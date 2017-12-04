@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<title>Sample Admin</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- The styles -->
+
+	<link href="../static/semantic_ui/css/semantic.min.css" rel="stylesheet">
+	<!-- <link href="../static/css/default_colors.css" rel="stylesheet"> -->
+	<link href="../static/css/jquery-ui-1.8.21.custom.css" rel="stylesheet">
+	<link href="../static/css/main.css" rel="stylesheet">
+	<link href="../static/css/main_elements.css" rel="stylesheet">
+	<link href="../static/css/animate.css" rel="stylesheet">
+	<link href="../static/js/morris.js/morris.css" rel="stylesheet">
+
+	<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+</head>
+<body>
+
+<div class="one column stackable ui grid hidden-desktop">
+
+	<div class="well column center">
+		<h3 class="ui center black header">
+			Login to SAMPLE admin panel
+			<div class="sub header">with any username and password</div>
+		</h3>
+
+		<div class="ui one column middle aligned grid basic segment ">
+			<div class="column">
+				<form>
+					<div class="ui form segment">
+						<div class="field">
+							<label>Username</label>
+							<div class="ui labeled icon input">
+								<input type="password" placeholder="Username">
+								<i class="user icon"></i>
+								<div class="ui corner label">
+									<i class="asterisk red icon"></i>
+								</div>
+							</div>
+						</div>
+						<div class="field">
+							<label>Password</label>
+							<div class="ui labeled icon input">
+								<input type="password" placeholder="Password">
+								<i class="lock icon"></i>
+								<div class="ui corner label">
+									<i class="asterisk red icon"></i>
+								</div>
+							</div>
+						</div>
+						<div onclick="window.location.href = 'index.html'" class="ui red  submit button">Login</div>
+
+						<div class="center aligned column">
+							<div class="ui horizontal divider">
+								Or
+							</div>
+							<div class="ui facebook button">
+								<i class="facebook icon"></i>
+								Log-in with Facebook
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="ui page grid login_box hidden-phone">
+	<div class="column center">
+		<h3 class="ui center black header">
+			<span id="logo">Sample Admin</span>
+		</h3>
+		<div class="ui one center column middle aligned grid basic segment">
+			<div class="column" style="width:50%">
+				<form>
+					<div class="ui form segment">
+						<h3 class="ui center black header">
+							Login to SAMPLE admin panel
+							<div class="sub header">with any username and password</div>
+						</h3>
+						<div class="field">
+							<label>Username</label>
+							<div class="ui labeled icon input">
+								<input type="text" placeholder="Username">
+								<i class="user icon"></i>
+								<div class="ui corner label">
+									<i class="asterisk red icon"></i>
+								</div>
+							</div>
+						</div>
+						<div class="field">
+							<label>Password</label>
+							<div class="ui labeled icon input">
+								<input type="password" placeholder="Password">
+								<i class="lock icon"></i>
+								<div class="ui corner label">
+									<i class="asterisk red icon"></i>
+								</div>
+							</div>
+						</div>
+						<div onclick="window.location.href = 'index.html'" class="ui red  submit button">Login</div>
+						<div class="center aligned ">
+							<div class="ui horizontal divider">
+								Or
+							</div>
+							<div class="ui facebook button">
+								<i class="facebook icon"></i>
+								Log-in with Facebook
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>
