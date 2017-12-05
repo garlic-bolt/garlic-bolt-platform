@@ -12,10 +12,18 @@
     margin-bottom: 0;
     font-weight:bold;
     font-size:16px;
+    background: #393C3D;
+    border-radius: 5px 5px 0 0;
 }
 
 .box .bottom.attached.header{
     border-radius:0;
+    background: #00B5AD;
+}
+
+.box .bottom.attached.header a,
+.box .bottom.attached.header .icon{
+    color: #fff !important
 }
 
 .box-header h2 {
@@ -23,6 +31,7 @@
     height: 25px;
     font-size: 20px!important;
     font-weight: 100!important;
+    color: #fff;
 }
 
 .box-header i{
@@ -35,11 +44,11 @@
 }
 
 .box-icons .dropdown {
- height:26px;
+    height:26px;
 }
 
 .box-icons .dropdown i.triangle{
-  padding-top: 7px !important;
+    padding-top: 7px !important;
 }
 
 .box-icons .dropdown .menu i{
@@ -47,7 +56,7 @@
 }
 
 .box-icons .dropdown .text {
- padding-top: 7px;
+    padding-top: 7px;
 }
 
 .box-icons .icon.button  {
@@ -96,6 +105,7 @@
 
 .box-content .ui.header{
     font-weight: 100;
+    color: #000;
 }
 
 .box-content .header .sub{
@@ -171,16 +181,17 @@
 }
 
 .home_chars{
-    background-image: -ms-radial-gradient(center, ellipse farthest-corner, #FFFFFF 0%, #00B5AD 100%);
-    background-image: -moz-radial-gradient(center, ellipse farthest-corner, #FFFFFF 0%, #00B5AD 100%);
-    background-image: -o-radial-gradient(center, ellipse farthest-corner, #FFFFFF 0%, #00B5AD 100%);
-    background-image: -webkit-gradient(radial, center center, 0, center center, 506, color-stop(0, #FFFFFF), color-stop(1, #00B5AD));
-    background-image: -webkit-radial-gradient(center, ellipse farthest-corner, #FFFFFF 0%, #00B5AD 100%);
-    background-image: radial-gradient(ellipse farthest-corner at center, #FFFFFF 0%, #00B5AD 100%);
+    background: #fff;
 }
 
-.home_chars h2{
+.home_chars #donut-example *{
+    stroke: none !important;
+}
+
+#graph *{
     color: #fff;
+    fill: none !important;
+    color: #000 !important;
 }
 
 .new_alerts .header2{
@@ -391,8 +402,8 @@
 
 /* images samples */
 .images_samples img{
- width: 104px;
- height: 100px;
+    width: 104px;
+    height: 100px;
 }
 
 /*login box */
@@ -415,7 +426,7 @@
     padding-left: 5px;
     cursor: pointer;
     padding: 8px 37px 26px 14px;
-    border: 1px solid rgba(111, 111, 111, 0.85);
+    !border: 1px solid rgba(111, 111, 111, 0.85);
 }
 
 .sidebar .dropdown{
@@ -423,9 +434,13 @@
 }
 
 .sidebar .info{
-  -webkit-box-shadow: inset 0px 10px 25px -10px rgba(112, 112, 112, 0.75);
-  -moz-box-shadow:    inset 0px 10px 25px -10px rgba(112, 112, 112, 0.75);
-  box-shadow:         inset 0px 10px 25px -10px rgba(112, 112, 112, 0.75);
+    -webkit-box-shadow: inset 0px 10px 25px -10px rgba(112, 112, 112, 0.75);
+    -moz-box-shadow:    inset 0px 10px 25px -10px rgba(112, 112, 112, 0.75);
+    box-shadow:         inset 0px 10px 25px -10px rgba(112, 112, 112, 0.75);
+}
+
+.sidebar .item>.label{
+    float: none!important;
 }
 
 .sidebar .info .title, .sidebar .info .title:hover{
@@ -488,7 +503,31 @@
 }
 
 .animation select{
-  outline:0;width:270px;padding: 10px;
-  font-size: 25px;
-  font-family: 'Open Sans Condensed', sans-serif;  
+    outline:0;width:270px;padding: 10px;
+    font-size: 25px;
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.home_chars h2{
+    margin-left: 10px !important;
+}
+
+.home_chars .label{
+    background: none;
+}
+
+#graph *{
+    color: #000 !important;
+}
+
+text{
+    color: #000 !important;
+}
+
+.field icon{
+    color: #000 !important;
+
+.ui.icon.input>.icon{
+    color: #000 !important;
+    background: #000 !important;
 }

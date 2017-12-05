@@ -12,7 +12,7 @@ a {
 }
 
 .awesome_red{
-    background-color: #DE6A6E !important;
+    background-color: #999 !important;
     color: #fff!important;
 }
 
@@ -82,14 +82,10 @@ a {
 }
 /* nav  */
 .nav-color {
-    background: #1abc9c;
-    background: -webkit-gradient(linear,0 55,0 57,from(transparent),color-stop(25%,rgba(0,0,0,0.1)),to(transparent)),-webkit-gradient(linear,left center,right center,from(#3498db),to(#1abc9c));
-    background: linear-gradient(to bottom,transparent,transparent 55px,rgba(0,0,0,0.1) 56px,rgba(0,0,0,0.1) 57px,transparent 57px,transparent),linear-gradient(to right,#3498db 0,#1abc9c 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1abc9c',endColorstr='#3498db',GradientType=1);
-
+    background: #fff;
 }
 .navbar #mail, .navbar .attention, .navbar .checkmark {
-    color: #fff;
+    color: #000;
 }
 .nav-buttons .dropdown i.color {
     color: #222;
@@ -100,8 +96,8 @@ a {
 }
 
 .navbar .dropdown .message{
-   /*background-color: #BD0A0A!important;;
-   color: #000!important;*/
+    /*background-color: #BD0A0A!important;;
+    color: #000!important;*/
 }
 
 .breadcrumb-panel h2{
@@ -135,7 +131,7 @@ a {
     background-color: rgba(250, 250, 250, 0.52);
 }
 .box-header h2, .box-header i {
-    color: #00B5AD!important;
+    color: #fff!important;
 }
 
 .box-content {

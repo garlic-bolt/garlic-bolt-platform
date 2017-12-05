@@ -20,7 +20,7 @@ public class IndexController {
 
 	@RequestMapping({"/",""})
 	public String index(){
-		return "index1";
+		return "index";
 	}
 
 	@RequestMapping("/test")

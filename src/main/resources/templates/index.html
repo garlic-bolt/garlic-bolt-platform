@@ -5,17 +5,17 @@
 	<title>Sample Admin</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- The styles -->
-
-	<link href="../static/semantic_ui/css/semantic.min.css" rel="stylesheet">
-	<!-- <link href="../static/css/default_colors.css" rel="stylesheet"> -->
-	<link href="../static/css/jquery-ui-1.8.21.custom.css" rel="stylesheet">
-	<link href="../static/css/main.css" rel="stylesheet">
-	<link href="../static/css/main_elements.css" rel="stylesheet">
-	<link href="../static/css/animate.css" rel="stylesheet">
-	<link href="../static/js/morris.js/morris.css" rel="stylesheet">
-
+	
+	<link href="../static/semantic_ui/css/semantic.min.css" rel="stylesheet" th:href="@{/semantic_ui/css/semantic.min.css}">
+	<!--	 <link href="../static/css/default_colors.css" rel="stylesheet">-->
+	<link href="../static/css/jquery-ui-1.8.21.custom.css" rel="stylesheet" th:href="@{/css/jquery-ui-1.8.21.custom.css}">
+	<link href="../static/css/main.css" rel="stylesheet" th:href="@{/css/main.css}">
+	<link href="../static/css/main_elements.css" rel="stylesheet" th:href="@{/css/main_elements.css}">
+	<link href="../static/css/animate.css" rel="stylesheet" th:href="@{/css/animate.css}">
+	<link href="../static/js/morris.js/morris.css" rel="stylesheet" th:href="@{/js/morris.js/morris.css}">
+	
 	<!--[if lt IE 9]>
-	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<script src="../static/js/html5.js"></script>
 	<![endif]-->
 </head>
 <body>
@@ -39,97 +39,102 @@
 							</div>
 						</div>
 					</div>
+					<div class="nav-button">
+						<div class="ui top right pointing dropdown mini">
+							<i class="large attention icon"></i>
+							<div class="floating ui awesome_red small circular label">13</div>
+							<div class="ui secondary menu">
+								<p class="item dropdown-header"> You have 13 new attention </p>
+								<div class="item">
+									<div class="ui small icon awesome_red message">
+										<i class=" inverter dashboard icon"></i>
+										<h5 class="header"></h5>
+										<p>CPU overload</p>
+									</div>
+									<div class="ui small icon awesome_red message">
+										<i class="small inverter user icon"></i>
+										<h5 class="header"></h5>
+										<p>1 user ticket waiting reply</p>
+									</div>
 
-					<div class="ui top left pointing dropdown mini nav-button ">
-						<i class="large attention icon"></i>
-						<div class="floating ui awesome_red small circular label">13</div>
-						<div class="ui secondary menu">
-							<p class="item dropdown-header"> You have 13 new attention </p>
-							<div class="item">
-								<div class="ui small icon awesome_red message">
-									<i class=" inverter dashboard icon"></i>
-									<h5 class="header"></h5>
-									<p>CPU overload</p>
+									<div class="ui small icon awesome_red message">
+										<i class="small inverter exclamation icon"></i>
+										<h5 class="header"></h5>
+										<p>Website crashed</p>
+									</div>
 								</div>
-								<div class="ui small icon awesome_red message">
-									<i class="small inverter user icon"></i>
-									<h5 class="header"></h5>
-									<p>1 user ticket waiting reply</p>
-								</div>
-
-								<div class="ui small icon awesome_red message">
-									<i class="small inverter exclamation icon"></i>
-									<h5 class="header"></h5>
-									<p>Website crashed</p>
-								</div>
+								<p class="item dropdown-link">
+									<a href="#">See them all</a><i class="right arrow icon"></i>
+								</p>
 							</div>
-							<p class="item dropdown-link">
-								<a href="#">See them all</a><i class="right arrow icon"></i>
-							</p>
 						</div>
 					</div>
-
-					<div class="ui top left pointing dropdown mini nav-button ">
-						<i id="mail" class="large mail icon"></i>
-						<div class="floating ui awesome_green small circular label">22</div>
-						<div class="menu ui transition">
-							<p class="item dropdown-header"> You have 22 new emails </p>
-							<div class="item">
-								<i class="circular awesome_green inverted open folder color icon"></i> <a href="#">Inbox</a>
+					<div class="nav-button">
+						<div class="ui top right pointing dropdown mini">
+							<i id="mail" class="large mail icon"></i>
+							<div class="floating ui awesome_green small circular label">22</div>
+							<div class="menu ui transition">
+								<p class="item dropdown-header"> You have 22 new emails </p>
+								<div class="item">
+									<i class="circular awesome_green inverted open folder color icon"></i> <a href="#">Inbox</a>
+								</div>
+								<div class="item">
+									<i class="circular folder awesome_red inverted color icon"></i> <a href="#">Outbox</a>
+								</div>
+								<div class="item">
+									<i class="circular awesome_yellow inverted archive color icon"></i> <a href="#">Archiv</a>
+								</div>
+								<p class="item dropdown-link">
+									<a href="#">See them all</a><i class="right arrow icon"></i>
+								</p>
 							</div>
-							<div class="item">
-								<i class="circular folder awesome_red inverted color icon"></i> <a href="#">Outbox</a>
-							</div>
-							<div class="item">
-								<i class="circular awesome_yellow inverted archive color icon"></i> <a href="#">Archiv</a>
-							</div>
-							<p class="item dropdown-link">
-								<a href="#">See them all</a><i class="right arrow icon"></i>
-							</p>
 						</div>
 					</div>
-
-					<div class="ui top left pointing dropdown mini nav-button ">
-						<i class="large checkmark sign icon"></i>
-						<div class="floating ui awesome_yellow small circular label">15</div>
-						<div class="menu ui transition">
-							<p class="item dropdown-header"> You have 15 new tasks </p>
-							<div class="item">
-								<i class="circular awesome_green inverted resize full color icon"></i> <a href="#">All Tasks</a>
+					<div class="nav-button">
+						<div class="ui top right pointing dropdown mini">
+							<i class="large checkmark sign icon"></i>
+							<div class="floating ui awesome_yellow small circular label">15</div>
+							<div class="menu ui transition">
+								<p class="item dropdown-header"> You have 15 new tasks </p>
+								<div class="item">
+									<i class="circular awesome_green inverted resize full color icon"></i> <a href="#">All Tasks</a>
+								</div>
+								<div class="item">
+									<i class="circular awesome_red inverted checked checkbox color icon"></i> <a href="#">Done Tasks</a>
+								</div>
+								<div class="item">
+									<i class="circular awesome_yellow inverted archive color icon"></i> <a href="#">Tasks Archiv</a>
+								</div>
+								<p class="item dropdown-link">
+									<a href="#">See them all</a><i class="right arrow icon"></i>
+								</p>
 							</div>
-							<div class="item">
-								<i class="circular awesome_red inverted checked checkbox color icon"></i> <a href="#">Done Tasks</a>
-							</div>
-							<div class="item">
-								<i class="circular awesome_yellow inverted archive color icon"></i> <a href="#">Tasks Archiv</a>
-							</div>
-							<p class="item dropdown-link">
-								<a href="#">See them all</a><i class="right arrow icon"></i>
-							</p>
 						</div>
 					</div>
-					<div class="ui top right pointing dropdown mini account hidden-phone">
-						<div class="account_image pull-left">
-							<img src="../static/img/avatar.jpg" class="circular ui image" alt="">
-						</div>
-						<span>Jonh Doe</span>
-						<div class="menu ui transition">
-							<p class="item dropdown-header"> Account </p>
-							<div class="item">
-								<i class="awesome_green_text settings full color icon"></i>
-								<a href="#">Settings</a>
+					<div class="nav-button account hidden-phone">
+						<div class="ui top right pointing dropdown mini">
+							<div class="account_image pull-left">
+								<img src="../static/img/avatar.jpg" class="circular ui image" alt="" th:src="@{/img/avatar.jpg}">
 							</div>
-							<div class="item">
-								<i class="awesome_green_text user full color icon"></i>
-								<a href="#">Account</a>
+							<div class="username pull-right">Jonh Doe</div>
+							<div class="menu ui transition">
+								<p class="item dropdown-header"> Account </p>
+								<div class="item">
+									<i class="awesome_green_text settings full color icon"></i>
+									<a href="#">Settings</a>
+								</div>
+								<div class="item">
+									<i class="awesome_green_text user full color icon"></i>
+									<a href="#">Account</a>
+								</div>
+								<div class="item">
+									<i class="awesome_green_text off full color icon"></i>
+									<a href="#">Log out</a>
+								</div>
+								<p class="item dropdown-link">
+									Role: admin
+								</p>
 							</div>
-							<div class="item">
-								<i class="awesome_green_text off full color icon"></i>
-								<a href="#">Log out</a>
-							</div>
-							<p class="item dropdown-link">
-								Role: admin
-							</p>
 						</div>
 					</div>
 				</div>
@@ -158,8 +163,7 @@
 				</a>
 
 				<div class="ui item sidebar_dropdown">
-					UI Elements <i class="icon left triangle"></i>
-					<div class="ui teal label">+100</div>
+					UI Elements  <i class="icon left triangle"></i> <div class="ui teal label">+100</div>
 				</div>
 
 				<div class="menu_dropdown hidden-elements">
@@ -186,7 +190,7 @@
 				</div>
 				<a href="extras.html" class="item  ajax-link">Extras<i class="star icon"></i></a>
 				<a href="form.html" class="item  ajax-link">Forms<i class="user layout icon"></i></a>
-				<a href="chart.html" class="item ajax-link" class="ajax-link"><i class="signal icon"></i> Charts</a>
+				<a href="chart.html" class="item ajax-link"><i class="signal icon"></i> Charts</a>
 				<a href="typography.html" class="item  ajax-link"><i class="globe layout icon"></i> Typography</a>
 				<a href="table.html" class="item  ajax-link"><i class="users layout icon"></i> Tables</a>
 				<a href="icon.html" class="item  ajax-link"><i class="grid layout icon"></i> Icons</a>
@@ -200,8 +204,7 @@
 				</a>
 
 				<div class="ui item sidebar_dropdown">
-					Layout <i class="icon left triangle"></i>
-					<div class="ui teal label">2</div>
+					Layout <i class="icon left triangle"></i> <div class="ui teal label">2</div>
 				</div>
 
 				<div class="menu_dropdown hidden-elements">
@@ -216,8 +219,7 @@
 				</div>
 
 				<div class="ui item sidebar_dropdown">
-					Pages <i class="icon left triangle"></i>
-					<div class="ui teal label">4</div>
+					Pages  <i class="icon left triangle"></i><div class="ui teal label">4</div>
 				</div>
 				<div class="menu_dropdown hidden-elements">
 					<div class="ui secondary vertical menu">
@@ -234,8 +236,7 @@
 							<a class="ajax-link" href="feed.html"> - Activity</a>
 						</div>
 						<div class="item">
-							<a class="ajax-link" href="contacts.html"> - Contact </a>
-							<div class="ui teal label">Comming soon</div>
+							<a class="ajax-link" href="contacts.html"> - Contact </a><div class="ui teal label">Comming soon</div>
 						</div>
 					</div>
 				</div>
@@ -296,12 +297,13 @@
 	</div>
 </div>
 
+
 <!-- left menu ends -->
+
 <noscript>
 	<div class="alert alert-block span1">
 		<h4 class="alert-heading">Warning!</h4>
-		<p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use
-			this site.</p>
+		<p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
 	</div>
 </noscript>
 
@@ -309,16 +311,15 @@
 <div class="one column stackable ui grid" id="general_container">
 	<!-- content starts -->
 	<div id="content" class="column">
-
 		<span class="is_home"></span>
-
+		
 		<div class="breadcrumb-panel hidden-phone">
 			<div class="ui breadcrumb">
 				<i class="right arrow icon divider"></i>
 				<a href="#" class="section">Dashboard</a>
 			</div>
 		</div>
-
+		
 		<!-- ALERTS -->
 		<div class="four column stackable ui grid new_alerts">
 			<div class="column">
@@ -331,7 +332,7 @@
 						<div class="sub header">new emails</div>
 						<div class="sub header2">*2 important</div>
 					</div>
-
+					
 					<div class="ui bottom attached inverted label">
 						<a href="#" class="see-all pull-right">Sea all <i class="icon arrow right"></i></a>
 						<span class="dynamicsparkline pull-left"></span>
@@ -380,7 +381,7 @@
 						<div class="sub header">orders</div>
 						<div class="sub header2">*today +2 orders</div>
 					</div>
-
+					
 					<div class="ui bottom attached inverted label">
 						<a href="#" class="see-all pull-right">Sea all <i class="icon arrow right"></i></a>
 						<span class="dynamicsparkline4 pull-left"></span>
@@ -389,7 +390,7 @@
 			</div>
 		</div>
 		<!-- ALERTS -->
-
+		
 		<div class="one column stackable ui grid">
 			<div class="column">
 				<div class="box">
@@ -418,11 +419,174 @@
 							</div>
 						</div>
 						<div class="clearfix"></div>
+						
+						<div class="column ui grid">
+							<div class="eleven wide column">
+								<div id="graph" style="position: relative;">
+									<svg height="342" version="1.1" width="671" xmlns="http://www.w3.org/2000/svg"
+									     style="overflow: hidden; position: relative; left: -0.539063px; top: -0.09375px;">
+										<desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.1.2</desc>
+										<defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs>
+										<text x="26.5625" y="306.5" text-anchor="end" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff"
+										      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"
+										      font-size="12px" font-family="sans-serif" font-weight="normal">
+											<tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="4.25">0</tspan>
+										</text>
+										<path fill="none" stroke="#aaaaaa" d="M39.0625,306.5H646" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+										<text x="26.5625" y="236.125" text-anchor="end" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff"
+										      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"
+										      font-size="12px" font-family="sans-serif" font-weight="normal">
+											<tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="4.25">3</tspan>
+										</text>
+										<path fill="none" stroke="#aaaaaa" d="M39.0625,236.125H646" stroke-width="0.5"
+										      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+										<text x="26.5625" y="165.75" text-anchor="end" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff"
+										      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"
+										      font-size="12px" font-family="sans-serif" font-weight="normal">
+											<tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="4.25">6</tspan>
+										</text>
+										<path fill="none" stroke="#aaaaaa" d="M39.0625,165.75H646" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+										<text x="26.5625" y="95.375" text-anchor="end" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff"
+										      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"
+										      font-size="12px" font-family="sans-serif" font-weight="normal">
+											<tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="4.25">9</tspan>
+										</text>
+										<path fill="none" stroke="#aaaaaa" d="M39.0625,95.375H646" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+										<text x="26.5625" y="25" text-anchor="end" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff"
+										      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"
+										      font-size="12px" font-family="sans-serif" font-weight="normal">
+											<tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="4.25">12</tspan>
+										</text>
+										<path fill="none" stroke="#aaaaaa" d="M39.0625,25H646" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+										<text x="645.9999999999999" y="319" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff"
+										      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"
+										      font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,7.75)">
+											<tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="4.25">2014</tspan>
+										</text>
+										<text x="524.6789772727273" y="319" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff"
+										      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"
+										      font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,7.75)">
+											<tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="4.25">2013</tspan>
+										</text>
+										<text x="403.02556818181813" y="319" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff"
+										      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"
+										      font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,7.75)">
+											<tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="4.25">2012</tspan>
+										</text>
+										<text x="281.70454545454544" y="319" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff"
+										      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"
+										      font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,7.75)">
+											<tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="4.25">2011</tspan>
+										</text>
+										<text x="160.38352272727272" y="319" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff"
+										      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"
+										      font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,7.75)">
+											<tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="4.25">2010</tspan>
+										</text>
+										<text x="39.0625" y="319" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff"
+										      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"
+										      font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,7.75)">
+											<tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="4.25">2009</tspan>
+										</text>
+										<path fill="#1674bb" stroke="#000000"
+										      d="M39.0625,283.0416666666667C69.39275568181819,283.0416666666667,130.05326704545453,291.8385416666667,160.38352272727272,283.0416666666667C190.7137784090909,274.2447916666667,251.37428977272725,221.46354166666669,281.70454545454544,212.66666666666669C312.0348011363636,203.86979166666669,372.69531249999994,215.5949469904241,403.02556818181813,212.66666666666669C433.4389204545454,209.73036365709075,494.265625,200.95354537163703,524.6789772727273,189.20833333333334C555.0092329545454,177.49521203830372,615.6697443181818,136.42708333333334,645.9999999999999,118.83333333333334L645.9999999999999,306.5L39.0625,306.5Z"
+										      fill-opacity="0.8" stroke-width="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 0.8;"></path>
+										<path fill="none" stroke="#0b62a4"
+										      d="M39.0625,283.0416666666667C69.39275568181819,283.0416666666667,130.05326704545453,291.8385416666667,160.38352272727272,283.0416666666667C190.7137784090909,274.2447916666667,251.37428977272725,221.46354166666669,281.70454545454544,212.66666666666669C312.0348011363636,203.86979166666669,372.69531249999994,215.5949469904241,403.02556818181813,212.66666666666669C433.4389204545454,209.73036365709075,494.265625,200.95354537163703,524.6789772727273,189.20833333333334C555.0092329545454,177.49521203830372,615.6697443181818,136.42708333333334,645.9999999999999,118.83333333333334"
+										      stroke-width="6" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+										<circle cx="39.0625" cy="283.0416666666667" r="4" fill="#000000" stroke="none" stroke-width="1"
+										        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+										<circle cx="160.38352272727272" cy="283.0416666666667" r="4" fill="#000000" stroke="none" stroke-width="1"
+										        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+										<circle cx="281.70454545454544" cy="212.66666666666669" r="4" fill="#000000" stroke="none" stroke-width="1"
+										        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+										<circle cx="403.02556818181813" cy="212.66666666666669" r="4" fill="#000000" stroke="none" stroke-width="1"
+										        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+										<circle cx="524.6789772727273" cy="189.20833333333334" r="4" fill="#000000" stroke="none" stroke-width="1"
+										        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+										<circle cx="645.9999999999999" cy="118.83333333333334" r="7" fill="#000000" stroke="none" stroke-width="1"
+										        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+										<path fill="#9dadb8" stroke="#000000"
+										      d="M39.0625,283.0416666666667C69.39275568181819,277.17708333333337,130.05326704545453,274.24479166666663,160.38352272727272,259.5833333333333C190.7137784090909,244.92187499999997,251.37428977272725,174.546875,281.70454545454544,165.75C312.0348011363636,156.953125,372.69531249999994,189.20833333333334,403.02556818181813,189.20833333333334C433.4389204545454,189.20833333333334,494.265625,177.4952120383037,524.6789772727273,165.75C555.0092329545454,154.03687870497038,615.6697443181818,112.96875,645.9999999999999,95.375L645.9999999999999,306.5L39.0625,306.5Z"
+										      fill-opacity="0.8" stroke-width="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 0.8;"></path>
+										<path fill="none" stroke="#7a92a3"
+										      d="M39.0625,283.0416666666667C69.39275568181819,277.17708333333337,130.05326704545453,274.24479166666663,160.38352272727272,259.5833333333333C190.7137784090909,244.92187499999997,251.37428977272725,174.546875,281.70454545454544,165.75C312.0348011363636,156.953125,372.69531249999994,189.20833333333334,403.02556818181813,189.20833333333334C433.4389204545454,189.20833333333334,494.265625,177.4952120383037,524.6789772727273,165.75C555.0092329545454,154.03687870497038,615.6697443181818,112.96875,645.9999999999999,95.375"
+										      stroke-width="6" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+										<circle cx="39.0625" cy="283.0416666666667" r="4" fill="#000000" stroke="#000000" stroke-width="1"
+										        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+										<circle cx="160.38352272727272" cy="259.5833333333333" r="4" fill="#000000" stroke="#000000" stroke-width="1"
+										        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+										<circle cx="281.70454545454544" cy="165.75" r="4" fill="#000000" stroke="#000000" stroke-width="1"
+										        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+										<circle cx="403.02556818181813" cy="189.20833333333334" r="4" fill="#000000" stroke="#000000" stroke-width="1"
+										        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+										<circle cx="524.6789772727273" cy="165.75" r="4" fill="#000000" stroke="#000000" stroke-width="1"
+										        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+										<circle cx="645.9999999999999" cy="95.375" r="7" fill="#000000" stroke="#000000" stroke-width="1"
+										        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+									</svg>
+									<div class="morris-hover morris-default-style" style="left: 611px; top: 37px;">
+										<div class="morris-hover-row-label">2014</div>
+										<div class="morris-hover-point" style="color: #0b62a4">
+											Sales:
+											8
+										</div>
+										<div class="morris-hover-point" style="color: #7A92A3">
+											Visits:
+											9
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="five wide column ">
+								<div id="donut-example">
+									<svg height="342" version="1.1" width="288" xmlns="http://www.w3.org/2000/svg"
+									     style="overflow: hidden; position: relative; left: -0.148438px; top: -0.09375px;">
+										<desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.1.2</desc>
+										<defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs>
+										<path fill="none" stroke="#6abbed"
+										      d="M144,262.8333333333333A89.33333333333333,89.33333333333333,0,0,0,230.72082742061005,194.94627090962928" stroke-width="2"
+										      opacity="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); opacity: 0;"></path>
+										<path fill="#6abbed" stroke="#ffffff"
+										      d="M144,265.8333333333333A92.33333333333333,92.33333333333333,0,0,0,233.63309401309323,195.66648149987802L269.22746347677645,204.46905538069603A129,129,0,0,1,144,302.5Z"
+										      stroke-width="3" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+										<path fill="none" stroke="#dabb1e"
+										      d="M230.72082742061005,194.94627090962928A89.33333333333333,89.33333333333333,0,0,0,225.5899906521321,137.11981487362326"
+										      stroke-width="2" opacity="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); opacity: 0;"></path>
+										<path fill="#dabb1e" stroke="#ffffff"
+										      d="M233.63309401309323,195.66648149987802A92.33333333333333,92.33333333333333,0,0,0,228.32995302477832,135.89809223878225L261.81838202378776,120.96592670183657A129,129,0,0,1,269.22746347677645,204.46905538069603Z"
+										      stroke-width="3" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+										<path fill="none" stroke="#de6a6e"
+										      d="M225.5899906521321,137.11981487362326A89.33333333333333,89.33333333333333,0,0,0,211.29304265416715,114.74550353556862"
+										      stroke-width="2" opacity="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); opacity: 0;"></path>
+										<path fill="#de6a6e" stroke="#ffffff"
+										      d="M228.32995302477832,135.89809223878225A92.33333333333333,92.33333333333333,0,0,0,213.55288363882204,112.77240477370337L241.1731623401593,88.65675323979497A129,129,0,0,1,261.81838202378776,120.96592670183657Z"
+										      stroke-width="3" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+										<path fill="none" stroke="#78a04f"
+										      d="M211.29304265416715,114.74550353556862A89.33333333333333,89.33333333333333,0,1,0,143.9719351060896,262.83332892491006"
+										      stroke-width="2" opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); opacity: 1;"></path>
+										<path fill="#78a04f" stroke="#ffffff"
+										      d="M213.55288363882204,112.77240477370337A92.33333333333333,92.33333333333333,0,1,0,143.970992628309,265.833328776866L143.9579026591344,307.4999933873651A134,134,0,1,1,244.93956398125076,85.36825530335291Z"
+										      stroke-width="3" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+										<text x="144" y="163.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000"
+										      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: 800; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial;"
+										      font-size="15px" font-weight="800" transform="matrix(0.7992,0,0,0.7992,28.9147,34.9405)" stroke-width="1.2512632151741296">
+											<tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="6">Sales from ThemeForest</tspan>
+										</text>
+										<text x="144" y="183.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000"
+										      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 14px; line-height: normal; font-family: Arial;"
+										      font-size="14px" transform="matrix(1.9211,0,0,1.9211,-132.6308,-161.8916)" stroke-width="0.5205223880597015">
+											<tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="4.75">65</tspan>
+										</text>
+									</svg>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
+		
 		<div class="two column stackable ui grid">
 			<div class="nine wide column">
 				<h4 class="ui inverted colored_header teal block header">
@@ -432,7 +596,7 @@
 					<div class="row" style="width: 100%;">
 						<div class="item">
 							<div class="image">
-								<img src="../static/img/sample2.jpg">
+								<img src="../static/img/sample2.jpg" th:src="@{/img/sample2.jpg}">
 								<a class="like ui corner label">
 									<i class="like icon"></i>
 								</a>
@@ -444,7 +608,7 @@
 						</div>
 						<div class="item">
 							<div class="image">
-								<img src="../static/img/sample2.jpg">
+								<img src="../static/img/sample2.jpg" th:src="@{/img/sample2.jpg}">
 								<a class="like ui corner label">
 									<i class="like icon"></i>
 								</a>
@@ -456,7 +620,7 @@
 						</div>
 						<div class="item">
 							<div class="image">
-								<img src="../static/img/sample2.jpg">
+								<img src="../static/img/sample2.jpg" th:src="@{/img/sample2.jpg}">
 								<a class="like ui corner label">
 									<i class="like icon"></i>
 								</a>
@@ -469,7 +633,7 @@
 					</div>
 				</div>
 			</div>
-
+			
 			<div class="seven wide column">
 				<div class="box">
 					<div class="box-header well">
@@ -478,40 +642,36 @@
 						</h2>
 						<div class="box-icons">
 							<a href="#" class="reload">
-								<i class="refresh popup icon" data-content="Reload" data-position="top left"
-								   data-variation="inverted"></i>
+								<i class="refresh popup icon" data-content="Reload" data-position="top left" data-variation="inverted"></i>
 							</a>
 							<a href="#" class="btn-setting">
-								<i class="icon popup setting" data-content="Settings" data-position="top left"
-								   data-variation="inverted"></i>
+								<i class="icon popup setting" data-content="Settings" data-position="top left" data-variation="inverted"></i>
 							</a>
 							<a href="#" class="btn-minimize">
-								<i class="arrow popup up icon" data-content="Minimize" data-position="top left"
-								   data-variation="inverted"></i>
+								<i class="arrow popup up icon" data-content="Minimize" data-position="top left" data-variation="inverted"></i>
 							</a>
 							<a href="#" class="btn-close">
-								<i class="remove popup icon" data-content="Close" data-position="top left"
-								   data-variation="inverted"></i>
+								<i class="remove popup icon" data-content="Close" data-position="top left" data-variation="inverted"></i>
 							</a>
 						</div>
 					</div>
-
+					
 					<div class="box-content with_loader">
 						<div class="ui sample segment segment_loader">
 							<div class="ui dimmer">
 								<div class="ui loader"></div>
 							</div>
-
+							
 							<div class="custom_scrollbar">
-								<div class="scrollbar">
-									<div class="track">
-										<div class="thumb">
+								<div class="scrollbar" style="height: 255px;">
+									<div class="track" style="height: 255px;">
+										<div class="thumb" style="top: 0px; height: 103.214px;">
 											<div class="end"></div>
 										</div>
 									</div>
 								</div>
 								<div class="viewport">
-									<div class="overview">
+									<div class="overview" style="top: 0px;">
 										<div class="ui animated selection list small home_alerts">
 											<div class="item">
 												<i class="ui icon teal circular users"></i>
@@ -527,7 +687,7 @@
 													<div class="header">Montly Report Created</div>
 												</div>
 											</div>
-
+											
 											<div class="item">
 												<i class="ui icon teal circular cart"></i>
 												<div class="right floated"><i class="calendar icon"></i>12.04.2014</div>
@@ -563,7 +723,7 @@
 													<div class="header">Montly Report Created</div>
 												</div>
 											</div>
-
+											
 											<div class="item">
 												<i class="ui icon teal circular cart"></i>
 												<div class="right floated"><i class="calendar icon"></i>12.04.2014</div>
@@ -571,7 +731,7 @@
 													<div class="header">3 new orders</div>
 												</div>
 											</div>
-
+											
 											<div class="item">
 												<i class="ui icon teal circular mail"></i>
 												<div class="right floated"><i class="calendar icon"></i>12.04.2014</div>
@@ -586,7 +746,7 @@
 													<div class="header">4 system errors</div>
 												</div>
 											</div>
-
+											
 											<div class="item">
 												<i class="ui icon teal circular cart"></i>
 												<div class="right floated"><i class="calendar icon"></i>12.04.2014</div>
@@ -594,7 +754,7 @@
 													<div class="header">3 new orders</div>
 												</div>
 											</div>
-
+											
 											<div class="item">
 												<i class="ui icon teal circular mail"></i>
 												<div class="right floated"><i class="calendar icon"></i>12.04.2014</div>
@@ -636,34 +796,34 @@
 				</div>
 			</div>
 		</div>
-
+		
 		<div class="two column stackable ui grid">
 			<div class="seven wide column">
-
+				
 				<h4 class="ui inverted teal block top attached header">
 					<i class="chat icon"></i> Chat
 				</h4>
 				<div class="ui segment attached">
 					<div class="ui piled segment comments">
 						<div class="custom_scrollbar">
-							<div class="scrollbar">
-								<div class="track">
-									<div class="thumb">
+							<div class="scrollbar disable" style="height: 255px;">
+								<div class="track" style="height: 255px;">
+									<div class="thumb" style="top: 0px; height: 255px;">
 										<div class="end"></div>
 									</div>
 								</div>
 							</div>
 							<div class="viewport">
-								<div class="overview">
+								<div class="overview" style="top: 0px;">
 									<div class="comment">
 										<a class="avatar">
-											<img src="../static/img/avatar.jpg">
+											<img src="../static/img/avatar.jpg" th:src="@{/img/avatar.jpg}">
 										</a>
 										<div class="content">
 											<a class="author">John</a>
 											<div class="metadata">
 												<div class="date"><i class="calendar icon"></i> 2 days ago</div>
-
+											
 											</div>
 											<div class="text">
 												I think this is a great idea and i am voting on it
@@ -676,7 +836,7 @@
 									</div>
 									<div class="comment">
 										<a class="avatar">
-											<img src="../static/img/avatar.jpg">
+											<img src="../static/img/avatar.jpg" th:src="@{/img/avatar.jpg}">
 										</a>
 										<div class="content">
 											<a class="author">Josh</a>
@@ -712,10 +872,10 @@
 						</form>
 					</div>
 				</div>
-
-
+			
+			
 			</div>
-
+			
 			<div class="nine wide column">
 				<div class="box">
 					<div class="box-header well">
@@ -725,20 +885,16 @@
 						</h2>
 						<div class="box-icons">
 							<a href="#" class="reload">
-								<i class="refresh popup icon" data-content="Reload" data-position="top left"
-								   data-variation="inverted"></i>
+								<i class="refresh popup icon" data-content="Reload" data-position="top left" data-variation="inverted"></i>
 							</a>
 							<a href="#" class="btn-setting">
-								<i class="icon popup setting" data-content="Settings" data-position="top left"
-								   data-variation="inverted"></i>
+								<i class="icon popup setting" data-content="Settings" data-position="top left" data-variation="inverted"></i>
 							</a>
 							<a href="#" class="btn-minimize">
-								<i class="arrow popup up icon" data-content="Minimize" data-position="top left"
-								   data-variation="inverted"></i>
+								<i class="arrow popup up icon" data-content="Minimize" data-position="top left" data-variation="inverted"></i>
 							</a>
 							<a href="#" class="btn-close">
-								<i class="remove popup icon" data-content="Close" data-position="top left"
-								   data-variation="inverted"></i>
+								<i class="remove popup icon" data-content="Close" data-position="top left" data-variation="inverted"></i>
 							</a>
 						</div>
 					</div>
@@ -747,7 +903,7 @@
 							<div class="ui dimmer">
 								<div class="ui loader"></div>
 							</div>
-
+							
 							<h4 class="ui header">
 						<span>
 							<i class="users teal icon"></i>Reached 100 users registered on the website
@@ -813,7 +969,7 @@
 				</div>
 			</div>
 		</div>
-
+		
 		<!-- CHARS CONTAINER -->
 		<div class="two column stackable ui grid">
 			<div class="column">
@@ -825,55 +981,59 @@
 						</h2>
 						<div class="box-icons">
 							<a href="#" class="reload">
-								<i class="refresh popup icon" data-content="Reload" data-position="top left"
-								   data-variation="inverted"></i>
+								<i class="refresh popup icon" data-content="Reload" data-position="top left" data-variation="inverted"></i>
 							</a>
 							<a href="#" class="btn-setting">
-								<i class="icon popup setting" data-content="Settings" data-position="top left"
-								   data-variation="inverted"></i>
+								<i class="icon popup setting" data-content="Settings" data-position="top left" data-variation="inverted"></i>
 							</a>
 							<a href="#" class="btn-minimize">
-								<i class="arrow popup up icon" data-content="Minimize" data-position="top left"
-								   data-variation="inverted"></i>
+								<i class="arrow popup up icon" data-content="Minimize" data-position="top left" data-variation="inverted"></i>
 							</a>
 							<a href="#" class="btn-close">
-								<i class="remove popup icon" data-content="Close" data-position="top left"
-								   data-variation="inverted"></i>
+								<i class="remove popup icon" data-content="Close" data-position="top left" data-variation="inverted"></i>
 							</a>
 						</div>
 					</div>
-
+					
 					<div class="box-content with_loader">
 						<div class="ui sample segment">
 							<div class="ui dimmer">
 								<div class="ui loader"></div>
 							</div>
-
+							
 							<div class="four column ui grid">
 								<div class="column">
 									<div class="char_container column">
-										<div class="chart" data-percent="35">35%</div>
+										<div class="chart" data-percent="35">35%
+											<canvas height="160" width="160" style="height: 80px; width: 80px;"></canvas>
+										</div>
 										<div class="clearfix char_text">CPU</div>
 									</div>
 								</div>
 								<div class="column">
 									<div class="char_container">
-										<div class="chart" data-percent="73">73%</div>
-										<br/>
+										<div class="chart" data-percent="73">73%
+											<canvas height="160" width="160" style="height: 80px; width: 80px;"></canvas>
+										</div>
+										<br>
 										<div class="clearfix char_text">RAM</div>
 									</div>
 								</div>
 								<div class="column">
 									<div class="char_container">
-										<div class="chart" data-percent="54">54%</div>
-										<br/>
+										<div class="chart" data-percent="54">54%
+											<canvas height="160" width="160" style="height: 80px; width: 80px;"></canvas>
+										</div>
+										<br>
 										<div class="clearfix char_text">Space</div>
 									</div>
 								</div>
 								<div class="column">
 									<div class="char_container">
-										<div class="chart" data-percent="75">75%</div>
-										<br/>
+										<div class="chart" data-percent="75">75%
+											<canvas height="160" width="160" style="height: 80px; width: 80px;"></canvas>
+										</div>
+										<br>
 										<div class="clearfix char_text">HD</div>
 									</div>
 								</div>
@@ -890,16 +1050,13 @@
 						</h2>
 						<div class="box-icons">
 							<a href="#" class="btn-setting">
-								<i class="icon popup setting" data-content="Settings" data-position="top left"
-								   data-variation="inverted"></i>
+								<i class="icon popup setting" data-content="Settings" data-position="top left" data-variation="inverted"></i>
 							</a>
 							<a href="#" class="btn-minimize">
-								<i class="arrow popup up icon" data-content="Minimize" data-position="top left"
-								   data-variation="inverted"></i>
+								<i class="arrow popup up icon" data-content="Minimize" data-position="top left" data-variation="inverted"></i>
 							</a>
 							<a href="#" class="btn-close">
-								<i class="remove popup icon" data-content="Close" data-position="top left"
-								   data-variation="inverted"></i>
+								<i class="remove popup icon" data-content="Close" data-position="top left" data-variation="inverted"></i>
 							</a>
 						</div>
 					</div>
@@ -909,15 +1066,15 @@
 							<i class="search icon"></i>
 						</div>
 						<div class="custom_scrollbar">
-							<div class="scrollbar">
-								<div class="track">
-									<div class="thumb">
+							<div class="scrollbar" style="height: 327px;">
+								<div class="track" style="height: 327px;">
+									<div class="thumb" style="top: 0px; height: 227.509px;">
 										<div class="end"></div>
 									</div>
 								</div>
 							</div>
 							<div class="viewport">
-								<div class="overview">
+								<div class="overview" style="top: 0px;">
 									<div class="ui animated selection list small home_alerts">
 										<div class="item">
 											<div class="right floated">
@@ -929,7 +1086,7 @@
 											<div class="right floated tiny blue ui button hidden-phone">
 												<i class="phone icon"></i>773-338-7786
 											</div>
-											<img class="ui avatar image" src="../static/img/contact.png">
+											<img class="ui avatar image" src="../static/img/contact.png" th:src="@{/img/contact.png}">
 											<div class="content">
 												<a class="header">Jonh Doe</a>
 												<div class="description">Family</div>
@@ -945,7 +1102,7 @@
 											<div class="right floated tiny blue ui button hidden-phone">
 												<i class="phone icon"></i>773-338-7786
 											</div>
-											<img class="ui avatar image" src="../static/img/contact.png">
+											<img class="ui avatar image" src="../static/img/contact.png" th:src="@{/img/contact.png}">
 											<div class="content">
 												<a class="header">Anna</a>
 												<div class="description">Work</div>
@@ -961,7 +1118,7 @@
 											<div class="right floated tiny blue ui button hidden-phone">
 												<i class="phone icon"></i>773-338-7786
 											</div>
-											<img class="ui avatar image" src="../static/img/contact.png">
+											<img class="ui avatar image" src="../static/img/contact.png" th:src="@{/img/contact.png}">
 											<div class="content">
 												<a class="header">Smith</a>
 												<div class="description">Family</div>
@@ -977,7 +1134,7 @@
 											<div class="right floated tiny blue ui button hidden-phone">
 												<i class="phone icon"></i>773-338-7786
 											</div>
-											<img class="ui avatar image" src="../static/img/contact.png">
+											<img class="ui avatar image" src="../static/img/contact.png" th:src="@{/img/contact.png}">
 											<div class="content">
 												<a class="header">Mitchell</a>
 												<div class="description">Friends</div>
@@ -993,7 +1150,7 @@
 											<div class="right floated tiny blue ui button hidden-phone">
 												<i class="phone icon"></i>773-338-7786
 											</div>
-											<img class="ui avatar image" src="../static/img/contact.png">
+											<img class="ui avatar image" src="../static/img/contact.png" th:src="@{/img/contact.png}">
 											<div class="content">
 												<a class="header">James</a>
 												<div class="description">Work</div>
@@ -1009,7 +1166,7 @@
 											<div class="right floated tiny blue ui button hidden-phone">
 												<i class="phone icon"></i>773-338-7786
 											</div>
-											<img class="ui avatar image" src="../static/img/contact.png">
+											<img class="ui avatar image" src="../static/img/contact.png" th:src="@{/img/contact.png}">
 											<div class="content">
 												<a class="header">Paul</a>
 												<div class="description">Friends</div>
@@ -1025,7 +1182,7 @@
 											<div class="right floated tiny blue ui button hidden-phone">
 												<i class="phone icon"></i>773-338-7786
 											</div>
-											<img class="ui avatar image" src="../static/img/contact.png">
+											<img class="ui avatar image" src="../static/img/contact.png" th:src="@{/img/contact.png}">
 											<div class="content">
 												<a class="header">John</a>
 												<div class="description">Work</div>
@@ -1041,7 +1198,7 @@
 											<div class="right floated tiny blue ui button hidden-phone">
 												<i class="phone icon"></i>773-338-7786
 											</div>
-											<img class="ui avatar image" src="../static/img/contact.png">
+											<img class="ui avatar image" src="../static/img/contact.png" th:src="@{/img/contact.png}">
 											<div class="content">
 												<a class="header">Jason</a>
 												<div class="description">Friends</div>
@@ -1057,7 +1214,7 @@
 											<div class="right floated tiny blue ui button hidden-phone">
 												<i class="phone icon"></i>773-338-7786
 											</div>
-											<img class="ui avatar image" src="../static/img/contact.png">
+											<img class="ui avatar image" src="../static/img/contact.png" th:src="@{/img/contact.png}">
 											<div class="content">
 												<a class="header">Lisa</a>
 												<div class="description">Family</div>
@@ -1073,7 +1230,7 @@
 											<div class="right floated tiny blue ui button hidden-phone">
 												<i class="phone icon"></i>773-338-7786
 											</div>
-											<img class="ui avatar image" src="../static/img/contact.png">
+											<img class="ui avatar image" src="../static/img/contact.png" th:src="@{/img/contact.png}">
 											<div class="content">
 												<a class="header">Adams</a>
 												<div class="description">Friends</div>
@@ -1086,7 +1243,7 @@
 					</div>
 				</div>
 			</div>
-
+			
 			<div class="column">
 				<div class="box">
 					<div class="box-header well">
@@ -1096,16 +1253,13 @@
 						</h2>
 						<div class="box-icons">
 							<a href="#" class="btn-setting">
-								<i class="icon popup setting" data-content="Settings" data-position="top left"
-								   data-variation="inverted"></i>
+								<i class="icon popup setting" data-content="Settings" data-position="top left" data-variation="inverted"></i>
 							</a>
 							<a href="#" class="btn-minimize">
-								<i class="arrow popup up icon" data-content="Minimize" data-position="top left"
-								   data-variation="inverted"></i>
+								<i class="arrow popup up icon" data-content="Minimize" data-position="top left" data-variation="inverted"></i>
 							</a>
 							<a href="#" class="btn-close">
-								<i class="remove popup icon" data-content="Close" data-position="top left"
-								   data-variation="inverted"></i>
+								<i class="remove popup icon" data-content="Close" data-position="top left" data-variation="inverted"></i>
 							</a>
 						</div>
 					</div>
@@ -1129,9 +1283,9 @@
 									</div>
 								</div>
 								<div class="content">
-									<div class="header inline field">
-										<div class="ui checkbox">
-											<input checked type="checkbox">
+									<div class="header">
+										<div class="ui  checkbox">
+											<input checked="" type="checkbox">
 											<label>Fix some erros in design</label>
 										</div>
 									</div>
@@ -1151,7 +1305,7 @@
 									</div>
 								</div>
 								<div class="content">
-									<div class="header inline field">
+									<div class="header">
 										<div class="ui  checkbox">
 											<input type="checkbox">
 											<label>Fix some erros in design</label>
@@ -1173,7 +1327,7 @@
 									</div>
 								</div>
 								<div class="content">
-									<div class="header inline field">
+									<div class="header">
 										<div class="ui  checkbox">
 											<input type="checkbox">
 											<label>Fix some erros in design</label>
@@ -1195,7 +1349,7 @@
 									</div>
 								</div>
 								<div class="content">
-									<div class="header inline field">
+									<div class="header">
 										<div class="ui  checkbox">
 											<input type="checkbox">
 											<label>Fix some erros in design</label>
@@ -1217,9 +1371,9 @@
 									</div>
 								</div>
 								<div class="content">
-									<div class="header inline field">
+									<div class="header">
 										<div class="ui  checkbox">
-											<input checked type="checkbox">
+											<input checked="" type="checkbox">
 											<label>Fix some erros in design</label>
 										</div>
 									</div>
@@ -1239,7 +1393,7 @@
 									</div>
 								</div>
 								<div class="content">
-									<div class="header inline field">
+									<div class="header">
 										<div class="ui  checkbox">
 											<input type="checkbox">
 											<label>Fix some erros in design</label>
@@ -1261,7 +1415,7 @@
 									</div>
 								</div>
 								<div class="content">
-									<div class="header inline field">
+									<div class="header">
 										<div class="ui  checkbox">
 											<input type="checkbox">
 											<label>Fix some erros in design</label>
@@ -1283,9 +1437,9 @@
 									</div>
 								</div>
 								<div class="content">
-									<div class="header inline field">
+									<div class="header">
 										<div class="ui  checkbox">
-											<input type="checkbox" checked>
+											<input type="checkbox" checked="">
 											<label>Fix some erros in design</label>
 										</div>
 									</div>
@@ -1305,9 +1459,9 @@
 									</div>
 								</div>
 								<div class="content">
-									<div class="header inline field">
+									<div class="header">
 										<div class="ui  checkbox">
-											<input type="checkbox" checked>
+											<input type="checkbox" checked="">
 											<label>Fix some erros in design</label>
 										</div>
 									</div>
@@ -1327,9 +1481,9 @@
 									</div>
 								</div>
 								<div class="content">
-									<div class="header inline field">
+									<div class="header">
 										<div class="ui  checkbox">
-											<input type="checkbox" checked>
+											<input type="checkbox" checked="">
 											<label>Fix some erros in design</label>
 										</div>
 									</div>
@@ -1349,9 +1503,9 @@
 									</div>
 								</div>
 								<div class="content">
-									<div class="header inline field">
+									<div class="header">
 										<div class="ui  checkbox">
-											<input type="checkbox" checked>
+											<input type="checkbox" checked="">
 											<label>Fix some erros in design</label>
 										</div>
 									</div>
@@ -1371,9 +1525,9 @@
 									</div>
 								</div>
 								<div class="content">
-									<div class="header inline field">
+									<div class="header">
 										<div class="ui  checkbox">
-											<input type="checkbox" checked>
+											<input type="checkbox" checked="">
 											<label>Fix some erros in design</label>
 										</div>
 									</div>
@@ -1393,7 +1547,7 @@
 									</div>
 								</div>
 								<div class="content">
-									<div class="header inline field">
+									<div class="header">
 										<div class="ui  checkbox">
 											<input type="checkbox">
 											<label>Fix some erros in design</label>
@@ -1414,6 +1568,7 @@
 	</div>
 
 </div>
+<a data-sumome-discover-grid></a>
 <!-- general container end-->
 
 <!-- Modal HTML -->
@@ -1434,51 +1589,52 @@
 </div>
 <!-- Modal HTML -->
 
+
 <!-- external javascript
 	================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 
 <!-- jQuery -->
-<script src="../static/js/jquery.js"></script>
+<script src="../static/js/jquery.js" th:src="@{/js/jquery.js}"></script>
 
 <!-- jQuery UI -->
-<script src="../static/js/jquery-ui-1.8.21.custom.min.js"></script>
+<script src="../static/js/jquery-ui-1.8.21.custom.min.js" th:src="@{/js/jquery-ui-1.8.21.custom.min.js}"></script>
 
 <!-- Semantic UI -->
-<script src="../static/semantic_ui/javascript/semantic.min.js"></script>
+<script src="../static/semantic_ui/javascript/semantic.min.js" th:src="@{/semantic_ui/javascript/semantic.min.js}"></script>
 <!-- Semantic UI -->
 
 <!-- Easypiechart -->
-<script src="../static/js/jquery.easypiechart.min.js"></script>
+<script src="../static/js/jquery.easypiechart.min.js" th:src="@{/js/jquery.easypiechart.min.js}"></script>
 <!-- Easypiechart -->
 
 <!-- Data tables js -->
-<script src="../static/js/data_tables/js/footable.js?v=2-0-1" type="text/javascript"></script>
-<script src="../static/js/data_tables/js/footable.paginate.js?v=2-0-1" type="text/javascript"></script>
-<script src="../static/js/data_tables/js/footable.sort.js" type="text/javascript"></script>
+<script src="../static/js/data_tables/js/footable.js?v=2-0-1" type="text/javascript" th:src="@{/js/data_tables/js/footable.js}"></script>
+<script src="../static/js/data_tables/js/footable.paginate.js?v=2-0-1" type="text/javascript" th:src="@{/js/data_tables/js/footable.paginate.js}"></script>
+<script src="../static/js/data_tables/js/footable.sort.js" type="text/javascript" th:src="@{/js/data_tables/js/footable.sort.js}"></script>
 
 <!-- morris chars -->
-<script src="../static/js/morris.js/raphael.js"></script>
-<script src="../static/js/morris.js/morris.js"></script>
+<script src="../static/js/morris.js/raphael.js" th:src="@{/js/morris.js/raphael.js}"></script>
+<script src="../static/js/morris.js/morris.js" th:src="@{/js/morris.js/morris.js}"></script>
 
 <!-- Spark lines -->
-<script src="../static/js/jquery.sparkline.min.js"></script>
+<script src="../static/js/jquery.sparkline.min.js" th:src="@{/js/jquery.sparkline.min.js}"></script>
 
 <!-- custom scrollbar -->
-<script src="../static/js/custom-scrollbar.min.js"></script>
+<script src="../static/js/custom-scrollbar.min.js" th:src="@{/js/custom-scrollbar.min.js}"></script>
 
-<script src="../static/js/main_plugin.js"></script>
-<script src="../static/js/main.js"></script>
+<script src="../static/js/main_plugin.js" th:src="@{/js/main_plugin.js}"></script>
+<script src="../static/js/main.js" th:src="@{/js/main.js}"></script>
 
 <!-- library for cookie management -->
-<script src="../static/js/jquery.cookie.js"></script>
+<script src="../static/js/jquery.cookie.js" th:src="@{/js/jquery.cookie.js}"></script>
 
 <!-- Gallery plugin -->
-<script src="../static/js/least/js/least.min.js"></script>
-<script src="../static/js/least/js/jquery.lazyload.min.js"></script>
+<script src="../static/js/least/js/least.min.js" th:src="@{/js/least/js/least.min.js}"></script>
+<script src="../static/js/least/js/jquery.lazyload.min.js" th:src="@{/js/least/js/jquery.lazyload.min.js}"></script>
 
 <!-- history.js for cross-browser state change on ajax -->
-<script src="../static/js/jquery.history.js"></script>
+<script src="../static/js/jquery.history.js" th:src="@{/js/jquery.history.js}"></script>
 
 </body>
 </html>
