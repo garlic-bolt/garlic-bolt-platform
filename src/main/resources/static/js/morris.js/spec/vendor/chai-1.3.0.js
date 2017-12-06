@@ -3012,13 +3012,13 @@
     exports.getActual = require('./getActual');
 
     /*!
-     * Inspect util
+     * Inspect common
      */
 
     exports.inspect = require('./inspect');
 
     /*!
-     * Object Display util
+     * Object Display common
      */
 
     exports.objDisplay = require('./objDisplay');
@@ -3148,7 +3148,7 @@
       // Provide a hook for user-specified inspect functions.
       // Check that value is an object with an inspect function on it
       if (value && typeof value.inspect === 'function' &&
-          // Filter out the util module, it's inspect function is special
+          // Filter out the common module, it's inspect function is special
           value.inspect !== exports.inspect &&
           // Also filter out any prototype objects using the circular check.
           !(value.constructor && value.constructor.prototype === value)) {

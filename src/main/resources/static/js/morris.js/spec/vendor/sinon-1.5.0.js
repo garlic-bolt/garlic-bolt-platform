@@ -771,12 +771,12 @@ var sinon = (function (buster) {
         };
     } else if (isNode) {
         try {
-            var util = require("util");
+            var util = require("common");
             sinon.format = function (value) {
                 return typeof value == "object" && value.toString === Object.prototype.toString ? util.inspect(value) : value;
             };
         } catch (e) {
-            /* Node, but no util module - would be very old, but better safe than
+            /* Node, but no common module - would be very old, but better safe than
              sorry */
         }
     }
@@ -3669,8 +3669,8 @@ if (typeof module == "object" && typeof require == "function") {
 /**
  * @depend ../sinon.js
  * @depend collection.js
- * @depend util/fake_timers.js
- * @depend util/fake_server_with_clock.js
+ * @depend common/fake_timers.js
+ * @depend common/fake_server_with_clock.js
  */
 /*jslint eqeqeq: false, onevar: false, plusplus: false*/
 /*global require, module*/
@@ -3686,7 +3686,7 @@ if (typeof module == "object" && typeof require == "function") {
 
 if (typeof module == "object" && typeof require == "function") {
     var sinon = require("../sinon");
-    sinon.extend(sinon, require("./util/fake_timers"));
+    sinon.extend(sinon, require("./common/fake_timers"));
 }
 
 (function () {
