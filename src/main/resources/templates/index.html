@@ -2,12 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="utf-8">
-	<title>Sample Admin</title>
+	<title th:text="#{app.title}">Sample Admin</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- The styles -->
-	
+	<link rel="shortcut icon" type="image/jpeg" href="../static/timg1.jpg" th:href="@{/timg1.jpg}"/>
 	<link href="../static/semantic_ui/css/semantic.min.css" rel="stylesheet" th:href="@{/semantic_ui/css/semantic.min.css}">
-	<!--	 <link href="../static/css/default_colors.css" rel="stylesheet">-->
 	<link href="../static/css/jquery-ui-1.8.21.custom.css" rel="stylesheet" th:href="@{/css/jquery-ui-1.8.21.custom.css}">
 	<link href="../static/css/main.css" rel="stylesheet" th:href="@{/css/main.css}">
 	<link href="../static/css/main_elements.css" rel="stylesheet" th:href="@{/css/main_elements.css}">
@@ -15,7 +14,7 @@
 	<link href="../static/js/morris.js/morris.css" rel="stylesheet" th:href="@{/js/morris.js/morris.css}">
 	
 	<!--[if lt IE 9]>
-	<script src="../static/js/html5.js"></script>
+	<script src="../static/js/html5.js" th:src="@{/js/html5.js}"></script>
 	<![endif]-->
 </head>
 <body>
@@ -25,7 +24,7 @@
 	<div class="navbar-inner nav-color menu">
 		<div class="container-fluid">
 			<a class="brand hidden-phone" href="index.html">
-				<span id="logo" class="animated rubberBand">Simple Admin</span>
+				<span id="logo" class="animated rubberBand" th:text="#{logo.tilte}">Sample Admin</span>
 			</a>
 			<div class="pull-right">
 				<div class="nav-buttons">
@@ -33,7 +32,7 @@
 						<div class="ui form pull-righ">
 							<div class="field">
 								<div class="ui icon mini input">
-									<input type="text" placeholder="Search..."/>
+									<input type="text" placeholder="Search..." th:attr="placeholder=#{serarch.holder}"/>
 									<i class="circular search icon"></i>
 								</div>
 							</div>
@@ -42,50 +41,42 @@
 					<div class="nav-button">
 						<div class="ui top right pointing dropdown mini">
 							<i class="large attention icon"></i>
-							<div class="floating ui awesome_red small circular label">13</div>
+							<div class="floating ui awesome_red small circular label" th:if="${user.attentionCount>0}" th:text="${user.attentionCount}">13</div>
 							<div class="ui secondary menu">
-								<p class="item dropdown-header"> You have 13 new attention </p>
+								<p class="item dropdown-header" th:text="| 您有${user.attentionCount?:'0'}项报警 |"> You have 13 new attention </p>
 								<div class="item">
 									<div class="ui small icon awesome_red message">
 										<i class=" inverter dashboard icon"></i>
 										<h5 class="header"></h5>
-										<p>CPU overload</p>
+										<p th:text="300万资金冻结">CPU overload</p>
 									</div>
 									<div class="ui small icon awesome_red message">
 										<i class="small inverter user icon"></i>
 										<h5 class="header"></h5>
-										<p>1 user ticket waiting reply</p>
-									</div>
-
-									<div class="ui small icon awesome_red message">
-										<i class="small inverter exclamation icon"></i>
-										<h5 class="header"></h5>
-										<p>Website crashed</p>
+										<p th:text="用户交易数据异常">1 user ticket waiting reply</p>
 									</div>
 								</div>
-								<p class="item dropdown-link">
-									<a href="#">See them all</a><i class="right arrow icon"></i>
-								</p>
+<!--								<p class="item dropdown-link">
+									<a href="#" th:text="查看全部信息">See them all</a><i class="right arrow icon"></i>
+								</p>-->
 							</div>
 						</div>
 					</div>
 					<div class="nav-button">
 						<div class="ui top right pointing dropdown mini">
 							<i id="mail" class="large mail icon"></i>
-							<div class="floating ui awesome_green small circular label">22</div>
-							<div class="menu ui transition">
-								<p class="item dropdown-header"> You have 22 new emails </p>
+							<div class="floating ui awesome_green small circular label" th:if="${user.messageCount>0}" th:text="${user.messageCount}">22</div>
+							<div class="menu ui transition hidden">
+								<p class="item dropdown-header" th:text="| 您有${user.messageCount?:'0'}条新消息 |"> You have 22 new emails </p>
 								<div class="item">
-									<i class="circular awesome_green inverted open folder color icon"></i> <a href="#">Inbox</a>
+									<i class="circular awesome_green inverted open folder color icon"></i> <a href="#" th:text="未读信息">Inbox</a>
 								</div>
 								<div class="item">
-									<i class="circular folder awesome_red inverted color icon"></i> <a href="#">Outbox</a>
+									<i class="circular folder awesome_red inverted color icon"></i> <a href="#" th:text="已读信息">Outbox</a>
 								</div>
-								<div class="item">
-									<i class="circular awesome_yellow inverted archive color icon"></i> <a href="#">Archiv</a>
-								</div>
+								
 								<p class="item dropdown-link">
-									<a href="#">See them all</a><i class="right arrow icon"></i>
+									<a href="#" th:text="查看全部消息">See them all</a><i class="right arrow icon"></i>
 								</p>
 							</div>
 						</div>
@@ -93,20 +84,20 @@
 					<div class="nav-button">
 						<div class="ui top right pointing dropdown mini">
 							<i class="large checkmark sign icon"></i>
-							<div class="floating ui awesome_yellow small circular label">15</div>
+							<div class="floating ui awesome_yellow small circular label" th:if="${user.taskCount>0}" th:text="${user.taskCount}">15</div>
 							<div class="menu ui transition">
-								<p class="item dropdown-header"> You have 15 new tasks </p>
+								<p class="item dropdown-header" th:text="| 您有${user.taskCount?:'0'}条新任务 |"> You have 15 new tasks </p>
 								<div class="item">
-									<i class="circular awesome_green inverted resize full color icon"></i> <a href="#">All Tasks</a>
+									<i class="circular awesome_green inverted resize full color icon"></i> <a href="#" th:text="待处理任务">All Tasks</a>
 								</div>
 								<div class="item">
-									<i class="circular awesome_red inverted checked checkbox color icon"></i> <a href="#">Done Tasks</a>
+									<i class="circular awesome_red inverted checked checkbox color icon"></i> <a href="#" th:text="已处理任务">Done Tasks</a>
 								</div>
 								<div class="item">
-									<i class="circular awesome_yellow inverted archive color icon"></i> <a href="#">Tasks Archiv</a>
+									<i class="circular awesome_yellow inverted archive color icon"></i> <a href="#" th:text="已结束任务">Tasks Archiv</a>
 								</div>
 								<p class="item dropdown-link">
-									<a href="#">See them all</a><i class="right arrow icon"></i>
+									<a href="#" th:text="查看全部任务">See them all</a><i class="right arrow icon"></i>
 								</p>
 							</div>
 						</div>
@@ -114,24 +105,24 @@
 					<div class="nav-button account hidden-phone">
 						<div class="ui top right pointing dropdown mini">
 							<div class="account_image pull-left">
-								<img src="../static/img/avatar.jpg" class="circular ui image" alt="" th:src="@{/img/avatar.jpg}">
+								<img src="../static/img/avatar.jpg" class="circular ui image" alt="" th:src="${user.avatar}">
 							</div>
-							<div class="username pull-right">Jonh Doe</div>
+							<div class="username pull-right" th:text="${user.nickName}">Jonh Doe</div>
 							<div class="menu ui transition">
-								<p class="item dropdown-header"> Account </p>
+								<p class="item dropdown-header" th:text="账号信息"> Account </p>
 								<div class="item">
 									<i class="awesome_green_text settings full color icon"></i>
-									<a href="#">Settings</a>
+									<a href="#" th:text="设置">Settings</a>
 								</div>
 								<div class="item">
 									<i class="awesome_green_text user full color icon"></i>
-									<a href="#">Account</a>
+									<a href="#" th:text="账户">Account</a>
 								</div>
 								<div class="item">
 									<i class="awesome_green_text off full color icon"></i>
-									<a href="#">Log out</a>
+									<a href="#" th:text="退出登录">Log out</a>
 								</div>
-								<p class="item dropdown-link">
+								<p class="item dropdown-link" th:text="|角色：${user.role}|">
 									Role: admin
 								</p>
 							</div>
@@ -158,123 +149,55 @@
 		</div>
 		<div class="viewport" id="side_scrollbar">
 			<div class="overview">
-				<a id="home" class="item active ajax-link" href="index.html">
-					Dashboard<i class="home icon"></i>
+				<a id="home" class="item active ajax-link" href="index.html" th:href="@{/admin}">
+					<span th:text="欢迎页">Dashboard</span><i class="home icon"></i>
 				</a>
-
-				<div class="ui item sidebar_dropdown">
-					UI Elements  <i class="icon left triangle"></i> <div class="ui teal label">+100</div>
+				
+				<!--/*/<th:block th:each="menu,stat : ${menus}">/*/-->
+				<!--有子菜单-->
+				<div class="ui item sidebar_dropdown" th:if="${menu.hasSub == true}">
+					<span th:text="| ${menu.title}|">UI Elements  </span><i class="icon left triangle"></i> <div class="ui teal label" th:text="${stat.count}">+100</div>
 				</div>
-
-				<div class="menu_dropdown hidden-elements">
+				<!--子菜单-->
+				<div class="menu_dropdown hidden-elements" th:if="${menu.hasSub == true}">
 					<div class="ui secondary vertical menu">
-						<div class="item">
-							<a class="ajax-link" href="buttons.html"> - Buttons</a>
+						<div class="item" th:each="subMenu, subStat:${menu.subMenus}">
+							<a class="ajax-link" href="modal.html" th:href="${subMenu.url}" th:text="| - ${subMenu.title}|"> - Modal</a>
 						</div>
-						<div class="item">
-							<a class="ajax-link" href="modal.html"> - Modal</a>
-						</div>
+						
+						<!--/*-->
 						<div class="item">
 							<a class="ajax-link" href="dropdown.html"> - Dropdown</a>
 						</div>
-						<div class="item">
-							<a class="ajax-link" href="labels.html"> - Labels</a>
-						</div>
-						<div class="item">
-							<a class="ajax-link" href="blocks.html"> - Block Elements</a>
-						</div>
-						<div class="item">
-							<a class="ajax-link" href="grid.html"> - Grid</a>
-						</div>
+						<!--*/-->
+					
 					</div>
 				</div>
-				<a href="extras.html" class="item  ajax-link">Extras<i class="star icon"></i></a>
-				<a href="form.html" class="item  ajax-link">Forms<i class="user layout icon"></i></a>
-				<a href="chart.html" class="item ajax-link"><i class="signal icon"></i> Charts</a>
-				<a href="typography.html" class="item  ajax-link"><i class="globe layout icon"></i> Typography</a>
-				<a href="table.html" class="item  ajax-link"><i class="users layout icon"></i> Tables</a>
-				<a href="icon.html" class="item  ajax-link"><i class="grid layout icon"></i> Icons</a>
-				<a href="email.html" class="item  ajax-link"><i class="mail icon"></i> Email
-					<div class="ui right teal corner label">
-						<i class="warning icon"></i>
-					</div>
-				</a>
-				<a class="item ajax-link" href="animations.html">
-					<i class="magic icon"></i> Animations
-				</a>
-
-				<div class="ui item sidebar_dropdown">
-					Layout <i class="icon left triangle"></i> <div class="ui teal label">2</div>
-				</div>
-
-				<div class="menu_dropdown hidden-elements">
-					<div class="ui secondary vertical menu">
-						<div class="item ">
-							<a class="settings-fluid change_wide active" data-type="fluid" href="#"> - Fluid</a>
-						</div>
-						<div class="item">
-							<a class="settings-boxed change_wide" data-type="boxed" href="#"> - Boxed</a>
-						</div>
-					</div>
-				</div>
-
-				<div class="ui item sidebar_dropdown">
-					Pages  <i class="icon left triangle"></i><div class="ui teal label">4</div>
-				</div>
-				<div class="menu_dropdown hidden-elements">
-					<div class="ui secondary vertical menu">
-						<div class="item">
-							<a class="ajax-link" href="error.html"> - Error Page</a>
-						</div>
-						<div class="item">
-							<a class="ajax-link" href="login.html"> - Login Page</a>
-						</div>
-						<div class="item">
-							<a class="ajax-link" href="gallery.html"> - Gallery</a>
-						</div>
-						<div class="item">
-							<a class="ajax-link" href="feed.html"> - Activity</a>
-						</div>
-						<div class="item">
-							<a class="ajax-link" href="contacts.html"> - Contact </a><div class="ui teal label">Comming soon</div>
-						</div>
-					</div>
-				</div>
+				<!--没有子菜单-->
+				<a href="extras.html" class="item ajax-link" th:if="${menu.hasSub == false}" th:href="${menu.url}" th:text="${menu.title}">Extras<i class="star icon"></i></a>
+				
+				<i th:text="${menu.code}"></i>
+				<!--/*/</th:block>/*/-->
 
 				<div class="ui item info">
 					<div class="ui list">
 						<div class="item">
-							<a href="#">
+							<a href="#" th:href="@{/admin/system-setting}">
 								<i class="circular inverted teal settings icon"></i>
-								Server settings
+								<span th:text="系统设置">Server settings</span>
 							</a>
 						</div>
 						<div class="item">
-							<a href="#">
-								<i class="circular inverted teal browser icon"></i>
-								Website settings
-							</a>
-						</div>
-						<div class="item">
-							<a href="#">
+							<a href="#" th:href="@{/admin/personal-setting}">
 								<i class="circular inverted teal user icon"></i>
-								Profile settings
+								<span th:text="个人设置">Profile settings</span>
 							</a>
 						</div>
 					</div>
 					<div class="ui basic accordion">
 						<div class="title">
-							<i class="icon check"></i>
-							Tasks completion
-						</div>
-						<div class="content field active">
-							<div class="sidebarstats"></div>
-						</div>
-					</div>
-					<div class="ui basic accordion">
-						<div class="title">
-							<i class="icon cart"></i>
-							Orders Finished
+							<i class="add to cart icon"></i>
+							<span th:text="订单统计">Orders Finished</span>
 						</div>
 						<div class="content field active">
 							<div class="sidebarstats2"></div>
@@ -282,8 +205,8 @@
 					</div>
 					<div class="ui basic accordion">
 						<div class="title">
-							<i class="dollar icon"></i>
-							Total Income
+							<i class="add user icon"></i>
+							<span th:text="用户统计">Total Income</span>
 						</div>
 						<div class="content field active">
 							<div class="sidebarstats3"></div>
@@ -299,11 +222,10 @@
 
 
 <!-- left menu ends -->
-
 <noscript>
-	<div class="alert alert-block span1">
+	<div class="alert alert-block span1" style="margin:0 auto; text-align: center;">
 		<h4 class="alert-heading">Warning!</h4>
-		<p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
+		<p th:utext="|浏览器需要允许&lt;a href=&quot;http://en.wikipedia.org/wiki/JavaScript&quot; target=&quot;_blank&quot;&gt;JavaScript&lt;/a&gt;才能正常使用本网站功能|">You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
 	</div>
 </noscript>
 
