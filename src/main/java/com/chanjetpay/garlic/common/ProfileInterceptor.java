@@ -23,6 +23,7 @@ public class ProfileInterceptor implements HandlerInterceptor {
 		user.setAttentionCount(12);
 		user.setMessageCount(3);
 		user.setTaskCount(0);
+		//user.setAttentionCount(0);
 
 		modelAndView.addObject("user",user);
 

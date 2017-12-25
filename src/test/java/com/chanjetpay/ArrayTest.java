@@ -1,7 +1,11 @@
 package com.chanjetpay;
 
+import com.chanjetpay.garlic.dto.MerchantDto;
+import com.chanjetpay.result.GenericResult;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -13,6 +17,18 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = GarlicBoltPlatformApplication.class)
 public class ArrayTest {
+
+	private static final Logger logger = LoggerFactory.getLogger(ArrayTest.class);
+
+	@Test
+	public void testLogger(){
+		GenericResult<MerchantDto> result = GenericResult.newGenericResult();
+		MerchantDto merchantDto = new MerchantDto();
+		merchantDto.setAdminName("张三123");
+		result.setValue(merchantDto);
+		result.getValue().setBizType("测试类型");
+		logger.info("result:"+ result);
+	}
 
 	@Test
 	public void testSort(){

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="common_header(title, links)">
+	<meta charset="utf-8">
+	<title th:text="${title}">Sample Admin</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- The styles -->
+	<link rel="shortcut icon" type="image/jpeg" href="../static/timg1.jpg" th:href="@{/timg1.jpg}"/>
+	<link href="../static/semantic_ui/css/semantic.min.css" rel="stylesheet" th:href="@{/semantic_ui/css/semantic.min.css}">
+	<link href="../static/css/jquery-ui-1.8.21.custom.css" rel="stylesheet" th:href="@{/css/jquery-ui-1.8.21.custom.css}">
+	<link href="../static/css/main.css" rel="stylesheet" th:href="@{/css/main.css}">
+	<link href="../static/css/main_elements.css" rel="stylesheet" th:href="@{/css/main_elements.css}">
+	<link href="../static/css/animate.css" rel="stylesheet" th:href="@{/css/animate.css}">
+	<link href="../static/js/morris.js/morris.css" rel="stylesheet" th:href="@{/js/morris.js/morris.css}">
+	
+	<th:block th:replace="${links}"/>
+	
+	<!--[if lt IE 9]>
+	<script src="../static/js/html5.js" th:src="@{/js/html5.js}"></script>
+	<![endif]-->
+</head>
+
+<div th:fragment="common_bottom(scripts)">
+	<!-- external javascript
+		================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	
+	<!-- jQuery -->
+	<script src="../static/js/jquery.js" th:src="@{/js/jquery.js}"></script>
+	
+	<!-- jQuery UI -->
+	<script src="../static/js/jquery-ui-1.8.21.custom.min.js" th:src="@{/js/jquery-ui-1.8.21.custom.min.js}"></script>
+	
+	<!-- Semantic UI -->
+	<script src="../static/semantic_ui/javascript/semantic.min.js" th:src="@{/semantic_ui/javascript/semantic.min.js}"></script>
+	<!-- Semantic UI -->
+	
+	<!-- Easypiechart -->
+	<script src="../static/js/jquery.easypiechart.min.js" th:src="@{/js/jquery.easypiechart.min.js}"></script>
+	<!-- Easypiechart -->
+	
+	<!-- Data tables js -->
+	<script src="../static/js/data_tables/js/footable.js?v=2-0-1" type="text/javascript" th:src="@{/js/data_tables/js/footable.js}"></script>
+	<script src="../static/js/data_tables/js/footable.paginate.js?v=2-0-1" type="text/javascript" th:src="@{/js/data_tables/js/footable.paginate.js}"></script>
+	<script src="../static/js/data_tables/js/footable.sort.js" type="text/javascript" th:src="@{/js/data_tables/js/footable.sort.js}"></script>
+	
+	<!-- morris chars -->
+	<script src="../static/js/morris.js/raphael.js" th:src="@{/js/morris.js/raphael.js}"></script>
+	<script src="../static/js/morris.js/morris.js" th:src="@{/js/morris.js/morris.js}"></script>
+	
+	<!-- Spark lines -->
+	<script src="../static/js/jquery.sparkline.min.js" th:src="@{/js/jquery.sparkline.min.js}"></script>
+	
+	<!-- custom scrollbar -->
+	<script src="../static/js/custom-scrollbar.min.js" th:src="@{/js/custom-scrollbar.min.js}"></script>
+	
+	<script src="../static/js/main_plugin.js" th:src="@{/js/main_plugin.js}"></script>
+	<script src="../static/js/main.js" th:src="@{/js/main.js}"></script>
+	
+	<!-- library for cookie management -->
+	<script src="../static/js/jquery.cookie.js" th:src="@{/js/jquery.cookie.js}"></script>
+	
+	<!-- Gallery plugin -->
+	<script src="../static/js/least/js/least.min.js" th:src="@{/js/least/js/least.min.js}"></script>
+	<script src="../static/js/least/js/jquery.lazyload.min.js" th:src="@{/js/least/js/jquery.lazyload.min.js}"></script>
+	
+	<!-- history.js for cross-browser state change on ajax -->
+	<script src="../static/js/jquery.history.js" th:src="@{/js/jquery.history.js}"></script>
+	
+	<th:block th:replace="${scripts}"/>
+</div>
+<body>
+
+</body>
+</html>

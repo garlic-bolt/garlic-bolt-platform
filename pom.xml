@@ -49,7 +49,6 @@
 			<version>3.3.2</version>
 		</dependency>
 
-
 		<!-- spring boot dependency -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -85,12 +84,11 @@
 			<version>8.18.0</version>
 		</dependency>
 
+		<!-- shiro dependency -->
 		<dependency>
-			<groupId>com.chanjetpay.garlic</groupId>
-			<artifactId>garlic-bolt-api</artifactId>
-			<version>1.0-SNAPSHOT</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/garlic-bolt-api-1.0-SNAPSHOT.jar</systemPath>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-spring</artifactId>
+			<version>1.4.0</version>
 		</dependency>
 
 	</dependencies>
@@ -102,13 +100,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-<!--			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<testFailureIgnore>true</testFailureIgnore>
-				</configuration>
-			</plugin>-->
 		</plugins>
 
 		<resources>
@@ -128,7 +119,6 @@
 				</includes>
 			</resource>
 		</resources>
-
 	</build>
 
 	<profiles>
@@ -144,16 +134,32 @@
 					</resource>
 				</resources>
 			</build>
+			<dependencies>
+				<dependency>
+					<groupId>com.chanjetpay.garlic</groupId>
+					<artifactId>garlic-bolt-api</artifactId>
+					<version>1.0-SNAPSHOT</version>
+				</dependency>
+			</dependencies>
 		</profile>
 		<profile>
-			<id>dev</id>
+			<id>openshift</id>
 			<build>
 				<resources>
 					<resource>
-						<directory>${profiles.dir}/dev</directory>
+						<directory>${profiles.dir}/openshift</directory>
 					</resource>
 				</resources>
 			</build>
+			<dependencies>
+				<dependency>
+					<groupId>com.chanjetpay.garlic</groupId>
+					<artifactId>garlic-bolt-api</artifactId>
+					<version>1.0-SNAPSHOT</version>
+					<scope>system</scope>
+					<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/garlic-bolt-api-1.0-SNAPSHOT.jar</systemPath>
+				</dependency>
+			</dependencies>
 		</profile>
 		<profile>
 			<id>betaa</id>
