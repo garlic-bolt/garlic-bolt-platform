@@ -30,7 +30,7 @@ public class FeignConfig {
 	private RequestInterceptor requestInterceptor = new RequestInterceptor() {
 		@Override
 		public void apply(RequestTemplate requestTemplate) {
-			requestTemplate.header("token","ttt");
+			requestTemplate.header("access-token",feignToken);
 		}
 	};
 
