@@ -22,46 +22,47 @@ public class IndexController {
 	private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
 
 	@Autowired
-	@Qualifier("blockService")
-	private BlockService blockService;
+	private MerchantService merchantService;
 
 	@RequestMapping({"/",""})
 	public String index(){
-
-
-		return "index";
+		return "login";
 	}
 
-	@RequestMapping("/test")
-	public String home(){
-		return "home";
+	@RequestMapping("/enroll")
+	public String enroll(){
+		//MerchantDto merchantDto = new MerchantDto();
+		//merchantDto.setBizType("disnahgn");
+		//merchantDto.setAdminName("张三");
+		//merchantDto.setAdminMobile("13488746533");
+		//GenericResult<MerchantDto> result = merchantService.createMerchant(merchantDto);
+
+		//model.addAttribute("adminInfo",result.getValue());
+
+		//result.getValue().setBizType("测试类型");
+		//
+		//logger.info("result1:{}", result);
+		//
+		//
+		//
+		//GenericResult<MerchantDto> result2 = GenericResult.newGenericResult();
+		//MerchantDto merchantDto2 = new MerchantDto();
+		//merchantDto.setAdminName("张三123");
+		//result.setValue(merchantDto);
+		//result.getValue().setBizType("测试类型");
+		//logger.info("result2:" + result.getValue());
+
+
+		return  "enroll";
 	}
 
+	@RequestMapping("/logoff")
+	public String logoff(){
+		return  "login";
+	}
 
-	//
-	//@RequestMapping("/")
-	//public String index(){
-	//
-	//	List<UserDto> users = blockService.queryUsers("hehe哈哈哈");
-	//
-	//	for(UserDto user : users){
-	//		System.out.println(user);
-	//	}
-	//
-	//	return "index";
-	//}
-	//
-	//
-	//@RequestMapping("/save")
-	//public String save(){
-	//
-	//	UserDto d1 = new UserDto();
-	//	d1.setNickName("张磊磊");
-	//	UserDto dto = blockService.saveUser(d1);
-	//
-	//	System.out.println(dto);
-	//
-	//
-	//	return "home";
-	//}
+	@RequestMapping("/excp")
+	public String excp(){
+		return  "404";
+	}
 }

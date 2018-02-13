@@ -1,1563 +1,883 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{layout/fragment::common_header(#{app.title},~{::link})}">
-	<meta charset="utf-8">
-	<title>Sample Admin</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- The styles -->
-	<link rel="shortcut icon" type="image/jpeg" href="../static/timg1.jpg" th:remove="all">
-	<link href="../static/semantic_ui/css/semantic.min.css" rel="stylesheet" th:remove="all">
-	<link href="../static/css/jquery-ui-1.8.21.custom.css" rel="stylesheet" th:remove="all">
-	<link href="../static/css/main.css" rel="stylesheet" th:remove="all">
-	<link href="../static/css/main_elements.css" rel="stylesheet" th:remove="all">
-	<link href="../static/css/animate.css" rel="stylesheet" th:remove="all">
-	<link href="../static/js/morris.js/morris.css" rel="stylesheet" th:remove="all">
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Stagb Admin Template</title>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+	<link href="../static/dist/semantic.min.css" rel="stylesheet"/>
+	<link href="../static/plugins/ionicons/css/ionicons.min.css" rel="stylesheet"/>
+	<link href="../static/css/main.css" rel="stylesheet"/>
 	
-	<!--[if lt IE 9]>
-	<script src="../static/js/html5.js" th:remove="all"></script>
-	<![endif]-->
 </head>
 <body>
 
-<!-- navbar starts -->
-<div class="navbar">
-	<div class="navbar-inner nav-color menu">
-		<div class="container-fluid">
-			<a class="brand hidden-phone" href="index.html">
-				<span id="logo" class="animated rubberBand" th:text="#{logo.tilte}">Sample Admin</span>
+<div id="contextWrap">
+	<!--sidebar-->
+	<div class="ui sidebar vertical left menu overlay  borderless visible sidemenu inverted  grey" style="-webkit-transition-duration: 0.1s; transition-duration: 0.1s;" data-color="grey">
+		
+		<a class="item logo" href="index.html">
+			<img src="../static/img/logo.png" alt="stagblogo" /><img src="../static/img/thumblogo.png" alt="stagblogo" class="displaynone" />
+		</a>
+		
+		<div class="ui accordion inverted">
+			
+			<a class="title item">
+				<i class="ion-speedometer titleIcon icon"></i> Dashboard <i class="dropdown icon"></i>
 			</a>
-			<div class="pull-right">
-				<div class="nav-buttons">
-					<div class="nav-button search hidden-phone">
-						<div class="ui form pull-righ">
-							<div class="field">
-								<div class="ui icon mini input">
-									<input type="text" placeholder="Search..." th:attr="placeholder=#{serarch.holder}"/>
-									<i class="circular search icon"></i>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="nav-button">
-						<div class="ui top right pointing dropdown mini">
-							<i class="large attention icon"></i>
-							<div class="floating ui awesome_red small circular label" th:if="${user.attentionCount>0}" th:text="${user.attentionCount}">13</div>
-							<div class="ui secondary menu">
-								<p class="item dropdown-header" th:text="| 您有${user.attentionCount?:'0'}项报警 |"> You have 13 new attention </p>
-								<div class="item">
-									<div class="ui small icon awesome_red message">
-										<i class=" inverter dashboard icon"></i>
-										<h5 class="header"></h5>
-										<p th:text="300万资金冻结">CPU overload</p>
-									</div>
-									<div class="ui small icon awesome_red message">
-										<i class="small inverter user icon"></i>
-										<h5 class="header"></h5>
-										<p th:text="用户交易数据异常">1 user ticket waiting reply</p>
-									</div>
-								</div>
-<!--								<p class="item dropdown-link">
-									<a href="#" th:text="查看全部信息">See them all</a><i class="right arrow icon"></i>
-								</p>-->
-							</div>
-						</div>
-					</div>
-					<div class="nav-button">
-						<div class="ui top right pointing dropdown mini">
-							<i id="mail" class="large mail icon"></i>
-							<div class="floating ui awesome_green small circular label" th:if="${user.messageCount>0}" th:text="${user.messageCount}">22</div>
-							<div class="menu ui transition hidden">
-								<p class="item dropdown-header" th:text="| 您有${user.messageCount?:'0'}条新消息 |"> You have 22 new emails </p>
-								<div class="item">
-									<i class="circular awesome_green inverted open folder color icon"></i> <a href="#" th:text="未读信息">Inbox</a>
-								</div>
-								<div class="item">
-									<i class="circular folder awesome_red inverted color icon"></i> <a href="#" th:text="已读信息">Outbox</a>
-								</div>
-								
-								<p class="item dropdown-link">
-									<a href="#" th:text="查看全部消息">See them all</a><i class="right arrow icon"></i>
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="nav-button">
-						<div class="ui top right pointing dropdown mini">
-							<i class="large checkmark sign icon"></i>
-							<div class="floating ui awesome_yellow small circular label" th:if="${user.taskCount>0}" th:text="${user.taskCount}">15</div>
-							<div class="menu ui transition">
-								<p class="item dropdown-header" th:text="| 您有${user.taskCount?:'0'}条新任务 |"> You have 15 new tasks </p>
-								<div class="item">
-									<i class="circular awesome_green inverted resize full color icon"></i> <a href="#" th:text="待处理任务">All Tasks</a>
-								</div>
-								<div class="item">
-									<i class="circular awesome_red inverted checked checkbox color icon"></i> <a href="#" th:text="已处理任务">Done Tasks</a>
-								</div>
-								<div class="item">
-									<i class="circular awesome_yellow inverted archive color icon"></i> <a href="#" th:text="已结束任务">Tasks Archiv</a>
-								</div>
-								<p class="item dropdown-link">
-									<a href="#" th:text="查看全部任务">See them all</a><i class="right arrow icon"></i>
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="nav-button account hidden-phone">
-						<div class="ui top right pointing dropdown mini">
-							<div class="account_image pull-left">
-								<img src="../static/img/avatar.jpg" class="circular ui image" alt="" th:src="${user.avatar}">
-							</div>
-							<div class="username pull-right" th:text="${user.nickName}">Jonh Doe</div>
-							<div class="menu ui transition">
-								<p class="item dropdown-header" th:text="账号信息"> Account </p>
-								<div class="item">
-									<i class="awesome_green_text settings full color icon"></i>
-									<a href="#" th:text="设置">Settings</a>
-								</div>
-								<div class="item">
-									<i class="awesome_green_text user full color icon"></i>
-									<a href="#" th:text="账户">Account</a>
-								</div>
-								<div class="item">
-									<i class="awesome_green_text off full color icon"></i>
-									<a href="#" th:text="退出登录">Log out</a>
-								</div>
-								<p class="item dropdown-link" th:text="|角色：${user.role}|">
-									Role: admin
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
+			<div class="content">
+				<a class="item" href="index.html">
+					Dashboard v1
+				</a>
 			</div>
-		</div>
-	</div>
-</div>
-<!-- navbar ends -->
-<div id="lunch_sidebar">
-	<i class="reorder circular inverted teal icon lunch_sidebar"></i>
-</div>
-<!-- left menu starts -->
-<div id="side" class="ui vertical sidebar menu">
-	<div class="custom_scrollbar2">
-		<div class="scrollbar">
-			<div class="track">
-				<div class="thumb">
-					<div class="end"></div>
-				</div>
+			
+			<div class="title item">
+				<i class="ion-ios-lightbulb titleIcon icon"></i>
+				
+				<i class="dropdown icon"></i> Apps
 			</div>
-		</div>
-		<div class="viewport" id="side_scrollbar">
-			<div class="overview">
-				<a id="home" class="item active ajax-link" href="index.html" th:href="@{/admin}">
-					<span th:text="欢迎页">Dashboard</span><i class="home icon"></i>
+			<div class="content">
+				<a class="item" href="inbox.html">
+					Inbox
 				</a>
 				
-				<!--/*/<th:block th:each="menu,stat : ${menus}">/*/-->
-				<!--有子菜单-->
-				<div class="ui item sidebar_dropdown" th:if="${menu.hasSub == true}">
-					<span th:text="| ${menu.title}|">UI Elements  </span><i class="icon left triangle"></i> <div class="ui teal label" th:text="${stat.count}">+100</div>
-				</div>
-				<!--子菜单-->
-				<div class="menu_dropdown hidden-elements" th:if="${menu.hasSub == true}">
-					<div class="ui secondary vertical menu">
-						<div class="item" th:each="subMenu, subStat:${menu.subMenus}">
-							<a class="ajax-link" href="modal.html" th:href="${subMenu.url}" th:text="| - ${subMenu.title}|"> - Modal</a>
-						</div>
-						
-						<!--/*-->
-						<div class="item">
-							<a class="ajax-link" href="dropdown.html"> - Dropdown</a>
-						</div>
-						<!--*/-->
-					
-					</div>
-				</div>
-				<!--没有子菜单-->
-				<a href="extras.html" class="item ajax-link" th:if="${menu.hasSub == false}" th:href="${menu.url}" th:text="${menu.title}">Extras<i class="star icon"></i></a>
+				<a class="item" href="chat.html">
+					Chat
+				</a>
 				
-				<i th:text="${menu.code}"></i>
-				<!--/*/</th:block>/*/-->
-
-				<div class="ui item info">
-					<div class="ui list">
-						<div class="item">
-							<a href="#" th:href="@{/admin/system-setting}">
-								<i class="circular inverted teal settings icon"></i>
-								<span th:text="系统设置">Server settings</span>
-							</a>
-						</div>
-						<div class="item">
-							<a href="#" th:href="@{/admin/personal-setting}">
-								<i class="circular inverted teal user icon"></i>
-								<span th:text="个人设置">Profile settings</span>
-							</a>
+				<a class="item" href="filter.html">
+					Filter
+				</a>
+				<a class="item" href="todo.html">
+					Todo
+				</a>
+			</div>
+			<div class="title item">
+				<i class="ion-ios-world titleIcon  icon"></i>
+				
+				<i class="dropdown icon"></i> Layouts
+			</div>
+			<div class="content">
+				<a class="item" href="sidebar.html">
+					Sidebar
+				</a>
+				<a class="item" href="menu.html">
+					Nav
+				</a>
+				
+				<a class="item" href="box.html">
+					Box
+				</a>
+				<a class="item" href="cards.html">
+					Cards
+				</a>
+				<a class="item" href="color.html">
+					Colors
+				</a>
+				<a class="item" href="comment.html">
+					Comment
+				</a>
+				<a class="item" href="embed.html">
+					Embed
+				</a>
+				<a class="item" href="faq.html">
+					Faq
+				</a>
+				<a class="item" href="feed.html">
+					Feed
+				</a>
+				<a class="item" href="gallery.html">
+					Gallery
+				</a>
+				<a class="item" href="grid.html">
+					Grid
+				</a>
+				<a class="item" href="header.html">
+					Header
+				</a>
+				<a class="item" href="timeline.html">
+					Timeline
+				</a>
+				<a class="item" href="message.html">
+					Message
+				</a>
+				<a class="item" href="price.html">
+					Price
+				</a>
+			</div>
+			
+			
+			
+			<div class="title item">
+				<i class="ion-briefcase titleIcon icon"></i>
+				
+				<i class="dropdown icon"></i> UI-Kit
+			</div>
+			<div class="content">
+				
+				<a class="item" href="breadcrumb.html">
+					Breadcrumb
+				</a>
+				<a class="item" href="button.html">
+					Button
+				</a>
+				<a class="item" href="divider.html">
+					Divider
+				</a>
+				
+				<a class="item" href="flag.html">
+					Flag
+				</a>
+				<a class="item" href="icon.html">
+					Icon
+				</a>
+				<a class="item" href="image.html">
+					Image
+				</a>
+				<a class="item" href="label.html">
+					Label
+				</a>
+				<a class="item" href="list.html">
+					List
+				</a>
+			</div>
+			<div class="title item">
+				<i class="ion-mouse titleIcon icon"></i>
+				
+				<i class="dropdown icon"></i> Script
+			</div>
+			<div class="content">
+				<a class="item" href="accordion.html">
+					Accordion
+				</a>
+				
+				<a class="item" href="dropdown.html">
+					Dropdown
+				</a>
+				
+				<a class="item" href="modal.html">
+					Modal
+				</a>
+				<a class="item" href="notification.html">
+					Notification
+				</a>
+				<a class="item" href="alert.html">
+					Alert
+				</a>
+				
+				<a class="item" href="progress.html">
+					Progress
+				</a>
+				<a class="item" href="range-v1.html">
+					Range Semantic
+				</a>
+				<a class="item" href="range-v2.html">
+					Range Material
+				</a>
+				<a class="item" href="rating.html">
+					Rating
+				</a>
+				<a class="item" href="tab.html">
+					Tab
+				</a>
+				<a class="item" href="tooltip.html">
+					Tooltip
+				</a>
+				<a class="item" href="transition.html">
+					Transition
+				</a>
+			</div>
+			<div class="title item">
+				<i class="ion-bowtie titleIcon icon"></i>
+				
+				<i class="dropdown icon"></i> Pages
+			</div>
+			<div class="content">
+				<a class="item" href="profile.html">
+					Profile
+				</a>
+				
+				<a class="item" href="settings.html">
+					Settings
+				</a>
+				
+				<a class="item" href="blank.html">
+					Blank
+				</a>
+				<a class="item" href="login.html">
+					Sign In
+				</a>
+				<a class="item" href="login.html">
+					Sign Up
+				</a>
+				<a class="item" href="forgotpassword.html">
+					Forgot Password
+				</a>
+				<a class="item" href="lockme.html">
+					Lock Me Screen
+				</a>
+				<a class="item" href="404.html">
+					Error 404
+				</a>
+				<a class="item" href="comingsoon.html">
+					Coming Soon
+				</a>
+			</div>
+			
+			<div class="title item">
+				<i class="ion-paintbrush titleIcon icon"></i>
+				
+				<i class="dropdown icon"></i> Form
+			</div>
+			<div class="content">
+				<a class="item" href="formelements.html">
+					Form Element
+				</a>
+				<a class="item" href="input.html">
+					Input
+				</a>
+				<a class="item" href="formvalidation.html">
+					Form Validation
+				</a>
+				
+				<a class="item" href="editor.html">
+					Html Editor
+				</a>
+			</div>
+			
+			<div class="title item">
+				<i class="ion-flame titleIcon icon"></i>
+				
+				<i class="dropdown icon"></i> Tables
+			</div>
+			<div class="content">
+				<a class="item" href="table.html">
+					Static Table
+				</a>
+				<a class="item" href="datatable.html">
+					Datatable
+				</a>
+				<a class="item" href="editable.html">
+					Editable
+				</a>
+			</div>
+			<div class="title item">
+				<i class="ion-arrow-graph-up-right titleIcon icon"></i>
+				
+				<i class="dropdown icon"></i> Chart
+			</div>
+			<div class="content">
+				<a class="item" href="chart.html">
+					Charts 1
+				</a>
+				<a class="item" href="chart-2.html">
+					Charts 2
+				</a>
+			
+			</div>
+		
+		</div>
+		
+		<div class="ui dropdown item displaynone scrolling">
+			<span>Dashboard</span>
+			<i class="ion-speedometer icon"></i>
+			
+			<div class="menu">
+				<div class="header">
+					Dashboard
+				</div>
+				<div class="ui divider"></div>
+				<a class="item" href="index.html">
+					Dashboard v1
+				</a>
+			</div>
+		</div>
+		
+		<div class="ui dropdown item displaynone scrolling">
+			<span>Apps</span>
+			<i class="ion-ios-lightbulb icon"></i>
+			<div class="menu">
+				<div class="header">
+					Apps
+				</div>
+				<div class="ui divider"></div>
+				<a class="item" href="inbox.html">
+					Inbox
+				</a>
+				<a class="item" href="filter.html">
+					Filter
+				</a>
+				<a class="item" href="todo.html">
+					Todo
+				</a>
+			</div>
+		</div>
+		<div class="ui dropdown item displaynone scrolling">
+			<span>Layouts</span>
+			<i class="ion-ios-world icon"></i>
+			<div class="menu">
+				<div class="header">
+					Layouts
+				</div>
+				<div class="ui divider"></div>
+				<a class="item" href="sidebar.html">
+					Sidebar
+				</a>
+				<a class="item" href="menu.html">
+					Nav
+				</a>
+				
+				<a class="item" href="box.html">
+					Box
+				</a>
+				<a class="item" href="cards.html">
+					Cards
+				</a>
+				<a class="item" href="color.html">
+					Colors
+				</a>
+				<a class="item" href="comment.html">
+					Comment
+				</a>
+				<a class="item" href="embed.html">
+					Embed
+				</a>
+				<a class="item" href="faq.html">
+					Faq
+				</a>
+				<a class="item" href="feed.html">
+					Feed
+				</a>
+				<a class="item" href="gallery.html">
+					Gallery
+				</a>
+				<a class="item" href="grid.html">
+					Grid
+				</a>
+				<a class="item" href="header.html">
+					Header
+				</a>
+				<a class="item" href="timeline.html">
+					Timeline
+				</a>
+				<a class="item" href="message.html">
+					Message
+				</a>
+				<a class="item" href="price.html">
+					Price
+				</a>
+			</div>
+		</div>
+		<div class="ui dropdown item displaynone scrolling">
+			<span>UI-Kit</span>
+			<i class="ion-briefcase icon"></i>
+			<div class="menu">
+				<div class="header">
+					UI-Kit
+				</div>
+				<div class="ui divider"></div>
+				<a class="item" href="breadcrumb.html">
+					Breadcrumb
+				</a>
+				<a class="item" href="button.html">
+					Button
+				</a>
+				<a class="item" href="divider.html">
+					Divider
+				</a>
+				
+				<a class="item" href="flag.html">
+					Flag
+				</a>
+				<a class="item" href="icon.html">
+					Icon
+				</a>
+				<a class="item" href="image.html">
+					Image
+				</a>
+				<a class="item" href="label.html">
+					Label
+				</a>
+				<a class="item" href="list.html">
+					List
+				</a>
+			</div>
+		</div>
+		<div class="ui dropdown item displaynone scrolling">
+			<span>Script</span>
+			<i class="ion-mouse icon"></i>
+			<div class="menu">
+				<div class="header">
+					UI-Kit
+				</div>
+				<div class="ui divider"></div>
+				<a class="item" href="accordion.html">
+					Accordion
+				</a>
+				
+				<a class="item" href="dropdown.html">
+					Dropdown
+				</a>
+				
+				<a class="item" href="modal.html">
+					Modal
+				</a>
+				<a class="item" href="notification.html">
+					Notification
+				</a>
+				<a class="item" href="alert.html">
+					Alert
+				</a>
+				
+				<a class="item" href="progress.html">
+					Progress
+				</a>
+				<a class="item" href="range-v1.html">
+					Range Semantic
+				</a>
+				<a class="item" href="range-v2.html">
+					Range Material
+				</a>
+				<a class="item" href="rating.html">
+					Rating
+				</a>
+				<a class="item" href="tab.html">
+					Tab
+				</a>
+				<a class="item" href="tooltip.html">
+					Tooltip
+				</a>
+				<a class="item" href="transition.html">
+					Transition
+				</a>
+			</div>
+		</div>
+		<div class="ui dropdown item displaynone scrolling">
+			<span>Pages</span>
+			<i class="ion-bowtie icon"></i>
+			
+			<div class="menu">
+				<div class="header">
+					Pages
+				</div>
+				<div class="ui divider"></div>
+				<a class="item" href="profile.html">
+					Profile
+				</a>
+				
+				<a class="item" href="settings.html">
+					Settings
+				</a>
+				
+				<a class="item" href="blank.html">
+					Blank
+				</a>
+				<a class="item" href="login.html">
+					Sign In
+				</a>
+				<a class="item" href="login.html">
+					Sign Up
+				</a>
+				<a class="item" href="forgotpassword.html">
+					Forgot Password
+				</a>
+				<a class="item" href="lockme.html">
+					Lock Me Screen
+				</a>
+				<a class="item" href="404.html">
+					Error 404
+				</a>
+				<a class="item" href="comingsoon.html">
+					Coming Soon
+				</a>
+			</div>
+		</div>
+		<div class="ui dropdown item displaynone scrolling">
+			<span>Form</span>
+			<i class="ion-paintbrush  icon"></i>
+			
+			<div class="menu">
+				<div class="header">
+					Form
+				</div>
+				<div class="ui divider"></div>
+				<a class="item" href="formelements.html">
+					Form Element
+				</a>
+				<a class="item" href="input.html">
+					Input
+				</a>
+				<a class="item" href="formvalidation.html">
+					Form Validation
+				</a>
+				
+				<a class="item" href="editor.html">
+					Html Editor
+				</a>
+			</div>
+		</div>
+		<div class="ui dropdown item displaynone scrolling">
+			<span>Table</span>
+			<i class="ion-flame icon"></i>
+			
+			<div class="menu">
+				<div class="header">
+					Table
+				</div>
+				<div class="ui divider"></div>
+				<a class="item" href="table.html">
+					Static Table
+				</a>
+				<a class="item" href="datatable.html">
+					Datatable
+				</a>
+				<a class="item" href="editable.html">
+					Editable
+				</a>
+			</div>
+		</div>
+		<div class="ui dropdown item displaynone scrolling">
+			<span>Charts</span>
+			<i class="ion-arrow-graph-up-right icon"></i>
+			
+			<div class="menu">
+				<div class="header">
+					Charts
+				</div>
+				<div class="ui divider"></div>
+				<a class="item" href="chart.html">
+					Charts 1
+				</a>
+				<a class="item" href="chart-2.html">
+					Charts 2
+				</a>
+			
+			</div>
+		</div>
+		<div class="ui divider"></div>
+		<a class="item" href="typography.html">
+			<i class="ion-printer icon"></i> <span class="colhidden">Typography</span>
+		</a>
+		<a class="item" href="document.html">
+			<i class="ion-code icon"></i> <span class="colhidden">Document</span>
+		</a>
+		<div class="ui divider"></div>
+		<a class="item">
+			<div class="ui inverted progress tiny yellow" id="sidebar_progress1">
+				<div class="bar">
+				
+				</div>
+				<div class="label colhidden" style="margin-top: 10px"><span class="colhidden">Monthly Bandwidth Transfer</span></div>
+			</div>
+		
+		</a>
+		
+		<a class="item">
+			<div class="ui inverted progress tiny teal" id="sidebar_progress2">
+				<div class="bar">
+				
+				</div>
+				<div class="label colhidden" style="margin-top: 10px"><span class="colhidden">Disk Space Usage</span></div>
+			</div>
+		
+		</a>
+		<a class="item">
+			<div class="ui inverted progress tiny blue" id="sidebar_progress3">
+				<div class="bar">
+				
+				</div>
+				<div class="label colhidden" style="margin-top: 10px"><span class="colhidden">Earn money</span></div>
+			</div>
+		
+		</a>
+		<div class="ui divider"></div>
+		
+		<a class="item hiddenCollapse">
+			<div class="ui one mini inverted statistics">
+				<div class="statistic">
+					<div class="value">
+						3654
+					</div>
+					<div class="label">
+						Downloads
+					</div>
+				</div>
+				<div class="statistic">
+					<div class="text value">
+						Three<br> Thousand
+					</div>
+					<div class="label">
+						Views
+					</div>
+				</div>
+				<div class="statistic">
+					<div class="value">
+						<i class="ion-paperclip icon"></i> 15
+					</div>
+					<div class="label">
+						Attached File
+					</div>
+				</div>
+				<div class="statistic">
+					<div class="value">
+						<img src="../static/img/avatar/people/carol.png" class="ui circular inline image"> 21254
+					</div>
+					<div class="label">
+						Team Members
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+	<!--sidebar-->
+	
+	<div class="pusher">
+		<!--navbar-->
+		<div class="navslide navwrap">
+			<div class="ui menu icon borderless grid" data-color="inverted white">
+				<a class="item labeled openbtn">
+					<i class="ion-navicon-round big icon"></i>
+				</a>
+				<a class="item labeled expandit" onclick="toggleFullScreen(document.body)">
+					<i class="ion-arrow-expand big icon"></i>
+				</a>
+				<div class="item ui colhidden">
+					<div class="ui icon input">
+						<input type="text" placeholder="Search...">
+						<i class="search icon"></i>
+					</div>
+				</div>
+				<div class="right menu colhidden">
+					
+					<div class="ui dropdown item labeled icon">
+						<i class="bell icon"></i>
+						<div class="ui red label mini circular">6</div>
+						<div class="menu">
+							<div class="header">
+								People You Might Know
+							</div>
+							<div class="item">
+								<img class="ui avatar image" src="../static/img/avatar/people/enid.png" alt="label-image" /> Janice Robinson
+							</div>
+							<div class="item">
+								<img class="ui avatar image" src="../static/img/avatar/people/Hershell.png" alt="label-image" /> Cynthia May
+							</div>
+							<div class="item">
+								<img class="ui avatar image" src="../static/img/avatar/people/Rick.png" alt="label-image" /> Hugh Carter
+							</div>
+							<div class="header">
+								Your Friends' Friends
+							</div>
+							<div class="item">
+								<img class="ui avatar image" src="../static/img/avatar/people/Meggie.png" alt="label-image" /> Pauline Cain
+							</div>
+							<div class="item">
+								<img class="ui avatar image" src="../static/img/avatar/people/Glenn.png" alt="label-image" /> Marco Beck
+							</div>
+							<div class="item">
+								<img class="ui avatar image" src="../static/img/avatar/people/Daryl.png" alt="label-image" /> Sue Quinn
+							</div>
 						</div>
 					</div>
-					<div class="ui basic accordion">
-						<div class="title">
-							<i class="add to cart icon"></i>
-							<span th:text="订单统计">Orders Finished</span>
-						</div>
-						<div class="content field active">
-							<div class="sidebarstats2"></div>
-						</div>
-					</div>
-					<div class="ui basic accordion">
-						<div class="title">
-							<i class="add user icon"></i>
-							<span th:text="用户统计">Total Income</span>
-						</div>
-						<div class="content field active">
-							<div class="sidebarstats3"></div>
+					<div class="ui dropdown item">
+						Language <i class="dropdown icon"></i>
+						<div class="menu">
+							<a class="item"><i class="united kingdom flag"></i>English</a>
+							<a class="item"><i class="turkey flag"></i>Turkish</a>
+							<a class="item"><i class="spain flag"></i>Spanish</a>
 						</div>
 					</div>
-
-
+					<div class="ui dropdown item">
+						<img class="ui mini circular image" src="../static/img/avatar/people/enid.png" alt="label-image" />
+						<div class="menu">
+							<a class="item" href="mail.html">Inbox</a>
+							<a class="item" href="profile.html">Profile</a>
+							<a class="item" href="settings.html">Settings</a>
+							<div class="ui divider"></div>
+							<a class="item">Need Help?</a>
+							<a class="item" href="login.html">Sign Out</a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
-
-
-<!-- left menu ends -->
-<noscript>
-	<div class="alert alert-block span1" style="margin:0 auto; text-align: center;">
-		<h4 class="alert-heading">Warning!</h4>
-		<p th:utext="|浏览器需要允许&lt;a href=&quot;http://en.wikipedia.org/wiki/JavaScript&quot; target=&quot;_blank&quot;&gt;JavaScript&lt;/a&gt;才能正常使用本网站功能|">You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
-	</div>
-</noscript>
-
-<!-- general container start-->
-<div class="one column stackable ui grid" id="general_container">
-	<!-- content starts -->
-	<div id="content" class="column">
-		<span class="is_home"></span>
+		<!--navbar-->
 		
-		<div class="breadcrumb-panel hidden-phone">
+		<!--maincontent-->
+		<div class="mainWrap navslide">
+			
 			<div class="ui breadcrumb">
-				<i class="right arrow icon divider"></i>
-				<a href="#" class="section">Dashboard</a>
-			</div>
-		</div>
-		
-		<!-- ALERTS -->
-		<div class="four column stackable ui grid new_alerts">
-			<div class="column">
-				<div class="ui raised segment green_alert ">
-					<div class="ui icon header left floated ">
-						<i class="icon circular inverted mail circle"></i>
-					</div>
-					<div class="ui icon header right floated ">
-						<a class="ui center huge aligned header number">22</a>
-						<div class="sub header">new emails</div>
-						<div class="sub header2">*2 important</div>
-					</div>
-					
-					<div class="ui bottom attached inverted label">
-						<a href="#" class="see-all pull-right">Sea all <i class="icon arrow right"></i></a>
-						<span class="dynamicsparkline pull-left"></span>
-					</div>
-				</div>
-			</div>
-			<div class="column">
-				<div class="ui raised segment yellow_alert">
-					<div class="ui icon header left floated ">
-						<i class="icon circular inverted exclamation circle"></i>
-					</div>
-					<div class="ui icon header right floated ">
-						<a class="ui center huge aligned header number">15</a>
-						<div class="sub header">attentions</div>
-						<div class="sub header2">*2 critical</div>
-					</div>
-					<div class="ui bottom attached inverted label">
-						<a href="#" class="see-all pull-right">Sea all <i class="icon arrow right"></i></a>
-						<span class="dynamicsparkline2 pull-left"></span>
-					</div>
-				</div>
-			</div>
-			<div class="column">
-				<div class="ui raised segment red_alert">
-					<div class="ui icon header left floated ">
-						<i class="icon circular inverted circle tasks"></i>
-					</div>
-					<div class="ui icon header right floated ">
-						<a class="ui center huge aligned header number">13</a>
-						<div class="sub header">new tasks</div>
-						<div class="sub header2">*3 is for today</div>
-					</div>
-					<div class="ui bottom attached inverted label">
-						<a href="#" class="see-all pull-right">Sea all <i class="icon arrow right"></i></a>
-						<span class="dynamicsparkline3 pull-left"></span>
-					</div>
-				</div>
-			</div>
-			<div class="column">
-				<div class="ui raised segment blue_alert">
-					<div class="ui icon  header left floated ">
-						<i class="circular inverted cart icon"></i>
-					</div>
-					<div class="ui icon header right floated ">
-						<a class="ui center huge aligned header number">11</a>
-						<div class="sub header">orders</div>
-						<div class="sub header2">*today +2 orders</div>
-					</div>
-					
-					<div class="ui bottom attached inverted label">
-						<a href="#" class="see-all pull-right">Sea all <i class="icon arrow right"></i></a>
-						<span class="dynamicsparkline4 pull-left"></span>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- ALERTS -->
-		
-		<div class="one column stackable ui grid">
-			<div class="column">
-				<div class="box">
-					<div class="box-content home_chars">
-						<h2 class="ui header pull-left">
-							<i class="signal icon"></i> Sales stats
-						</h2>
-						<div class="ui horizontal list pull-right hidden-phone">
-							<div class="item">
-								<div class="content">
-									<div class="ui large awesome_red label">
-										<h4 class="ui header">
-											<i class="dollar icon"></i>This year: $21,323
-										</h4>
-									</div>
-								</div>
-							</div>
-							<div class="item">
-								<div class="content">
-									<div class="ui large awesome_red label">
-										<h4 class="ui header">
-											<i class="dollar icon"></i>This month: $ 213
-										</h4>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="clearfix"></div>
-						
-						<div class="column ui grid">
-							<div class="eleven wide column">
-								<div id="graph" style="position: relative;">
-									<svg height="342" version="1.1" width="671" xmlns="http://www.w3.org/2000/svg"
-									     style="overflow: hidden; position: relative; left: -0.539063px; top: -0.09375px;">
-										<desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.1.2</desc>
-										<defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs>
-										<text x="26.5625" y="306.5" text-anchor="end" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff"
-										      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"
-										      font-size="12px" font-family="sans-serif" font-weight="normal">
-											<tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="4.25">0</tspan>
-										</text>
-										<path fill="none" stroke="#aaaaaa" d="M39.0625,306.5H646" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
-										<text x="26.5625" y="236.125" text-anchor="end" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff"
-										      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"
-										      font-size="12px" font-family="sans-serif" font-weight="normal">
-											<tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="4.25">3</tspan>
-										</text>
-										<path fill="none" stroke="#aaaaaa" d="M39.0625,236.125H646" stroke-width="0.5"
-										      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
-										<text x="26.5625" y="165.75" text-anchor="end" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff"
-										      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"
-										      font-size="12px" font-family="sans-serif" font-weight="normal">
-											<tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="4.25">6</tspan>
-										</text>
-										<path fill="none" stroke="#aaaaaa" d="M39.0625,165.75H646" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
-										<text x="26.5625" y="95.375" text-anchor="end" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff"
-										      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"
-										      font-size="12px" font-family="sans-serif" font-weight="normal">
-											<tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="4.25">9</tspan>
-										</text>
-										<path fill="none" stroke="#aaaaaa" d="M39.0625,95.375H646" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
-										<text x="26.5625" y="25" text-anchor="end" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff"
-										      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"
-										      font-size="12px" font-family="sans-serif" font-weight="normal">
-											<tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="4.25">12</tspan>
-										</text>
-										<path fill="none" stroke="#aaaaaa" d="M39.0625,25H646" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
-										<text x="645.9999999999999" y="319" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff"
-										      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"
-										      font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,7.75)">
-											<tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="4.25">2014</tspan>
-										</text>
-										<text x="524.6789772727273" y="319" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff"
-										      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"
-										      font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,7.75)">
-											<tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="4.25">2013</tspan>
-										</text>
-										<text x="403.02556818181813" y="319" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff"
-										      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"
-										      font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,7.75)">
-											<tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="4.25">2012</tspan>
-										</text>
-										<text x="281.70454545454544" y="319" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff"
-										      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"
-										      font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,7.75)">
-											<tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="4.25">2011</tspan>
-										</text>
-										<text x="160.38352272727272" y="319" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff"
-										      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"
-										      font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,7.75)">
-											<tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="4.25">2010</tspan>
-										</text>
-										<text x="39.0625" y="319" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff"
-										      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"
-										      font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,7.75)">
-											<tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="4.25">2009</tspan>
-										</text>
-										<path fill="#1674bb" stroke="#000000"
-										      d="M39.0625,283.0416666666667C69.39275568181819,283.0416666666667,130.05326704545453,291.8385416666667,160.38352272727272,283.0416666666667C190.7137784090909,274.2447916666667,251.37428977272725,221.46354166666669,281.70454545454544,212.66666666666669C312.0348011363636,203.86979166666669,372.69531249999994,215.5949469904241,403.02556818181813,212.66666666666669C433.4389204545454,209.73036365709075,494.265625,200.95354537163703,524.6789772727273,189.20833333333334C555.0092329545454,177.49521203830372,615.6697443181818,136.42708333333334,645.9999999999999,118.83333333333334L645.9999999999999,306.5L39.0625,306.5Z"
-										      fill-opacity="0.8" stroke-width="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 0.8;"></path>
-										<path fill="none" stroke="#0b62a4"
-										      d="M39.0625,283.0416666666667C69.39275568181819,283.0416666666667,130.05326704545453,291.8385416666667,160.38352272727272,283.0416666666667C190.7137784090909,274.2447916666667,251.37428977272725,221.46354166666669,281.70454545454544,212.66666666666669C312.0348011363636,203.86979166666669,372.69531249999994,215.5949469904241,403.02556818181813,212.66666666666669C433.4389204545454,209.73036365709075,494.265625,200.95354537163703,524.6789772727273,189.20833333333334C555.0092329545454,177.49521203830372,615.6697443181818,136.42708333333334,645.9999999999999,118.83333333333334"
-										      stroke-width="6" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
-										<circle cx="39.0625" cy="283.0416666666667" r="4" fill="#000000" stroke="none" stroke-width="1"
-										        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
-										<circle cx="160.38352272727272" cy="283.0416666666667" r="4" fill="#000000" stroke="none" stroke-width="1"
-										        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
-										<circle cx="281.70454545454544" cy="212.66666666666669" r="4" fill="#000000" stroke="none" stroke-width="1"
-										        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
-										<circle cx="403.02556818181813" cy="212.66666666666669" r="4" fill="#000000" stroke="none" stroke-width="1"
-										        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
-										<circle cx="524.6789772727273" cy="189.20833333333334" r="4" fill="#000000" stroke="none" stroke-width="1"
-										        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
-										<circle cx="645.9999999999999" cy="118.83333333333334" r="7" fill="#000000" stroke="none" stroke-width="1"
-										        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
-										<path fill="#9dadb8" stroke="#000000"
-										      d="M39.0625,283.0416666666667C69.39275568181819,277.17708333333337,130.05326704545453,274.24479166666663,160.38352272727272,259.5833333333333C190.7137784090909,244.92187499999997,251.37428977272725,174.546875,281.70454545454544,165.75C312.0348011363636,156.953125,372.69531249999994,189.20833333333334,403.02556818181813,189.20833333333334C433.4389204545454,189.20833333333334,494.265625,177.4952120383037,524.6789772727273,165.75C555.0092329545454,154.03687870497038,615.6697443181818,112.96875,645.9999999999999,95.375L645.9999999999999,306.5L39.0625,306.5Z"
-										      fill-opacity="0.8" stroke-width="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 0.8;"></path>
-										<path fill="none" stroke="#7a92a3"
-										      d="M39.0625,283.0416666666667C69.39275568181819,277.17708333333337,130.05326704545453,274.24479166666663,160.38352272727272,259.5833333333333C190.7137784090909,244.92187499999997,251.37428977272725,174.546875,281.70454545454544,165.75C312.0348011363636,156.953125,372.69531249999994,189.20833333333334,403.02556818181813,189.20833333333334C433.4389204545454,189.20833333333334,494.265625,177.4952120383037,524.6789772727273,165.75C555.0092329545454,154.03687870497038,615.6697443181818,112.96875,645.9999999999999,95.375"
-										      stroke-width="6" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
-										<circle cx="39.0625" cy="283.0416666666667" r="4" fill="#000000" stroke="#000000" stroke-width="1"
-										        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
-										<circle cx="160.38352272727272" cy="259.5833333333333" r="4" fill="#000000" stroke="#000000" stroke-width="1"
-										        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
-										<circle cx="281.70454545454544" cy="165.75" r="4" fill="#000000" stroke="#000000" stroke-width="1"
-										        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
-										<circle cx="403.02556818181813" cy="189.20833333333334" r="4" fill="#000000" stroke="#000000" stroke-width="1"
-										        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
-										<circle cx="524.6789772727273" cy="165.75" r="4" fill="#000000" stroke="#000000" stroke-width="1"
-										        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
-										<circle cx="645.9999999999999" cy="95.375" r="7" fill="#000000" stroke="#000000" stroke-width="1"
-										        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
-									</svg>
-									<div class="morris-hover morris-default-style" style="left: 611px; top: 37px;">
-										<div class="morris-hover-row-label">2014</div>
-										<div class="morris-hover-point" style="color: #0b62a4">
-											Sales:
-											8
-										</div>
-										<div class="morris-hover-point" style="color: #7A92A3">
-											Visits:
-											9
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="five wide column ">
-								<div id="donut-example">
-									<svg height="342" version="1.1" width="288" xmlns="http://www.w3.org/2000/svg"
-									     style="overflow: hidden; position: relative; left: -0.148438px; top: -0.09375px;">
-										<desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.1.2</desc>
-										<defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs>
-										<path fill="none" stroke="#6abbed"
-										      d="M144,262.8333333333333A89.33333333333333,89.33333333333333,0,0,0,230.72082742061005,194.94627090962928" stroke-width="2"
-										      opacity="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); opacity: 0;"></path>
-										<path fill="#6abbed" stroke="#ffffff"
-										      d="M144,265.8333333333333A92.33333333333333,92.33333333333333,0,0,0,233.63309401309323,195.66648149987802L269.22746347677645,204.46905538069603A129,129,0,0,1,144,302.5Z"
-										      stroke-width="3" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
-										<path fill="none" stroke="#dabb1e"
-										      d="M230.72082742061005,194.94627090962928A89.33333333333333,89.33333333333333,0,0,0,225.5899906521321,137.11981487362326"
-										      stroke-width="2" opacity="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); opacity: 0;"></path>
-										<path fill="#dabb1e" stroke="#ffffff"
-										      d="M233.63309401309323,195.66648149987802A92.33333333333333,92.33333333333333,0,0,0,228.32995302477832,135.89809223878225L261.81838202378776,120.96592670183657A129,129,0,0,1,269.22746347677645,204.46905538069603Z"
-										      stroke-width="3" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
-										<path fill="none" stroke="#de6a6e"
-										      d="M225.5899906521321,137.11981487362326A89.33333333333333,89.33333333333333,0,0,0,211.29304265416715,114.74550353556862"
-										      stroke-width="2" opacity="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); opacity: 0;"></path>
-										<path fill="#de6a6e" stroke="#ffffff"
-										      d="M228.32995302477832,135.89809223878225A92.33333333333333,92.33333333333333,0,0,0,213.55288363882204,112.77240477370337L241.1731623401593,88.65675323979497A129,129,0,0,1,261.81838202378776,120.96592670183657Z"
-										      stroke-width="3" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
-										<path fill="none" stroke="#78a04f"
-										      d="M211.29304265416715,114.74550353556862A89.33333333333333,89.33333333333333,0,1,0,143.9719351060896,262.83332892491006"
-										      stroke-width="2" opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); opacity: 1;"></path>
-										<path fill="#78a04f" stroke="#ffffff"
-										      d="M213.55288363882204,112.77240477370337A92.33333333333333,92.33333333333333,0,1,0,143.970992628309,265.833328776866L143.9579026591344,307.4999933873651A134,134,0,1,1,244.93956398125076,85.36825530335291Z"
-										      stroke-width="3" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
-										<text x="144" y="163.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000"
-										      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: 800; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial;"
-										      font-size="15px" font-weight="800" transform="matrix(0.7992,0,0,0.7992,28.9147,34.9405)" stroke-width="1.2512632151741296">
-											<tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="6">Sales from ThemeForest</tspan>
-										</text>
-										<text x="144" y="183.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000"
-										      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 14px; line-height: normal; font-family: Arial;"
-										      font-size="14px" transform="matrix(1.9211,0,0,1.9211,-132.6308,-161.8916)" stroke-width="0.5205223880597015">
-											<tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="4.75">65</tspan>
-										</text>
-									</svg>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<div class="two column stackable ui grid">
-			<div class="nine wide column">
-				<h4 class="ui inverted colored_header teal block header">
-					<i class="icon cart"></i>Top three most ordered products
-				</h4>
-				<div class="ui connected home_items items">
-					<div class="row" style="width: 100%;">
-						<div class="item">
-							<div class="image">
-								<img src="../static/img/sample2.jpg" th:src="@{/img/sample2.jpg}">
-								<a class="like ui corner label">
-									<i class="like icon"></i>
-								</a>
-							</div>
-							<div class="content">
-								<div class="name">iMac</div>
-								<p class="description">Lorem Ipsum is simply dummy text of the printing...</p>
-							</div>
-						</div>
-						<div class="item">
-							<div class="image">
-								<img src="../static/img/sample2.jpg" th:src="@{/img/sample2.jpg}">
-								<a class="like ui corner label">
-									<i class="like icon"></i>
-								</a>
-							</div>
-							<div class="content">
-								<div class="name">Joypad</div>
-								<p class="description">Lorem Ipsum is simply dummy text of the printing...</p>
-							</div>
-						</div>
-						<div class="item">
-							<div class="image">
-								<img src="../static/img/sample2.jpg" th:src="@{/img/sample2.jpg}">
-								<a class="like ui corner label">
-									<i class="like icon"></i>
-								</a>
-							</div>
-							<div class="content">
-								<div class="name">Keyboard</div>
-								<p class="description">Lorem Ipsum is simply dummy text of the printing...</p>
-							</div>
-						</div>
-					</div>
-				</div>
+				<i class="angle right icon"></i>
+				<a class="section">智慧生活</a>
+				<div class="divider"> / </div>
+				<div class="active section">社区首页</div>
 			</div>
 			
-			<div class="seven wide column">
-				<div class="box">
-					<div class="box-header well">
-						<h2 class="ui header">
-							<i class="settings icon"></i>Alerts
-						</h2>
-						<div class="box-icons">
-							<a href="#" class="reload">
-								<i class="refresh popup icon" data-content="Reload" data-position="top left" data-variation="inverted"></i>
-							</a>
-							<a href="#" class="btn-setting">
-								<i class="icon popup setting" data-content="Settings" data-position="top left" data-variation="inverted"></i>
-							</a>
-							<a href="#" class="btn-minimize">
-								<i class="arrow popup up icon" data-content="Minimize" data-position="top left" data-variation="inverted"></i>
-							</a>
-							<a href="#" class="btn-close">
-								<i class="remove popup icon" data-content="Close" data-position="top left" data-variation="inverted"></i>
-							</a>
-						</div>
-					</div>
-					
-					<div class="box-content with_loader">
-						<div class="ui sample segment segment_loader">
-							<div class="ui dimmer">
-								<div class="ui loader"></div>
-							</div>
-							
-							<div class="custom_scrollbar">
-								<div class="scrollbar" style="height: 255px;">
-									<div class="track" style="height: 255px;">
-										<div class="thumb" style="top: 0px; height: 103.214px;">
-											<div class="end"></div>
-										</div>
-									</div>
-								</div>
-								<div class="viewport">
-									<div class="overview" style="top: 0px;">
-										<div class="ui animated selection list small home_alerts">
-											<div class="item">
-												<i class="ui icon teal circular users"></i>
-												<div class="right floated"><i class="calendar icon"></i>12.04.2014</div>
-												<div class="content">
-													<div class="header">3 new user joined</div>
-												</div>
-											</div>
-											<div class="item">
-												<i class="ui icon teal circular empty calendar"></i>
-												<div class="right floated"><i class="calendar icon"></i>12.04.2014</div>
-												<div class="content">
-													<div class="header">Montly Report Created</div>
-												</div>
-											</div>
-											
-											<div class="item">
-												<i class="ui icon teal circular cart"></i>
-												<div class="right floated"><i class="calendar icon"></i>12.04.2014</div>
-												<div class="content">
-													<div class="header">3 new orders</div>
-												</div>
-											</div>
-											<div class="item">
-												<i class="ui icon teal circular mail"></i>
-												<div class="right floated"><i class="calendar icon"></i>12.04.2014</div>
-												<div class="content">
-													<div class="header">3 new mails</div>
-												</div>
-											</div>
-											<div class="item">
-												<i class="ban circle teal circular icon"></i>
-												<div class="right floated"><i class="calendar icon"></i>12.04.2014</div>
-												<div class="content">
-													<div class="header">4 system errors</div>
-												</div>
-											</div>
-											<div class="item">
-												<i class="ui icon teal circular users"></i>
-												<div class="right floated"><i class="calendar icon"></i>12.04.2014</div>
-												<div class="content">
-													<div class="header">3 new user joined</div>
-												</div>
-											</div>
-											<div class="item">
-												<i class="ui icon teal circular empty calendar"></i>
-												<div class="right floated"><i class="calendar icon"></i>12.04.2014</div>
-												<div class="content">
-													<div class="header">Montly Report Created</div>
-												</div>
-											</div>
-											
-											<div class="item">
-												<i class="ui icon teal circular cart"></i>
-												<div class="right floated"><i class="calendar icon"></i>12.04.2014</div>
-												<div class="content">
-													<div class="header">3 new orders</div>
-												</div>
-											</div>
-											
-											<div class="item">
-												<i class="ui icon teal circular mail"></i>
-												<div class="right floated"><i class="calendar icon"></i>12.04.2014</div>
-												<div class="content">
-													<div class="header">3 new mails</div>
-												</div>
-											</div>
-											<div class="item">
-												<i class="ban circle teal circular icon"></i>
-												<div class="right floated"><i class="calendar icon"></i>12.04.2014</div>
-												<div class="content">
-													<div class="header">4 system errors</div>
-												</div>
-											</div>
-											
-											<div class="item">
-												<i class="ui icon teal circular cart"></i>
-												<div class="right floated"><i class="calendar icon"></i>12.04.2014</div>
-												<div class="content">
-													<div class="header">3 new orders</div>
-												</div>
-											</div>
-											
-											<div class="item">
-												<i class="ui icon teal circular mail"></i>
-												<div class="right floated"><i class="calendar icon"></i>12.04.2014</div>
-												<div class="content">
-													<div class="header">3 new mails</div>
-												</div>
-											</div>
-											<div class="item">
-												<i class="ban circle teal circular icon"></i>
-												<div class="right floated"><i class="calendar icon"></i>12.04.2014</div>
-												<div class="content">
-													<div class="header">4 system errors</div>
-												</div>
-											</div>
-											<div class="item">
-												<i class="ui icon teal circular users"></i>
-												<div class="right floated"><i class="calendar icon"></i>12.04.2014</div>
-												<div class="content">
-													<div class="header">3 new user joined</div>
-												</div>
-											</div>
-											<div class="item">
-												<i class="ui icon teal circular empty calendar"></i>
-												<div class="right floated"><i class="calendar icon"></i>12.04.2014</div>
-												<div class="content">
-													<div class="header">Montly Report Created</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<h4 class="ui  bottom attached tiny header">
-						<a href="#" class="see-all pull-right">See All <i class="icon arrow right"></i> </a>
-						<div class="clearfix"></div>
-					</h4>
-				</div>
-			</div>
-		</div>
-		
-		<div class="two column stackable ui grid">
-			<div class="seven wide column">
+			<div class="ui equal width left aligned padded grid stackable">
+				<!--Site Content-->
 				
-				<h4 class="ui inverted teal block top attached header">
-					<i class="chat icon"></i> Chat
-				</h4>
-				<div class="ui segment attached">
-					<div class="ui piled segment comments">
-						<div class="custom_scrollbar">
-							<div class="scrollbar disable" style="height: 255px;">
-								<div class="track" style="height: 255px;">
-									<div class="thumb" style="top: 0px; height: 255px;">
-										<div class="end"></div>
-									</div>
-								</div>
+				<div class="row">
+					<div class="sixteen wide tablet sixteen wide computer column">
+						<div class="ui segments">
+							<div class="ui segment">
+								<h5 class="ui header">
+									基本信息
+								</h5>
 							</div>
-							<div class="viewport">
-								<div class="overview" style="top: 0px;">
-									<div class="comment">
-										<a class="avatar">
-											<img src="../static/img/avatar.jpg" th:src="@{/img/avatar.jpg}">
-										</a>
-										<div class="content">
-											<a class="author">John</a>
-											<div class="metadata">
-												<div class="date"><i class="calendar icon"></i> 2 days ago</div>
-											
-											</div>
-											<div class="text">
-												I think this is a great idea and i am voting on it
-											</div>
-											<div class="actions">
-												<a class="reply">Reply</a>
-												<a class="delete">Delete</a>
-											</div>
+							<div class="ui segment">
+								<div class="ui fluid form">
+									<div class="two fields">
+										<div class="field">
+											<label>First Name</label>
+											<input placeholder="First Name" type="text">
+										</div>
+										<div class="field">
+											<label>Last Name</label>
+											<input placeholder="Last Name" type="text">
 										</div>
 									</div>
-									<div class="comment">
-										<a class="avatar">
-											<img src="../static/img/avatar.jpg" th:src="@{/img/avatar.jpg}">
-										</a>
-										<div class="content">
-											<a class="author">Josh</a>
-											<div class="metadata">
-												<div class="date"><i class="calendar icon"></i> 1 days ago</div>
-												<div class="stars">
-													<i class="icon awesome_yellow_text star"></i>
-													<i class="icon awesome_yellow_text star"></i>
-													<i class="icon awesome_yellow_text star"></i>
-													<i class="icon empty star"></i>
-													<i class="icon empty star"></i>
-												</div>
-											</div>
-											<div class="text">
-												I think this is a great idea and i am voting on it
-											</div>
-											<div class="actions">
-												<a class="reply">Reply</a>
-												<a class="delete">Delete</a>
-											</div>
+									<div class="ui accordion field">
+										<div class="title">
+											<i class="icon dropdown"></i> Optional Details
+										</div>
+										<div class="content field">
+											<label class="transition hidden">Maiden Name</label>
+											<input placeholder="Maiden Name" type="text" class="transition hidden">
 										</div>
 									</div>
+									<div class="ui secondary submit button">Sign Up</div>
 								</div>
 							</div>
 						</div>
-						<form class="ui reply form">
-							<div class="field ">
-								<div class="ui action input">
-									<input type="text" placeholder="Message...">
-									<div id="add_comment" class="ui button">Send</div>
-								</div>
-							</div>
-						</form>
 					</div>
 				</div>
-			
-			
-			</div>
-			
-			<div class="nine wide column">
-				<div class="box">
-					<div class="box-header well">
-						<h2 class="ui header">
-							<i class="list icon"></i>
-							<div class="content">Month Targets</div>
-						</h2>
-						<div class="box-icons">
-							<a href="#" class="reload">
-								<i class="refresh popup icon" data-content="Reload" data-position="top left" data-variation="inverted"></i>
-							</a>
-							<a href="#" class="btn-setting">
-								<i class="icon popup setting" data-content="Settings" data-position="top left" data-variation="inverted"></i>
-							</a>
-							<a href="#" class="btn-minimize">
-								<i class="arrow popup up icon" data-content="Minimize" data-position="top left" data-variation="inverted"></i>
-							</a>
-							<a href="#" class="btn-close">
-								<i class="remove popup icon" data-content="Close" data-position="top left" data-variation="inverted"></i>
-							</a>
+				
+				<div class="row">
+					<div class="sixteen wide tablet sixteen wide computer column">
+						<div class="ui segments">
+							<div class="ui segment">
+								<h5 class="ui header">
+									基本信息
+								</h5>
+							</div>
+							<div class="ui segment">
+								<div class="ui fluid form">
+									<div class="two fields">
+										<div class="field">
+											<label>First Name</label>
+											<input placeholder="First Name" type="text">
+										</div>
+										<div class="field">
+											<label>Last Name</label>
+											<input placeholder="Last Name" type="text">
+										</div>
+									</div>
+									<div class="ui accordion field">
+										<div class="title">
+											<i class="icon dropdown"></i> Optional Details
+										</div>
+										<div class="content field">
+											<label class="transition hidden">Maiden Name</label>
+											<input placeholder="Maiden Name" type="text" class="transition hidden">
+										</div>
+									</div>
+									<div class="ui secondary submit button">Sign Up</div>
+								</div>
+							</div>
 						</div>
 					</div>
-					<div class="box-content with_loader">
-						<div class="ui sample segment segment_loader">
-							<div class="ui dimmer">
-								<div class="ui loader"></div>
-							</div>
+				</div>
+				
+				
+				<div class="row">
+					<div class="sixteen wide tablet four wide computer column">
+						
+						<div class="ui segment left aligned">
 							
-							<h4 class="ui header">
-						<span>
-							<i class="users teal icon"></i>Reached 100 users registered on the website
-						</span>
-								<div class="sub header">
-									<div class="ui striped  progress">
-										<div style="width: 50%;" class="bar">
-											<h4 class="ui header bold">50%</h4>
-										</div>
-									</div>
+							<div class="ui  statistic">
+								<div class="value counter">
+									3,952
 								</div>
-							</h4>
-							<h4 class="ui header">
-						<span>
-							<i class="store cart teal icon"></i>Reached 100 orders in web store
-						</span>
-								<div class="sub header">
-									<div class="ui active striped progress">
-										<div style="width: 20%;" class="bar">
-											<h4 class="ui header bold">20%</h4>
-										</div>
-									</div>
+								<div class="label">
+									Orders
 								</div>
-							</h4>
-							<h4 class="ui header">
-						<span>
-							<i class="facebook teal icon"></i>Reached 100 shares in Facebook
-						</span>
-								<div class="sub header">
-									<div class="ui active striped progress">
-										<div style="width: 70%;" class="bar">
-											<h4 class="ui header bold">70%</h4>
-										</div>
-									</div>
-								</div>
-							</h4>
-							<h4 class="ui header">
-						<span>
-							<i class="twitter teal icon"></i>Reached 100 tweets in Twitter
-						</span>
-								<div class="sub header">
-									<div class="ui active striped progress">
-										<div style="width: 99%;" class="bar">
-											<h4 class="ui header bold">99%</h4>
-										</div>
-									</div>
-								</div>
-							</h4>
-							<h4 class="ui header">
-						<span>
-							<i class="dollar teal icon"></i>Reached $1000 income
-						</span>
-								<div class="sub header">
-									<div class="ui active striped progress">
-										<div style="width: 99%;" class="bar">
-											<h4 class="ui header bold">99%</h4>
-										</div>
-									</div>
-								</div>
-							</h4>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<!-- CHARS CONTAINER -->
-		<div class="two column stackable ui grid">
-			<div class="column">
-				<div class="box">
-					<div class="box-header well">
-						<h2 class="ui header">
-							<i class="settings icon"></i>
-							<div class="content">Server usage</div>
-						</h2>
-						<div class="box-icons">
-							<a href="#" class="reload">
-								<i class="refresh popup icon" data-content="Reload" data-position="top left" data-variation="inverted"></i>
-							</a>
-							<a href="#" class="btn-setting">
-								<i class="icon popup setting" data-content="Settings" data-position="top left" data-variation="inverted"></i>
-							</a>
-							<a href="#" class="btn-minimize">
-								<i class="arrow popup up icon" data-content="Minimize" data-position="top left" data-variation="inverted"></i>
-							</a>
-							<a href="#" class="btn-close">
-								<i class="remove popup icon" data-content="Close" data-position="top left" data-variation="inverted"></i>
-							</a>
+								<i class="icon ion-ios-cart teal statisticIcon"></i>
+							</div>
+							<div id="flot-order" class="flotchart"></div>
 						</div>
 					</div>
 					
-					<div class="box-content with_loader">
-						<div class="ui sample segment">
-							<div class="ui dimmer">
-								<div class="ui loader"></div>
-							</div>
+					<div class="sixteen wide tablet four wide computer column">
+						<div class="ui segment left aligned">
 							
-							<div class="four column ui grid">
-								<div class="column">
-									<div class="char_container column">
-										<div class="chart" data-percent="35">35%
-											<canvas height="160" width="160" style="height: 80px; width: 80px;"></canvas>
-										</div>
-										<div class="clearfix char_text">CPU</div>
-									</div>
+							<div class="ui  statistic">
+								<div class="value">
+									<span class="counter">57.6</span> %
 								</div>
-								<div class="column">
-									<div class="char_container">
-										<div class="chart" data-percent="73">73%
-											<canvas height="160" width="160" style="height: 80px; width: 80px;"></canvas>
-										</div>
-										<br>
-										<div class="clearfix char_text">RAM</div>
-									</div>
+								<div class="label">
+									Average Time
 								</div>
-								<div class="column">
-									<div class="char_container">
-										<div class="chart" data-percent="54">54%
-											<canvas height="160" width="160" style="height: 80px; width: 80px;"></canvas>
-										</div>
-										<br>
-										<div class="clearfix char_text">Space</div>
-									</div>
-								</div>
-								<div class="column">
-									<div class="char_container">
-										<div class="chart" data-percent="75">75%
-											<canvas height="160" width="160" style="height: 80px; width: 80px;"></canvas>
-										</div>
-										<br>
-										<div class="clearfix char_text">HD</div>
-									</div>
-								</div>
-								<div class="clear"></div>
+								<i class="icon ion-ios-timer blue statisticIcon"></i>
 							</div>
+							<div id="flot-avarage" class="flotchart"></div>
+						</div>
+					</div>
+					
+					<div class="sixteen wide tablet four wide computer column">
+						
+						<div class="ui segment left aligned">
+							
+							<div class="ui  statistic">
+								<div class="value counter">
+									3,112
+								</div>
+								<div class="label">
+									Saves
+								</div>
+								<i class="icon ion-magnet purple statisticIcon"></i>
+							</div>
+							<div id="flot-saves" class="flotchart"></div>
+						</div>
+					</div>
+					
+					<div class="sixteen wide tablet four wide computer column">
+						
+						<div class="ui segment left aligned">
+							
+							<div class="ui  statistic">
+								
+								<div class="value counter">
+									9,582
+								</div>
+								<div class="label">
+									Page Views
+								</div>
+								<i class="icon ion-trophy red statisticIcon"></i>
+							</div>
+							<div id="flot-view" class="flotchart"></div>
 						</div>
 					</div>
 				</div>
-				<div class="box">
-					<div class="box-header well">
-						<h2 class="ui header">
-							<i class="users icon"></i>
-							<div class="content">Contacts</div>
-						</h2>
-						<div class="box-icons">
-							<a href="#" class="btn-setting">
-								<i class="icon popup setting" data-content="Settings" data-position="top left" data-variation="inverted"></i>
-							</a>
-							<a href="#" class="btn-minimize">
-								<i class="arrow popup up icon" data-content="Minimize" data-position="top left" data-variation="inverted"></i>
-							</a>
-							<a href="#" class="btn-close">
-								<i class="remove popup icon" data-content="Close" data-position="top left" data-variation="inverted"></i>
-							</a>
-						</div>
-					</div>
-					<div class="box-content contact_list">
-						<div class="ui fluid icon input">
-							<input type="text" placeholder="Search ...">
-							<i class="search icon"></i>
-						</div>
-						<div class="custom_scrollbar">
-							<div class="scrollbar" style="height: 327px;">
-								<div class="track" style="height: 327px;">
-									<div class="thumb" style="top: 0px; height: 227.509px;">
-										<div class="end"></div>
-									</div>
-								</div>
-							</div>
-							<div class="viewport">
-								<div class="overview" style="top: 0px;">
-									<div class="ui animated selection list small home_alerts">
-										<div class="item">
-											<div class="right floated">
-												<i class="circular trash red icon"></i>
-											</div>
-											<div class="right floated tiny teal ui button">
-												<i class="mail icon"></i>Send Mail
-											</div>
-											<div class="right floated tiny blue ui button hidden-phone">
-												<i class="phone icon"></i>773-338-7786
-											</div>
-											<img class="ui avatar image" src="../static/img/contact.png" th:src="@{/img/contact.png}">
-											<div class="content">
-												<a class="header">Jonh Doe</a>
-												<div class="description">Family</div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="right floated">
-												<i class="circular trash red icon"></i>
-											</div>
-											<div class="right floated tiny teal ui button">
-												<i class="mail icon"></i>Send Mail
-											</div>
-											<div class="right floated tiny blue ui button hidden-phone">
-												<i class="phone icon"></i>773-338-7786
-											</div>
-											<img class="ui avatar image" src="../static/img/contact.png" th:src="@{/img/contact.png}">
-											<div class="content">
-												<a class="header">Anna</a>
-												<div class="description">Work</div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="right floated">
-												<i class="circular trash red icon"></i>
-											</div>
-											<div class="right floated tiny teal ui button">
-												<i class="mail icon"></i>Send Mail
-											</div>
-											<div class="right floated tiny blue ui button hidden-phone">
-												<i class="phone icon"></i>773-338-7786
-											</div>
-											<img class="ui avatar image" src="../static/img/contact.png" th:src="@{/img/contact.png}">
-											<div class="content">
-												<a class="header">Smith</a>
-												<div class="description">Family</div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="right floated">
-												<i class="circular trash red icon"></i>
-											</div>
-											<div class="right floated tiny teal ui button">
-												<i class="mail icon"></i>Send Mail
-											</div>
-											<div class="right floated tiny blue ui button hidden-phone">
-												<i class="phone icon"></i>773-338-7786
-											</div>
-											<img class="ui avatar image" src="../static/img/contact.png" th:src="@{/img/contact.png}">
-											<div class="content">
-												<a class="header">Mitchell</a>
-												<div class="description">Friends</div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="right floated">
-												<i class="circular trash red icon"></i>
-											</div>
-											<div class="right floated tiny teal ui button">
-												<i class="mail icon"></i>Send Mail
-											</div>
-											<div class="right floated tiny blue ui button hidden-phone">
-												<i class="phone icon"></i>773-338-7786
-											</div>
-											<img class="ui avatar image" src="../static/img/contact.png" th:src="@{/img/contact.png}">
-											<div class="content">
-												<a class="header">James</a>
-												<div class="description">Work</div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="right floated">
-												<i class="circular trash red icon"></i>
-											</div>
-											<div class="right floated tiny teal ui button">
-												<i class="mail icon"></i>Send Mail
-											</div>
-											<div class="right floated tiny blue ui button hidden-phone">
-												<i class="phone icon"></i>773-338-7786
-											</div>
-											<img class="ui avatar image" src="../static/img/contact.png" th:src="@{/img/contact.png}">
-											<div class="content">
-												<a class="header">Paul</a>
-												<div class="description">Friends</div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="right floated">
-												<i class="circular trash red icon"></i>
-											</div>
-											<div class="right floated tiny teal ui button">
-												<i class="mail icon"></i>Send Mail
-											</div>
-											<div class="right floated tiny blue ui button hidden-phone">
-												<i class="phone icon"></i>773-338-7786
-											</div>
-											<img class="ui avatar image" src="../static/img/contact.png" th:src="@{/img/contact.png}">
-											<div class="content">
-												<a class="header">John</a>
-												<div class="description">Work</div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="right floated">
-												<i class="circular trash red icon"></i>
-											</div>
-											<div class="right floated tiny teal ui button">
-												<i class="mail icon"></i>Send Mail
-											</div>
-											<div class="right floated tiny blue ui button hidden-phone">
-												<i class="phone icon"></i>773-338-7786
-											</div>
-											<img class="ui avatar image" src="../static/img/contact.png" th:src="@{/img/contact.png}">
-											<div class="content">
-												<a class="header">Jason</a>
-												<div class="description">Friends</div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="right floated">
-												<i class="circular trash red icon"></i>
-											</div>
-											<div class="right floated tiny teal ui button">
-												<i class="mail icon"></i>Send Mail
-											</div>
-											<div class="right floated tiny blue ui button hidden-phone">
-												<i class="phone icon"></i>773-338-7786
-											</div>
-											<img class="ui avatar image" src="../static/img/contact.png" th:src="@{/img/contact.png}">
-											<div class="content">
-												<a class="header">Lisa</a>
-												<div class="description">Family</div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="right floated">
-												<i class="circular trash red icon"></i>
-											</div>
-											<div class="right floated tiny teal ui button">
-												<i class="mail icon"></i>Send Mail
-											</div>
-											<div class="right floated tiny blue ui button hidden-phone">
-												<i class="phone icon"></i>773-338-7786
-											</div>
-											<img class="ui avatar image" src="../static/img/contact.png" th:src="@{/img/contact.png}">
-											<div class="content">
-												<a class="header">Adams</a>
-												<div class="description">Friends</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			
-			<div class="column">
-				<div class="box">
-					<div class="box-header well">
-						<h2 class="ui header">
-							<i class="settings icon"></i>
-							<div class="content">Tasks</div>
-						</h2>
-						<div class="box-icons">
-							<a href="#" class="btn-setting">
-								<i class="icon popup setting" data-content="Settings" data-position="top left" data-variation="inverted"></i>
-							</a>
-							<a href="#" class="btn-minimize">
-								<i class="arrow popup up icon" data-content="Minimize" data-position="top left" data-variation="inverted"></i>
-							</a>
-							<a href="#" class="btn-close">
-								<i class="remove popup icon" data-content="Close" data-position="top left" data-variation="inverted"></i>
-							</a>
-						</div>
-					</div>
-					<div class="box-content tasks_list">
-						<div class="ui fluid animated fade teal green button">
-							<div class="visible content">Add new task</div>
-							<div class="hidden content"><i class="plus icon"></i></div>
-						</div>
-						<div class="ui divided list">
-							<div class="item">
-								<div class="ui ribbon teal label">Done</div>
-								<div class="right floated hidden-elements actions hidden-phone hidden-phone">
-									<div class="ui teal labeled mini icon top right dropdown button">
-										<i class="settings icon"></i>
-										<span class="text">Actions</span>
-										<div class="menu">
-											<div class="item"><i class="edit icon"></i>Edit</div>
-											<div class="item"><i class="delete icon"></i>Remove</div>
-											<div class="item"><i class="hide icon"></i>Hide</div>
-										</div>
-									</div>
-								</div>
-								<div class="content">
-									<div class="header">
-										<div class="ui  checkbox">
-											<input checked="" type="checkbox">
-											<label>Fix some erros in design</label>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="item ">
-								<div class="ui ribbon awesome_red label">Not Done</div>
-								<div class="right floated hidden-elements actions hidden-phone">
-									<div class="ui teal labeled mini icon top right dropdown button">
-										<i class="settings icon"></i>
-										<span class="text">Actions</span>
-										<div class="menu">
-											<div class="item"><i class="edit icon"></i>Edit</div>
-											<div class="item"><i class="delete icon"></i>Remove</div>
-											<div class="item"><i class="hide icon"></i>Hide</div>
-										</div>
-									</div>
-								</div>
-								<div class="content">
-									<div class="header">
-										<div class="ui  checkbox">
-											<input type="checkbox">
-											<label>Fix some erros in design</label>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="item ">
-								<div class="ui ribbon awesome_red label">Not Done</div>
-								<div class="right floated hidden-elements actions hidden-phone">
-									<div class="ui teal labeled mini icon top right dropdown button">
-										<i class="settings icon"></i>
-										<span class="text">Actions</span>
-										<div class="menu">
-											<div class="item"><i class="edit icon"></i>Edit</div>
-											<div class="item"><i class="delete icon"></i>Remove</div>
-											<div class="item"><i class="hide icon"></i>Hide</div>
-										</div>
-									</div>
-								</div>
-								<div class="content">
-									<div class="header">
-										<div class="ui  checkbox">
-											<input type="checkbox">
-											<label>Fix some erros in design</label>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="item ">
-								<div class="ui ribbon awesome_red label">Not Done</div>
-								<div class="right floated hidden-elements actions hidden-phone">
-									<div class="ui teal labeled mini icon top right dropdown button">
-										<i class="settings icon"></i>
-										<span class="text">Actions</span>
-										<div class="menu">
-											<div class="item"><i class="edit icon"></i>Edit</div>
-											<div class="item"><i class="delete icon"></i>Remove</div>
-											<div class="item"><i class="hide icon"></i>Hide</div>
-										</div>
-									</div>
-								</div>
-								<div class="content">
-									<div class="header">
-										<div class="ui  checkbox">
-											<input type="checkbox">
-											<label>Fix some erros in design</label>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="item ">
-								<div class="ui ribbon teal label">Done</div>
-								<div class="right floated hidden-elements actions hidden-phone">
-									<div class="ui teal labeled mini icon top right dropdown button">
-										<i class="settings icon"></i>
-										<span class="text">Actions</span>
-										<div class="menu">
-											<div class="item"><i class="edit icon"></i>Edit</div>
-											<div class="item"><i class="delete icon"></i>Remove</div>
-											<div class="item"><i class="hide icon"></i>Hide</div>
-										</div>
-									</div>
-								</div>
-								<div class="content">
-									<div class="header">
-										<div class="ui  checkbox">
-											<input checked="" type="checkbox">
-											<label>Fix some erros in design</label>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="item ">
-								<div class="ui ribbon awesome_red label">Not Done</div>
-								<div class="right floated hidden-elements actions hidden-phone">
-									<div class="ui teal labeled mini icon top right dropdown button">
-										<i class="settings icon"></i>
-										<span class="text">Actions</span>
-										<div class="menu">
-											<div class="item"><i class="edit icon"></i>Edit</div>
-											<div class="item"><i class="delete icon"></i>Remove</div>
-											<div class="item"><i class="hide icon"></i>Hide</div>
-										</div>
-									</div>
-								</div>
-								<div class="content">
-									<div class="header">
-										<div class="ui  checkbox">
-											<input type="checkbox">
-											<label>Fix some erros in design</label>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="item ">
-								<div class="ui ribbon awesome_red label">Not Done</div>
-								<div class="right floated hidden-elements actions hidden-phone">
-									<div class="ui teal labeled mini icon top right dropdown button">
-										<i class="settings icon"></i>
-										<span class="text">Actions</span>
-										<div class="menu">
-											<div class="item"><i class="edit icon"></i>Edit</div>
-											<div class="item"><i class="delete icon"></i>Remove</div>
-											<div class="item"><i class="hide icon"></i>Hide</div>
-										</div>
-									</div>
-								</div>
-								<div class="content">
-									<div class="header">
-										<div class="ui  checkbox">
-											<input type="checkbox">
-											<label>Fix some erros in design</label>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="item ">
-								<div class="ui ribbon teal label">Done</div>
-								<div class="right floated hidden-elements actions hidden-phone">
-									<div class="ui teal labeled mini icon top right dropdown button">
-										<i class="settings icon"></i>
-										<span class="text">Actions</span>
-										<div class="menu">
-											<div class="item"><i class="edit icon"></i>Edit</div>
-											<div class="item"><i class="delete icon"></i>Remove</div>
-											<div class="item"><i class="hide icon"></i>Hide</div>
-										</div>
-									</div>
-								</div>
-								<div class="content">
-									<div class="header">
-										<div class="ui  checkbox">
-											<input type="checkbox" checked="">
-											<label>Fix some erros in design</label>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="item ">
-								<div class="ui ribbon teal label">Done</div>
-								<div class="right floated hidden-elements actions hidden-phone">
-									<div class="ui teal labeled mini icon top right dropdown button">
-										<i class="settings icon"></i>
-										<span class="text">Actions</span>
-										<div class="menu">
-											<div class="item"><i class="edit icon"></i>Edit</div>
-											<div class="item"><i class="delete icon"></i>Remove</div>
-											<div class="item"><i class="hide icon"></i>Hide</div>
-										</div>
-									</div>
-								</div>
-								<div class="content">
-									<div class="header">
-										<div class="ui  checkbox">
-											<input type="checkbox" checked="">
-											<label>Fix some erros in design</label>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="item ">
-								<div class="ui ribbon teal label">Done</div>
-								<div class="right floated hidden-elements actions hidden-phone">
-									<div class="ui teal labeled mini icon top right dropdown button">
-										<i class="settings icon"></i>
-										<span class="text">Actions</span>
-										<div class="menu">
-											<div class="item"><i class="edit icon"></i>Edit</div>
-											<div class="item"><i class="delete icon"></i>Remove</div>
-											<div class="item"><i class="hide icon"></i>Hide</div>
-										</div>
-									</div>
-								</div>
-								<div class="content">
-									<div class="header">
-										<div class="ui  checkbox">
-											<input type="checkbox" checked="">
-											<label>Fix some erros in design</label>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="item ">
-								<div class="ui ribbon teal label">Done</div>
-								<div class="right floated hidden-elements actions hidden-phone">
-									<div class="ui teal labeled mini icon top right dropdown button">
-										<i class="settings icon"></i>
-										<span class="text">Actions</span>
-										<div class="menu">
-											<div class="item"><i class="edit icon"></i>Edit</div>
-											<div class="item"><i class="delete icon"></i>Remove</div>
-											<div class="item"><i class="hide icon"></i>Hide</div>
-										</div>
-									</div>
-								</div>
-								<div class="content">
-									<div class="header">
-										<div class="ui  checkbox">
-											<input type="checkbox" checked="">
-											<label>Fix some erros in design</label>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="item ">
-								<div class="ui ribbon teal label">Done</div>
-								<div class="right floated hidden-elements actions hidden-phone">
-									<div class="ui teal labeled mini icon top right dropdown button">
-										<i class="settings icon"></i>
-										<span class="text">Actions</span>
-										<div class="menu">
-											<div class="item"><i class="edit icon"></i>Edit</div>
-											<div class="item"><i class="delete icon"></i>Remove</div>
-											<div class="item"><i class="hide icon"></i>Hide</div>
-										</div>
-									</div>
-								</div>
-								<div class="content">
-									<div class="header">
-										<div class="ui  checkbox">
-											<input type="checkbox" checked="">
-											<label>Fix some erros in design</label>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="item ">
-								<div class="ui ribbon awesome_red label">Not Done</div>
-								<div class="right floated hidden-elements actions hidden-phone">
-									<div class="ui teal labeled mini icon top right dropdown button">
-										<i class="settings icon"></i>
-										<span class="text">Actions</span>
-										<div class="menu">
-											<div class="item"><i class="edit icon"></i>Edit</div>
-											<div class="item"><i class="delete icon"></i>Remove</div>
-											<div class="item"><i class="hide icon"></i>Hide</div>
-										</div>
-									</div>
-								</div>
-								<div class="content">
-									<div class="header">
-										<div class="ui  checkbox">
-											<input type="checkbox">
-											<label>Fix some erros in design</label>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<h4 class="ui  bottom attached tiny header">
-						<a href="#" class="see-all pull-right">See All <i class="icon arrow right"></i> </a>
-						<div class="clearfix"></div>
-					</h4>
-				</div>
+				
+				<!--Site Content-->
 			</div>
 		</div>
-		<!-- CHARS CONTAINER -->
-	</div>
-
-</div>
-<a data-sumome-discover-grid></a>
-<!-- general container end-->
-
-<!-- Modal HTML -->
-<div class="ui modal_settings modal">
-	<i class="close icon"></i>
-	<div class="header">
-		Settings
-	</div>
-	<div class="content">
-		<div class="left">
-			<p>Here settings can be configured...</p>
-		</div>
-	</div>
-	<div class="actions">
-		<div class="ui button">Cancel</div>
-		<div class="ui button">OK</div>
+		<!--maincontent-->
 	</div>
 </div>
-<!-- Modal HTML -->
 
-<div th:replace="~{layout/fragment::common_bottom(~{::script})}">
-<!-- external javascript
-	================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
+<!--jquery-->
+<script src="../static/js/jquery-2.1.4.min.js"></script>
+<!--jquery-->
+<!--semantic-->
+<script src="../static/dist/semantic.min.js"></script>
+<!--semantic-->
+<script src="../static/plugins/cookie/js.cookie.js"></script>
+<script src="../static/plugins/nicescrool/jquery.nicescroll.min.js"></script>
 
-<!-- jQuery -->
-<script src="../static/js/jquery.js" th:remove="all"></script>
+<script data-pace-options='{ "ajax": false }' src="../static/plugins/pacejs/pace.js"></script>
 
-<!-- jQuery UI -->
-<script src="../static/js/jquery-ui-1.8.21.custom.min.js" th:remove="all"></script>
-
-<!-- Semantic UI -->
-<script src="../static/semantic_ui/javascript/semantic.min.js" th:remove="all"></script>
-<!-- Semantic UI -->
-
-<!-- Easypiechart -->
-<script src="../static/js/jquery.easypiechart.min.js" th:remove="all"></script>
-<!-- Easypiechart -->
-
-<!-- Data tables js -->
-<script src="../static/js/data_tables/js/footable.js?v=2-0-1" type="text/javascript" th:remove="all"></script>
-<script src="../static/js/data_tables/js/footable.paginate.js?v=2-0-1" type="text/javascript" th:remove="all"></script>
-<script src="../static/js/data_tables/js/footable.sort.js" type="text/javascript" th:remove="all"></script>
-
-<!-- morris chars -->
-<script src="../static/js/morris.js/raphael.js" th:remove="all"></script>
-<script src="../static/js/morris.js/morris.js" th:remove="all"></script>
-
-<!-- Spark lines -->
-<script src="../static/js/jquery.sparkline.min.js" th:remove="all"></script>
-
-<!-- custom scrollbar -->
-<script src="../static/js/custom-scrollbar.min.js" th:remove="all"></script>
-
-<script src="../static/js/main_plugin.js" th:remove="all"></script>
-<script src="../static/js/main.js" th:remove="all"></script>
-
-<!-- library for cookie management -->
-<script src="../static/js/jquery.cookie.js" th:remove="all"></script>
-
-<!-- Gallery plugin -->
-<script src="../static/js/least/js/least.min.js" th:remove="all"></script>
-<script src="../static/js/least/js/jquery.lazyload.min.js" th:remove="all"></script>
-
-<!-- history.js for cross-browser state change on ajax -->
-<script src="../static/js/jquery.history.js" th:remove="all"></script>
-</div>
+<script src="../static/js/main.js"></script>
 
 </body>
 </html>
