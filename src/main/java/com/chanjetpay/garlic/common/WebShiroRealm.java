@@ -1,9 +1,8 @@
 package com.chanjetpay.garlic.common;
 
-import com.chanjetpay.garlic.api.UserService;
-import com.chanjetpay.garlic.dto.UserInfoDto;
-import com.chanjetpay.garlic.dto.UserPermDto;
-import com.chanjetpay.garlic.dto.UserRoleDto;
+import com.chanjetpay.garlic.api.OperatorService;
+import com.chanjetpay.garlic.dto.OperatorDto;
+import com.chanjetpay.result.GenericResult;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -15,12 +14,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
+
+//		//UnknownAccountException 账户不存在
+//		//IncorrectCredentialsException 密码不正确
+//		//LockedAccountException 用户被锁定了
+//		//AuthenticationException 未授权的用户
+
 public class WebShiroRealm extends AuthorizingRealm {
 
 	private static final Logger logger = LoggerFactory.getLogger(WebShiroRealm.class);
 
 	@Autowired
-	private UserService userService;
+	private OperatorService operatorService;
 
 	/**
 	 * 此方法调用  hasRole,hasPermission的时候才会进行回调.
@@ -45,22 +50,19 @@ public class WebShiroRealm extends AuthorizingRealm {
 		 * 当放到缓存中时，这样的话，doGetAuthorizationInfo就只会执行一次了，
 		 * 缓存过期之后会再次执行。
 		 */
-		logger.info("doGetAuthorizationInfo:" + principals);
-
 		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-		UserInfoDto userInfo  = (UserInfoDto)principals.getPrimaryPrincipal();
+		String loginName = (String) principals.getPrimaryPrincipal();
 
 		//设置权限信息.
-		for (UserRoleDto role : userInfo.getUserRoleList()) {
+/*		for (UserRoleDto role : userInfo.getUserRoleList()) {
 			authorizationInfo.addRole(role.getRoleId());
 			for (UserPermDto perm : role.getUserPermList()) {
 				authorizationInfo.addStringPermission(perm.getPermission());
 			}
-		}
+		}*/
 
 		return authorizationInfo;
 	}
-
 
 	/**
 	 * 认证信息(身份验证)
@@ -70,10 +72,7 @@ public class WebShiroRealm extends AuthorizingRealm {
 	 * @throws AuthenticationException
 	 */
 	@Override
-	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-
-		logger.info("doGetAuthenticationInfo token:" + token);
-
+	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) {
 		//获取用户的输入的账号.
 		String loginName = (String)token.getPrincipal();
 
@@ -81,42 +80,38 @@ public class WebShiroRealm extends AuthorizingRealm {
 
 		// 获取用户名称
 		if (StringUtils.isEmpty(loginName)) {
-			throw new UnknownAccountException("当前登录的用户不存在");
+			throw new UnknownAccountException("非法的用户名");
 		}
 
-		//通过username从数据库中查找 User对象，如果找到，没找到.
+		//通过username从数据库中查找 User对象
 		//实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
-		//GenericResult<UserInfoDto> result = userService.findByLoginName(loginName);
-		//
-		//if(result.isError()){
-		//	logger.info("result:" + result);
-		//	throw new AccountException(result.getCode() + ":" + result.getDesc());
-		//}
+		GenericResult<OperatorDto> result = operatorService.find(loginName);
 
-		//UserInfoDto userInfo = result.getValue();
+		if(result.isError() || result.getValue() == null){
+			throw new UnknownAccountException("用户不存在");
+		}
 
-		UserInfoDto userInfo = new UserInfoDto();
-		userInfo.setLoginName("admin");
-		userInfo.setSalt("xyz1");
-		userInfo.setPassword("123456");
+		String password = result.getValue().getPassword();
+		String salt = result.getValue().getSalt();
 
-		ByteSource u = ByteSource.Util.bytes(userInfo.getSalt());
+		ByteSource u = ByteSource.Util.bytes(salt);
+
 		//加密方式;
-		//交给AuthenticatingRealm使用CredentialsMatcher进行密码匹配，如果觉得人家的不好可以自定义实现
-/*		SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
-				userInfo.getLoginName(), //用户名
-				userInfo.getPassword(), //密码
+		//交给AuthenticatingRealm使用CredentialsMatcher进行密码匹配
+		SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
+				loginName, //用户名
+				password, //密码
 				u,//salt
 				getName()  //realm name
-		);*/
+		);
 
 
 		//明文: 若存在，将此用户存放到登录认证info中，无需自己做密码对比，Shiro会为我们进行密码对比校验
-		SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
+/*		SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
 				userInfo.getLoginName(), //用户名
 				userInfo.getPassword(), //密码
 				getName()  //realm name
-		);
+		);*/
 
 		return authenticationInfo;
 	}

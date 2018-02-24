@@ -84,6 +84,13 @@
 			<version>8.18.0</version>
 		</dependency>
 
+		<dependency>
+			<groupId>io.github.openfeign</groupId>
+			<artifactId>feign-httpclient</artifactId>
+			<version>9.5.0</version>
+		</dependency>
+
+
 		<!-- shiro dependency -->
 		<dependency>
 			<groupId>org.apache.shiro</groupId>

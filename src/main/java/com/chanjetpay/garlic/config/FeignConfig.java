@@ -1,7 +1,9 @@
 package com.chanjetpay.garlic.config;
 
+import com.chanjetpay.garlic.api.BillingService;
 import com.chanjetpay.garlic.api.BlockService;
 import com.chanjetpay.garlic.api.MerchantService;
+import com.chanjetpay.garlic.api.OperatorService;
 import feign.*;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
@@ -56,4 +58,30 @@ public class FeignConfig {
 				.requestInterceptor(requestInterceptor)
 				.target(MerchantService.class, feignUrl);
 	}
+
+	@Bean(name="operatorService")
+	public OperatorService operatorService(){
+		log.info("operatorService started feignUrl: " + feignUrl);
+		return Feign.builder()
+				.encoder(new JacksonEncoder())
+				.decoder(new JacksonDecoder())
+				.options(new Request.Options(1000, 3500))
+				.retryer(new Retryer.Default(5000, 5000, 3))
+				.requestInterceptor(requestInterceptor)
+				.target(OperatorService.class, feignUrl);
+	}
+
+	@Bean(name="billingService")
+	public BillingService billingService(){
+		log.info("billingService started feignUrl: " + feignUrl);
+		return Feign.builder()
+				.encoder(new JacksonEncoder())
+				.decoder(new JacksonDecoder())
+				.options(new Request.Options(1000, 3500))
+				.retryer(new Retryer.Default(5000, 5000, 3))
+				.requestInterceptor(requestInterceptor)
+				.target(BillingService.class, feignUrl);
+	}
+
+
 }

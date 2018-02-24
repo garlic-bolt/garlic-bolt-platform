@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<!-- Standard Meta -->
 	<meta charset="utf-8"/>
@@ -11,8 +11,8 @@
 	<title>登录-商户平台</title>
 	<meta name="description" content="Stagb Admin Template"/>
 	<meta name="keywords" content="html5, ,semantic,ui, library, framework, javascript,jquery,template,blog,stagb,template"/>
-	<link href="../static/dist/semantic.min.css" rel="stylesheet"/>
-	<link href="../static/css/main.css" rel="stylesheet"/>
+	<link href="../static/dist/semantic.min.css" rel="stylesheet" th:href="@{/dist/semantic.min.css}" />
+	<link href="../static/css/main.css" rel="stylesheet" th:href="@{/css/main.css}" />
 </head>
 <body>
 <div class="ui container" style="padding-top:10%">
@@ -21,7 +21,7 @@
 			<div class="sixteen wide tablet six wide computer column">
 				<div class="ui left aligned segment">
 					
-					<form id="form1" class="ui form">
+					<form id="form1" class="ui form" action="/login" method="post">
 						
 						<h1 class="ui header center aligned">
 							<div class="content">
@@ -34,7 +34,7 @@
 								登录名:
 							</label>
 							<div class="ui fluid icon input">
-								<input name="user_name" id="u_name" type="email" autocomplete="off" placeholder="请输入手机号或邮箱"
+								<input name="loginName" id="loginName" type="email" autocomplete="off" placeholder="请输入手机号或邮箱"
 								       style="width:100%!important;min-width:100%;width:100%;">
 								<i class="icon mail outline"></i>
 							</div>
@@ -44,14 +44,14 @@
 								密码:
 							</label>
 							<div class="ui fluid icon input">
-								<input name="password" id="u_pass" type="password" autocomplete="off" placeholder="请输入密码"
+								<input name="loginPass" id="loginPass" type="password" autocomplete="off" placeholder="请输入密码"
 								       style="width:100%!important;min-width:100%;width:100%;">
 								<i class="icon key"></i>
 							</div>
 						</div>
 						<div class="ui two column grid">
 								<div class="column">
-									<a class="ui teal right labeled icon button fluid" href="javascript:void(0);">
+									<a id="submit" class="ui teal right labeled icon button fluid" href="javascript:void(0);">
 										登录
 										<i class="icon sign in"></i>
 									</a>
@@ -65,7 +65,7 @@
 								</div>
 						</div>
 					</form>
-					<div class="ui bottom attached inverted lightyellowli message">
+					<div class="ui bottom attached inverted lightyellowli message" th:if="${msg}" th:text="${msg}">
 						用户名密码不匹配，请检查后重新输入
 					</div>
 					
@@ -74,7 +74,20 @@
 		</div>
 	</div>
 </div>
-<script src="../static/js/jquery-2.1.4.min.js"></script>
+
+
+<script src="../static/js/jquery-2.1.4.min.js" th:src="@{/js/jquery-2.1.4.min.js}"></script>
+
+<script type="text/javascript">
+
+	$(function (){
+		$('#submit').click(function(){
+			$('#form1').submit();
+		});
+	
+	});
+
+</script>
 
 </body>
 </html>

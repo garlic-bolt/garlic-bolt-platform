@@ -1,13 +1,13 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Stagb Admin Template</title>
+	<title>首页-商户平台</title>
 	<meta charset="utf-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-	<link href="../static/dist/semantic.min.css" rel="stylesheet"/>
-	<link href="../static/plugins/ionicons/css/ionicons.min.css" rel="stylesheet"/>
-	<link href="../static/css/main.css" rel="stylesheet"/>
+	<link href="../static/dist/semantic.min.css" rel="stylesheet" th:href="@{/dist/semantic.min.css}"/>
+	<link href="../static/plugins/ionicons/css/ionicons.min.css" rel="stylesheet" th:href="@{/plugins/ionicons/css/ionicons.min.css}"/>
+	<link href="../static/css/main.css" rel="stylesheet" th:href="@{/css/main.css}"/>
 	
 </head>
 <body>
@@ -16,7 +16,7 @@
 	<!--sidebar-->
 	<div class="ui sidebar vertical left menu overlay  borderless visible sidemenu inverted  grey" style="-webkit-transition-duration: 0.1s; transition-duration: 0.1s;" data-color="grey">
 		
-		<a class="item logo" href="index.html">
+		<a class="item logo" href="home.html">
 			<img src="../static/img/logo.png" alt="stagblogo" /><img src="../static/img/thumblogo.png" alt="stagblogo" class="displaynone" />
 		</a>
 		
@@ -26,7 +26,7 @@
 				<i class="ion-speedometer titleIcon icon"></i> Dashboard <i class="dropdown icon"></i>
 			</a>
 			<div class="content">
-				<a class="item" href="index.html">
+				<a class="item" href="home.html">
 					Dashboard v1
 				</a>
 			</div>
@@ -287,7 +287,7 @@
 					Dashboard
 				</div>
 				<div class="ui divider"></div>
-				<a class="item" href="index.html">
+				<a class="item" href="home.html">
 					Dashboard v1
 				</a>
 			</div>
@@ -867,17 +867,17 @@
 </div>
 
 <!--jquery-->
-<script src="../static/js/jquery-2.1.4.min.js"></script>
+<script src="../static/js/jquery-2.1.4.min.js" th:src="@{/js/jquery-2.1.4.min.js}"></script>
 <!--jquery-->
 <!--semantic-->
-<script src="../static/dist/semantic.min.js"></script>
+<script src="../static/dist/semantic.min.js" th:src="@{/dist/semantic.min.js}"></script>
 <!--semantic-->
-<script src="../static/plugins/cookie/js.cookie.js"></script>
-<script src="../static/plugins/nicescrool/jquery.nicescroll.min.js"></script>
+<script src="../static/plugins/cookie/js.cookie.js" th:src="@{/plugins/cookie/js.cookie.js}"></script>
+<script src="../static/plugins/nicescrool/jquery.nicescroll.min.js" th:src="@{/plugins/nicescrool/jquery.nicescroll.min.js}"></script>
 
-<script data-pace-options='{ "ajax": false }' src="../static/plugins/pacejs/pace.js"></script>
+<script data-pace-options='{ "ajax": false }' src="../static/plugins/pacejs/pace.js" th:src="@{/plugins/pacejs/pace.js}"></script>
 
-<script src="../static/js/main.js"></script>
+<script src="../static/js/main.js" th:src="@{/js/main.js}"></script>
 
 </body>
 </html>
