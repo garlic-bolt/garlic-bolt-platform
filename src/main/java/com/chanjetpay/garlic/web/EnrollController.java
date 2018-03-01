@@ -1,6 +1,5 @@
 package com.chanjetpay.garlic.web;
 
-import com.chanjetpay.garlic.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -23,16 +22,6 @@ public class EnrollController extends AbstractJsonpResponseBodyAdvice {
 
 	public EnrollController(){
 		super("callback","callback");
-	}
-
-	@ResponseBody
-	@RequestMapping(value = "/reg",method = RequestMethod.POST,consumes="application/json")
-	public Map<String, Object> reg(@RequestParam("token") String token, @RequestBody UserDto user){
-		System.out.println(token + user.getLoginName() + user.getEmail());
-
-		Map<String, Object> result = new HashMap<>();
-		result.put("code","success");
-		return result;
 	}
 
 	@RequestMapping("upload")

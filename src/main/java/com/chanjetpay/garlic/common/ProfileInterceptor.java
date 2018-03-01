@@ -1,26 +1,34 @@
 package com.chanjetpay.garlic.common;
 
+import com.chanjetpay.garlic.api.AuthorityService;
 import com.chanjetpay.garlic.api.OperatorService;
+import com.chanjetpay.garlic.dto.AuthorityDto;
 import com.chanjetpay.garlic.dto.OperatorDto;
+import com.chanjetpay.garlic.pojo.NoticeEntity;
+import com.chanjetpay.garlic.pojo.ProfileEntity;
+import com.chanjetpay.result.ListResult;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProfileInterceptor implements HandlerInterceptor {
 	private static final Logger logger = LoggerFactory.getLogger(ProfileInterceptor.class);
 
 	@Autowired
 	private OperatorService operatorService;
+
+	@Autowired
+	private AuthorityService authorityService;
 
 	@Override
 	public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
@@ -34,44 +42,33 @@ public class ProfileInterceptor implements HandlerInterceptor {
 		// 在应用的当前会话中设置属性
 		Session session = currentUser.getSession();
 
-		OperatorDto operatorDto = null;
-		if(session.getAttribute("login_user") == null){
+		ProfileEntity profile = null;
+		if(session.getAttribute("login_user") != null) {
+			profile = (ProfileEntity)session.getAttribute("login_user");
+		} else {
 			String loginName = (String)currentUser.getPrincipal();
-			operatorDto = operatorService.find(loginName).getValue();
+			OperatorDto operatorDto = operatorService.find(loginName).getValue();
 
-			session.setAttribute("login_user",operatorDto);
+			profile.setOperator(operatorDto);
+			profile.setUserName(operatorDto.getNickName());
+			profile.setAvatarUrl(operatorDto.getAvatar());
+
+			//todo:通过服务获取
+			List<NoticeEntity> alertMessages = new ArrayList<>();
+			NoticeEntity entity1 = new NoticeEntity();
+			entity1.setIconUrl("/u");
+			entity1.setTitle("报警");
+			alertMessages.add(entity1);
+			profile.setAlertMessages(alertMessages);
+
+			ListResult<AuthorityDto> authListResult = authorityService.queryByOperator(loginName);
+			profile.setAuthorities(authListResult.getValues());
+			profile.setMenus(authListResult.getValues());
+
+			session.setAttribute("login_user",profile);
 		}
 
-		operatorDto = (OperatorDto)session.getAttribute("login_user");
-
-		//
-		//MenuEntity settingMenuEntity = new MenuEntity("1030","系统设置","/admin/setting");
-		//MenuEntity my11 = new MenuEntity("1031","个人信息","11");
-		//MenuEntity my12 = new MenuEntity("2032","系统安全","22");
-		//settingMenuEntity.addSubMenu(my11).addSubMenu(my12).addSubMenu(my11);
-		//
-		//
-		//MenuEntity tradeMenuEntity = new MenuEntity("1010","交易管理","/admin/trade");
-		//MenuEntity my01 = new MenuEntity("101010","我的","1111");
-		//MenuEntity my02 = new MenuEntity("101011","三方","1111");
-		//tradeMenuEntity.addSubMenu(my01).addSubMenu(my02).addSubMenu(my11).addSubMenu(my12);
-		//
-		//menuEntities.add(settingMenuEntity);
-		//menuEntities.add(new MenuEntity("1020","区域管理","/admin"));
-		//menuEntities.add(tradeMenuEntity);
-		//
-		//Collections.sort(menuEntities);
-
-		//operatorDto.setAvatar("/official_accounts.png");
-		//operatorDto.setNickName("张老三");
-		//operatorDto.setRole("社区管理员");
-		//operatorDto.setAttentionCount(12);
-		//operatorDto.setMessageCount(3);
-		//operatorDto.setTaskCount(0);
-		//operatorDto.setAttentionCount(0);
-
-
-		modelAndView.addObject("user", operatorDto);
+		modelAndView.addObject("user", profile);
 	}
 
 	@Override
