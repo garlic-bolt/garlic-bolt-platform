@@ -26,7 +26,7 @@ public class ArrayTest {
 		MerchantDto merchantDto = new MerchantDto();
 		merchantDto.setAdminName("张三123");
 		result.setValue(merchantDto);
-		result.getValue().setBizType("测试类型");
+
 		logger.info("result:"+ result);
 	}
 
