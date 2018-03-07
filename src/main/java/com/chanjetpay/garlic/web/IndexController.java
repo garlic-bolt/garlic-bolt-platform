@@ -4,7 +4,9 @@ package com.chanjetpay.garlic.web;
 //import com.chanjetpay.garlic.dto.UserDto;
 
 import com.chanjetpay.garlic.api.MerchantService;
+import com.chanjetpay.garlic.common.ProfileUtil;
 import com.chanjetpay.garlic.pojo.LoginForm;
+import com.chanjetpay.garlic.pojo.ProfileEntity;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.session.Session;
@@ -39,28 +41,22 @@ public class IndexController {
 	//根目录跳转到首页
 	@RequestMapping({"/index", ""})
 	public String index() {
-		return "redirect:/home";
-	}
-
-	@RequestMapping("/home")
-	public String home(HttpSession session) {
-		return "home";
+		return "redirect:/login";
 	}
 
 	@RequestMapping(value = "/login", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView login(HttpServletRequest request, RedirectAttributes redirectAttributes, @ModelAttribute LoginForm loginForm) {
+	public String login(HttpServletRequest request, RedirectAttributes redirectAttributes, @ModelAttribute LoginForm loginForm) {
 		ModelAndView mav = new ModelAndView();
-
-		if (request.getMethod().equals("GET")) {
-			mav.setViewName("login");
-			return mav;
-		}
 
 		// 安全操作
 		Subject currentUser = SecurityUtils.getSubject();
+		if(currentUser.isAuthenticated()){
+			logger.info("已登录状态");
+			return "redirect:/vender/index";
+		}
 
 		//当前我们的用户是匿名的用户，我们尝试进行登录，
-		if (!currentUser.isAuthenticated()) {
+		if(request.getMethod().toUpperCase().equals("POST")){
 			UsernamePasswordToken token = new UsernamePasswordToken(loginForm.getLoginName(), loginForm.getLoginPass());
 			//this is all you have to do to support 'remember me' (no config - built in!):
 			token.setRememberMe(true);
@@ -69,19 +65,26 @@ public class IndexController {
 				currentUser.login(token);
 				//当我们获登录用户之后
 				logger.info("User [" + currentUser.getPrincipal() + "] logged in successfully.");
-				mav.setViewName("redirect:home");
+
 			} catch (Exception e) {
 				redirectAttributes.addFlashAttribute("msg", e.getMessage());
-				mav.setViewName("redirect:login");
+				return "redirect:/login";
 			}
-		} else {
-			logger.info("已登录状态");
-			mav.setViewName("redirect:home");
-		}
 
-		return mav;
+			return "redirect:/vender/index";
+		} else {
+			return "login";
+		}
 	}
 
+	@RequestMapping("/logout")
+	public String logout() {
+/*		// 安全操作
+		Subject currentUser = SecurityUtils.getSubject();
+		//登出
+		currentUser.logout();*/
+		return "redirect:/login";
+	}
 
 	@RequestMapping("/enroll")
 	public String enroll() {
@@ -139,17 +142,6 @@ public class IndexController {
 
 
 		return "enroll";
-	}
-
-	@RequestMapping("/logoff")
-	public String logoff() {
-		// 安全操作
-		Subject currentUser = SecurityUtils.getSubject();
-
-		//登出
-		currentUser.logout();
-
-		return "login";
 	}
 
 	@RequestMapping("/403")

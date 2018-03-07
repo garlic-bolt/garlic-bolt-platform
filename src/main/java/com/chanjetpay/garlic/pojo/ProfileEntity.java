@@ -1,6 +1,7 @@
 package com.chanjetpay.garlic.pojo;
 
 import com.chanjetpay.garlic.dto.AuthorityDto;
+import com.chanjetpay.garlic.dto.NoticeDto;
 import com.chanjetpay.garlic.dto.OperatorDto;
 import com.chanjetpay.garlic.enums.AuthorityTypeEnum;
 import org.apache.commons.lang3.StringUtils;
@@ -11,9 +12,12 @@ import java.util.*;
 public class ProfileEntity implements Serializable{
 	private static final long serialVersionUID = 6835026061434461681L;
 
+	private String blockCode;
+	private String merchantId;
 	private String userName;
 	private String avatarUrl;
-	private List<NoticeEntity> alertMessages;
+
+	private List<NoticeDto> alertMessages;
 
 	private OperatorDto operator;
 	private Map<String, AuthorityDto> authorities = new HashMap<>();
@@ -57,6 +61,28 @@ public class ProfileEntity implements Serializable{
 		}
 	}
 
+	private Boolean blockOperator;
+
+	public Boolean isBlockOperator(){
+		return blockCode.equals(merchantId);
+	}
+
+	public String getBlockCode() {
+		return blockCode;
+	}
+
+	public void setBlockCode(String blockCode) {
+		this.blockCode = blockCode;
+	}
+
+	public String getMerchantId() {
+		return merchantId;
+	}
+
+	public void setMerchantId(String merchantCode) {
+		this.merchantId = merchantCode;
+	}
+
 	public OperatorDto getOperator() {
 		return operator;
 	}
@@ -81,11 +107,11 @@ public class ProfileEntity implements Serializable{
 		this.avatarUrl = avatarUrl;
 	}
 
-	public List<NoticeEntity> getAlertMessages() {
+	public List<NoticeDto> getAlertMessages() {
 		return alertMessages;
 	}
 
-	public void setAlertMessages(List<NoticeEntity> alertMessages) {
+	public void setAlertMessages(List<NoticeDto> alertMessages) {
 		this.alertMessages = alertMessages;
 	}
 }

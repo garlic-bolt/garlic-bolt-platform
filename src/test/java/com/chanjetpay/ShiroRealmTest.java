@@ -1,6 +1,8 @@
 package com.chanjetpay;
 
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.util.ByteSource;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -32,4 +34,18 @@ public class ShiroRealmTest {
 		SimpleHash hash = new SimpleHash(algorithmName, password, salt1, hashIterations);
 		String encodedPassword = hash.toHex();
 	}
+
+	@Test
+	public void test3(){
+		ByteSource u = ByteSource.Util.bytes("QouRPz");
+		SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
+				"101000", //用户名
+				"1a6ef1492a68d7f3cb012b5a88b2260b", //密码
+				u,//salt
+				"webShiroRealm"  //realm name
+		);
+
+
+	}
+
 }

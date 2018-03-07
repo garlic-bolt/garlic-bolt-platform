@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>社区注册</title>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+	
+	<link rel="icon" href="../static/favicon.jpg" type="image/x-icon" th:href="@{/favicon.jpg}" />
+	<link href="../static/dist/semantic.min.css" rel="stylesheet" th:href="@{}"/>
+	<link href="../static/css/main.css" rel="stylesheet" th:href="@{}"/>
+</head>
+<body>
+<div class="ui container" style="padding-top:10%">
+	<div class="sixteen wide tablet eight wide computer column">
+		<h2 class="ui center aligned header">完善社区信息</h2>
+		<div class="ui segments">
+			<div class="ui segment">
+				<h5 class="ui header">
+					gaotianle@163.com，请正确填写 xxx社区 信息并激活
+				</h5>
+			</div>
+			<form class="ui form segment form1">
+				
+				<div class="two fields">
+					<div class="field">
+						<label>姓名</label>
+						<input placeholder="First Name" name="name" type="text">
+					</div>
+					<div class="field">
+						<label>Gender</label>
+						<div class="ui dropdown selection" tabindex="0">
+							<select name="gender">
+								<option value="">Gender</option>
+								<option value="male">Male</option>
+								<option value="female">Female</option>
+							</select>
+							<i class="dropdown icon"></i>
+							<div class="default text">Gender</div>
+							<div class="menu" tabindex="-1">
+								<div class="item" data-value="male">Male</div>
+								<div class="item" data-value="female">Female</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="two fields">
+					<div class="field">
+						<label>Username</label>
+						<input placeholder="Username" name="username" type="text">
+					</div>
+					<div class="field">
+						<label>Password</label>
+						<input type="password" name="password">
+					</div>
+				</div>
+				<div class="field">
+					<label>Skills</label>
+					<div class="ui dropdown selection multiple" tabindex="0">
+						<select name="skills" multiple="multiple">
+							<option value="">Select Skills</option>
+							<option value="css">CSS</option>
+							<option value="html">HTML</option>
+							<option value="javascript">Javascript</option>
+							<option value="design">Graphic Design</option>
+							<option value="plumbing">Plumbing</option>
+							<option value="mech">Mechanical Engineering</option>
+							<option value="repair">Kitchen Repair</option>
+						</select>
+						<i class="dropdown icon"></i>
+						<div class="default text">Select Skills</div>
+						<div class="menu" tabindex="-1">
+							<div class="item" data-value="css">CSS</div>
+							<div class="item" data-value="html">HTML</div>
+							<div class="item" data-value="javascript">Javascript</div>
+							<div class="item" data-value="design">Graphic Design</div>
+							<div class="item" data-value="plumbing">Plumbing</div>
+							<div class="item" data-value="mech">Mechanical Engineering</div>
+							<div class="item" data-value="repair">Kitchen Repair</div>
+						</div>
+					</div>
+				</div>
+				<div class="inline field">
+					<div class="ui checkbox">
+						<input id="ckbAgreement" type="checkbox" name="terms" tabindex="0" class="hidden" checked="checked">
+						<label for="ckbAgreement">同意<a>注册条款</a>内容</label>
+					</div>
+				</div>
+				<div class="ui blue submit button">Submit</div>
+				<div class="ui error message"></div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!--jquery-->
+<script src="../static/js/jquery-2.1.4.min.js" th:src="@{/js/jquery-2.1.4.min.js}"></script>
+<!--jquery-->
+<!--semantic-->
+<script src="../static/dist/semantic.min.js" th:src="@{/dist/semantic.min.js}"></script>
+<!--semantic-->
+<script src="../static/plugins/cookie/js.cookie.js" th:src="@{/plugins/cookie/js.cookie.js}"></script>
+<script src="../static/plugins/nicescrool/jquery.nicescroll.min.js" th:src="@{/plugins/nicescrool/jquery.nicescroll.min.js}"></script>
+<script data-pace-options='{ "ajax": false }' src="../static/plugins/pacejs/pace.js" th:src="@{/plugins/pacejs/pace.js}"></script>
+<script src="../static/js/main.js" th:src="@{/js/main.js}"></script>
+
+</body>
+</html>

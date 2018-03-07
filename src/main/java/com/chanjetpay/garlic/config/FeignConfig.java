@@ -92,6 +92,18 @@ public class FeignConfig {
 				.target(AuthorityService.class, feignUrl);
 	}
 
+	@Bean(name="noticeService")
+	public NoticeService noticeService(){
+		log.info("noticeService started feignUrl: " + feignUrl);
+		return Feign.builder()
+				.encoder(new JacksonEncoder())
+				.decoder(new JacksonDecoder())
+				.options(new Request.Options(1000, 3500))
+				.retryer(new Retryer.Default(5000, 5000, 3))
+				.requestInterceptor(requestInterceptor)
+				.target(NoticeService.class, feignUrl);
+	}
+
 
 
 }

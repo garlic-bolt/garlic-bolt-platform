@@ -1,10 +1,11 @@
 package com.chanjetpay.garlic.common;
 
 import com.chanjetpay.garlic.api.AuthorityService;
+import com.chanjetpay.garlic.api.NoticeService;
 import com.chanjetpay.garlic.api.OperatorService;
 import com.chanjetpay.garlic.dto.AuthorityDto;
+import com.chanjetpay.garlic.dto.NoticeDto;
 import com.chanjetpay.garlic.dto.OperatorDto;
-import com.chanjetpay.garlic.pojo.NoticeEntity;
 import com.chanjetpay.garlic.pojo.ProfileEntity;
 import com.chanjetpay.result.ListResult;
 import org.apache.shiro.SecurityUtils;
@@ -30,45 +31,46 @@ public class ProfileInterceptor implements HandlerInterceptor {
 	@Autowired
 	private AuthorityService authorityService;
 
+	@Autowired
+	private NoticeService noticeService;
+
 	@Override
-	public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+		logger.info("ProfileInterceptor 请求 :" + request.getRequestURI());
+
+		ProfileEntity profile = ProfileUtil.getProfile();
+		if(profile == null){
+			Subject currentUser = SecurityUtils.getSubject();
+			// 在应用的当前会话中设置属性
+			Session session = currentUser.getSession();
+			String loginName = (String)currentUser.getPrincipal();
+			OperatorDto operatorDto = operatorService.find(loginName).getValue();
+
+			profile = new ProfileEntity();
+			profile.setOperator(operatorDto);
+			profile.setBlockCode(operatorDto.getBlockCode());
+			profile.setMerchantId(operatorDto.getMerchantId());
+			profile.setUserName(operatorDto.getName());
+			profile.setAvatarUrl(operatorDto.getAvatar());
+
+			ListResult<NoticeDto> result = noticeService.queryMerchantNotice(operatorDto.getMerchantId());
+			profile.setAlertMessages(result.getValues());
+
+			ListResult<AuthorityDto> authListResult = authorityService.queryByOperator(loginName);
+			profile.setAuthorities(authListResult.getValues());
+			profile.setMenus(authListResult.getValues());
+
+			ProfileUtil.saveProfile(profile);
+		}
+
+		request.setAttribute("user", profile);
+
 		return true;
 	}
 
 	@Override
 	public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
 
-		Subject currentUser = SecurityUtils.getSubject();
-		// 在应用的当前会话中设置属性
-		Session session = currentUser.getSession();
-
-		ProfileEntity profile = null;
-		if(session.getAttribute("login_user") != null) {
-			profile = (ProfileEntity)session.getAttribute("login_user");
-		} else {
-			String loginName = (String)currentUser.getPrincipal();
-			OperatorDto operatorDto = operatorService.find(loginName).getValue();
-
-			profile.setOperator(operatorDto);
-			profile.setUserName(operatorDto.getNickName());
-			profile.setAvatarUrl(operatorDto.getAvatar());
-
-			//todo:通过服务获取
-			List<NoticeEntity> alertMessages = new ArrayList<>();
-			NoticeEntity entity1 = new NoticeEntity();
-			entity1.setIconUrl("/u");
-			entity1.setTitle("报警");
-			alertMessages.add(entity1);
-			profile.setAlertMessages(alertMessages);
-
-			ListResult<AuthorityDto> authListResult = authorityService.queryByOperator(loginName);
-			profile.setAuthorities(authListResult.getValues());
-			profile.setMenus(authListResult.getValues());
-
-			session.setAttribute("login_user",profile);
-		}
-
-		modelAndView.addObject("user", profile);
 	}
 
 	@Override

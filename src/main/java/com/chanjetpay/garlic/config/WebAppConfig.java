@@ -20,11 +20,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 		// addPathPatterns 用于添加拦截规则
 		// excludePathPatterns 用户排除拦截
 		registry.addInterceptor(profileInterceptor())
-				.addPathPatterns("/home")
-				.addPathPatterns("/vender/**")
-				.excludePathPatterns("/index")
-				.excludePathPatterns("/login")
-				.excludePathPatterns("logoff");
+				.addPathPatterns("/vender/**");
 		super.addInterceptors(registry);
 	}
 }

@@ -2,6 +2,9 @@ package com.chanjetpay;
 
 import com.chanjetpay.garlic.api.OperatorService;
 import com.chanjetpay.garlic.dto.OperatorDto;
+import com.chanjetpay.garlic.enums.OperatorTypeEnum;
+import com.chanjetpay.result.BasicResult;
+import com.chanjetpay.result.GenericResult;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +21,21 @@ public class OperatorControllerTest {
 	@Test
 	public void testCreateOperator(){
 		OperatorDto operatorDto = new OperatorDto();
-		operatorDto.setBlockId("1234");
-		operatorDto.setMerchantId("123456");
+		operatorDto.setBlockCode("100");
+		operatorDto.setMerchantId("100");
 		operatorDto.setOperatorId("zhangsan");
+		operatorDto.setName("张三");
+		operatorDto.setType(OperatorTypeEnum.ADMIN);
 		operatorDto.setPassword("123456");
-		operatorDto.setSalt("abcd");
 
-		operatorService.create("12343",operatorDto);
+		GenericResult<OperatorDto> result = operatorService.create("100",operatorDto);
+		System.out.println(result.getCode());
+	}
+
+	@Test
+	public void testFindByCode(){
+		GenericResult<OperatorDto> result = operatorService.find("10000201");
+		System.out.println(result);
 	}
 
 
