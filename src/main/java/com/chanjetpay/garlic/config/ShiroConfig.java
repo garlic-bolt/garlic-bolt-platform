@@ -2,6 +2,7 @@ package com.chanjetpay.garlic.config;
 
 import com.chanjetpay.garlic.common.WebShiroRealm;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -62,7 +63,7 @@ public class ShiroConfig {
 
 	@Bean
 	public SecurityManager securityManager() {
-		DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+		DefaultSecurityManager securityManager = new DefaultSecurityManager();
 		securityManager.setRealm(webShiroRealm());
 		return securityManager;
 	}

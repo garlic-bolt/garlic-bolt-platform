@@ -5,8 +5,8 @@
 	<meta charset="utf-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-
-	<link rel="icon" href="../static/favicon.jpg" type="image/x-icon" th:href="@{/favicon.jpg}" />
+	
+	<link rel="icon" href="../static/favicon.jpg" type="image/x-icon" th:href="@{/favicon.jpg}"/>
 	<link href="../static/dist/semantic.min.css" rel="stylesheet" th:href="@{/dist/semantic.min.css}"/>
 	<link href="../static/plugins/ionicons/css/ionicons.min.css" rel="stylesheet" th:href="@{/plugins/ionicons/css/ionicons.min.css}"/>
 	<link href="../static/css/main.css" rel="stylesheet" th:href="@{/css/main.css}"/>
@@ -15,7 +15,8 @@
 
 <div id="contextWrap">
 	<!--sidebar-->
-	<div class="ui sidebar vertical left menu overlay  borderless visible sidemenu inverted  grey" style="-webkit-transition-duration: 0.1s; transition-duration: 0.1s;" data-color="grey">
+	<div class="ui sidebar vertical left menu overlay  borderless visible sidemenu inverted  grey"
+	     style="-webkit-transition-duration: 0.1s; transition-duration: 0.1s;" data-color="grey">
 		
 		<a class="item logo" href="home.html">
 			<img src="../static/img/logo.png" alt="stagblogo" th:src="@{/img/logo.png}"/>
@@ -203,7 +204,7 @@
 								消息
 							</div>
 							<div class="item" th:each="notice : ${user.alertMessages}">
-								<img class="ui avatar image" src="../static/img/avatar/people/Hershell.png" alt="label-image" th:src="${notice.iconUrl}" />
+								<img class="ui avatar image" src="../static/img/avatar/people/Hershell.png" alt="label-image" th:src="${notice.iconUrl}"/>
 								<a href="#" th:text="${notice.title}" th:href="${notice.linkUri}">完成公众号配置</a>
 							</div>
 							
@@ -211,7 +212,7 @@
 								报警
 							</div>
 							<div class="item" th:remove="all">
-								<img class="ui avatar image" src="../static/img/avatar/people/Meggie.png" alt="label-image" /> 请还款标的
+								<img class="ui avatar image" src="../static/img/avatar/people/Meggie.png" alt="label-image"/> 请还款标的
 							</div>
 						</div>
 					</div>
@@ -235,7 +236,7 @@
 			<div class="ui breadcrumb">
 				<i class="angle right icon"></i>
 				<a class="section">智慧生活</a>
-				<div class="divider"> / </div>
+				<div class="divider"> /</div>
 				<div class="active section">我的社区</div>
 			</div>
 			
@@ -243,7 +244,7 @@
 				<!--Site Content-->
 				
 				<div class="row">
-					<div class="sixteen wide tablet ten wide computer column">
+					<div class="sixteen wide tablet eight wide computer column">
 						<div class="ui segments">
 							<div class="ui segment">
 								<h3 class="ui header">社区基本信息</h3>
@@ -265,7 +266,7 @@
 								<div class="three fields disabled">
 									<div class="field">
 										<label>省份</label>
-										<input type="text" value="广东省"  th:value="${block.province}">
+										<input type="text" value="广东省" th:value="${block.province}">
 									</div>
 									<div class="field">
 										<label>城市</label>
@@ -310,42 +311,43 @@
 								
 								<div class="field disabled">
 									<label>备注信息</label>
-									<textarea rows="2" th:text="${block.memo}">1234</textarea>
+									<textarea rows="3" th:text="${block.memo}">1234</textarea>
 								</div>
-								
+							
 							</div>
 						</div>
 					</div>
 					
-					<div class="sixteen wide tablet six wide computer column">
+					<div class="sixteen wide tablet eight wide computer column">
 						<div class="ui segments">
 							<div class="ui segment">
 								<h3 class="ui header">微信支付参数配置</h3>
 								<div class="ui green message" th:if="${message}" th:text="${message}">更新成功</div>
 							</div>
-							<div class="ui segment disabled">
+							<div class="ui segment">
 								<form id="wxForm" class="ui fluid form" method="post" th:action="@{/vender/block/wxOfficial}">
 									
-										<div class="field">
-											<label>微信商户id</label>
-											<input type="text" name="officialId" th:value="${block.wxOfficial.officialId}">
-										</div>
-									
+									<div class="field">
+										<label>微信商户id</label>
+										<input type="text" name="officialId" th:value="${block.wxOfficial.officialId}">
+									</div>
+									<div class="two fields">
 										<div class="field">
 											<label>公众号App ID</label>
 											<input type="text" name="appId" th:value="${block.wxOfficial.appId}">
 										</div>
-									
-									<div class="field">
-										<label>公众号类型</label>
-										<div class="ui selection dropdown" tabindex="0">
-											<input type="hidden" name="officialType" th:value="${block.wxOfficial.officialType}">
-											<div class="text" th:text="${block.wxOfficial.officialType}">1234</div>
-											<i class="dropdown icon"></i>
-											<div class="menu" tabindex="-1">
-												<div class="item" data-value="SUBSCRIBE">订阅号</div>
-												<div class="item" data-value="SERVICE">服务号</div>
-												<div class="item" data-value="ENTERPRISE">企业号</div>
+										
+										<div class="field">
+											<label>公众号类型</label>
+											<div class="ui selection dropdown" tabindex="0">
+												<input type="hidden" name="officialType" th:value="${block.wxOfficial.officialType}">
+												<div class="text" th:text="${block.wxOfficial.officialType}">1234</div>
+												<i class="dropdown icon"></i>
+												<div class="menu" tabindex="-1">
+													<div class="item" data-value="SUBSCRIBE">订阅号</div>
+													<div class="item" data-value="SERVICE">服务号</div>
+													<div class="item" data-value="ENTERPRISE">企业号</div>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -371,14 +373,14 @@
 								<button id="wxSubmit" class="ui primary button saving">更新微信支付参数</button>
 							</div>
 						</div>
-						
-
+					
+					
 					</div>
 				</div>
-
+				
 				<!--Site Content-->
 			</div>
-			
+		
 		</div>
 		<!--maincontent-->
 	</div>
@@ -399,9 +401,9 @@
 
 <script type="text/javascript">
 	$(function () {
-	  $("#wxSubmit").on( "click", function( e ) {
+		$("#wxSubmit").on("click", function (e) {
 			$("#wxForm").submit();
-	});
+		});
 	})
 </script>
 

@@ -1,11 +1,14 @@
 package com.chanjetpay.garlic.web;
 
 import com.chanjetpay.garlic.api.BlockService;
+import com.chanjetpay.garlic.api.MerchantService;
 import com.chanjetpay.garlic.common.ProfileUtil;
 import com.chanjetpay.garlic.dto.BlockDto;
+import com.chanjetpay.garlic.dto.MerchantDto;
 import com.chanjetpay.garlic.dto.WxOfficialDto;
 import com.chanjetpay.garlic.pojo.ProfileEntity;
 import com.chanjetpay.result.BasicResult;
+import com.chanjetpay.result.ListResult;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,12 +19,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.jws.WebParam;
+import java.util.List;
+
 @Controller
 @RequestMapping("vender/block")
 public class BlockController {
 
 	@Autowired
 	private BlockService blockService;
+
+	@Autowired
+	private MerchantService merchantService;
 
 	//社区欢迎页
 	@RequestMapping(value = {"", "/", "index"}, method = RequestMethod.GET)
@@ -51,5 +60,15 @@ public class BlockController {
 		}
 
 		return "redirect:/vender/block";
+	}
+
+	@RequestMapping(value = "/merchant", method = RequestMethod.GET)
+	public String merchant(@ModelAttribute MerchantDto query, Model model){
+		ProfileEntity profile = ProfileUtil.getProfile();
+		ListResult<MerchantDto> result = merchantService.queryALl(profile.getBlockCode());
+
+		model.addAttribute("query",query);
+		model.addAttribute("merchantList", result.getValues());
+		return "block-index";
 	}
 }
