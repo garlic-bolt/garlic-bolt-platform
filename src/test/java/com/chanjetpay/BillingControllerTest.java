@@ -2,7 +2,6 @@ package com.chanjetpay;
 
 import com.chanjetpay.garlic.api.BillingService;
 import com.chanjetpay.garlic.dto.QueryRegionDto;
-import com.chanjetpay.result.BasicResult;
 import com.chanjetpay.result.GenericResult;
 import com.chanjetpay.result.ListResult;
 import org.apache.commons.io.FileUtils;
@@ -27,17 +26,17 @@ public class BillingControllerTest {
 	public void testFindName(){
 		ListResult<String> result = billingService.query("123455",new QueryRegionDto());
 
-		System.out.println(result.getValues());
+		System.out.println(result.getData());
 	}
 
 	@Test
 	public void testUpdateName() throws IOException {
 		GenericResult<String> result = billingService.download("123455","2018-02-26-crebas.txt");
 
-		byte[] bt = Base64Utils.decodeFromString(result.getValue());
+		byte[] bt = Base64Utils.decodeFromString(result.getData());
 
 		FileUtils.writeByteArrayToFile(new File("C:/billings/123ttt.txt"),bt);
 
-		System.out.println(result.getValue());
+		System.out.println(result.getData());
 	}
 }

@@ -87,12 +87,12 @@ public class WebShiroRealm extends AuthorizingRealm {
 		//实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
 		GenericResult<OperatorDto> result = operatorService.find(loginName);
 
-		if(result.isError() || result.getValue() == null){
+		if(result.isError() || result.getData() == null){
 			throw new UnknownAccountException("用户不存在");
 		}
 
-		String password = result.getValue().getPassword();
-		String salt = result.getValue().getSalt();
+		String password = result.getData().getPassword();
+		String salt = result.getData().getSalt();
 
 		ByteSource u = ByteSource.Util.bytes(salt);
 

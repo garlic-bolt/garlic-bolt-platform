@@ -10,8 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -25,7 +23,7 @@ public class ArrayTest {
 		GenericResult<MerchantDto> result = GenericResult.newGenericResult();
 		MerchantDto merchantDto = new MerchantDto();
 		merchantDto.setAdminName("张三123");
-		result.setValue(merchantDto);
+		result.setData(merchantDto);
 
 		logger.info("result:"+ result);
 	}

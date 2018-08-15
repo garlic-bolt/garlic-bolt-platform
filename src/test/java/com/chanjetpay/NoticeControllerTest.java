@@ -24,7 +24,7 @@ public class NoticeControllerTest {
 
 		Assert.assertEquals(result.getCode(), Result.SUCCESS);
 
-		System.out.println(result.getValues());
+		System.out.println(result.getData());
 	}
 
 	@Test

@@ -1,147 +1,80 @@
 package com.chanjetpay.garlic.web;
 
+import com.chanjetpay.garlic.api.BlockService;
+import com.chanjetpay.garlic.dto.BlockDto;
+import com.chanjetpay.garlic.pojo.EnrollForm;
+import com.chanjetpay.result.GenericResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.method.annotation.AbstractJsonpResponseBodyAdvice;
-
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletResponse;
-import java.io.*;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * 注册
  * Created by libaoa on 2017/11/9.
  */
-@RestController
-public class EnrollController extends AbstractJsonpResponseBodyAdvice {
+@Controller
+public class EnrollController {
 
-	public EnrollController(){
-		super("callback","callback");
-	}
-
-	@RequestMapping("upload")
-	public String file(){
-		return "/uploadtest";
-	}
-
-	@Value("${upload.dir}")
-	private String uploadDir;
+	private static final Logger logger = LoggerFactory.getLogger(EnrollController.class);
 
 	@Autowired
-	private ServletContext servletContext;
+	private BlockService blockService;
 
-	/**
-	 * 实现文件上传
-	 * */
-	@RequestMapping("fileUpload")
-	@ResponseBody
-	public String fileUpload(@RequestParam("fileName") MultipartFile file){
-		if(file.isEmpty()){
-			return "false";
+	@RequestMapping(value = "/reg/{blockCode}/invite/{inviteCode}", method = RequestMethod.GET)
+	public String register(@PathVariable String blockCode, @PathVariable String inviteCode, Model model){
+		GenericResult<BlockDto> result = blockService.findByBlockCode(blockCode);
+		if (result.isError() || !inviteCode.equals(result.getData().getInviteCode())) {
+			logger.error("社区不存在或邀请码不匹配");
+			throw new RuntimeException("社区不存在或邀请码不匹配");
 		}
-		String fileName = file.getOriginalFilename();
-		int size = (int) file.getSize();
-		System.out.println(fileName + "-->" + size);
 
-		String path = servletContext.getRealPath("/WEB-INF/tmp");
-		path = "d:/test";
-		System.out.println(uploadDir);
-		File dest = new File(path + "/" + fileName);
+		BlockDto blockDto = result.getData();
+		EnrollForm enrollForm = new EnrollForm(blockDto.getInviteCode(),blockDto.getBlockCode(), blockDto.getBlockName(), blockDto.getWardenEmail());
 
-		if(!dest.getParentFile().exists()){ //判断文件父目录是否存在
-			dest.getParentFile().mkdir();
-		}
-		try {
-			file.transferTo(dest); //保存文件
-			return "true";
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return "false";
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return "false";
-		}
+		model.addAttribute("enroll", enrollForm);
+		return "enroll";
 	}
 
-	/**
-	 * 实现多文件上传
-	 * */
-	@RequestMapping(value="multifileUpload",method= RequestMethod.POST)
-	public @ResponseBody String multifileUpload(@RequestParam("fileName")List<MultipartFile> files){
-		if(files.isEmpty()){
-			return "false";
+	@RequestMapping(value = "/enroll", method = RequestMethod.POST)
+	public String enroll(@ModelAttribute EnrollForm enrollForm, Model model){
+
+		String blockCode = enrollForm.getBlockCode();
+		String inviteCode = enrollForm.getInviteCode();
+
+		if(!enrollForm.validate()){
+			model.addAttribute("enroll", enrollForm);
+			model.addAttribute("msg", "参数校验不通过，请检查后重新提交");
+			return "enroll";
 		}
 
-		String path = "d:/test" ;
+		GenericResult<BlockDto> blockResult = blockService.findByBlockCode(blockCode);
 
-		for(MultipartFile file:files){
-			String fileName = file.getOriginalFilename();
-			int size = (int) file.getSize();
-			System.out.println(fileName + "-->" + size);
-
-			if(file.isEmpty()){
-				return "false";
-			}else{
-				File dest = new File(path + "/" + fileName);
-				if(!dest.getParentFile().exists()){ //判断文件父目录是否存在
-					dest.getParentFile().mkdir();
-				}
-				try {
-					file.transferTo(dest);
-				}catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					return "false";
-				}
-			}
+		if(blockResult.isError()  || !blockResult.getData().getInviteCode().equals(inviteCode)){
+			model.addAttribute("enroll", enrollForm);
+			model.addAttribute("msg", blockResult.getDesc());
+			return "enroll";
 		}
-		return "true";
-	}
 
-	@RequestMapping("download")
-	public String downLoad(HttpServletResponse response){
-		String filename="2.jpg";
-		String filePath = "d:/test" ;
-		File file = new File(filePath + "/" + filename);
-		if(file.exists()){ //判断文件父目录是否存在
-			response.setContentType("application/force-download");
-			response.setHeader("Content-Disposition", "attachment;fileName=" + filename);
+		BlockDto blockDto = blockResult.getData();
 
-			byte[] buffer = new byte[1024];
-			FileInputStream fis = null; //文件输入流
-			BufferedInputStream bis = null;
+		blockDto.setWardenName(enrollForm.getWardenName());
+		blockDto.setPassword(enrollForm.getPassword());
+		blockDto.setDistrict(enrollForm.getAddress());
+		blockDto.setMemo(enrollForm.getIndustry());
 
-			OutputStream os = null; //输出流
-			try {
-				os = response.getOutputStream();
-				fis = new FileInputStream(file);
-				bis = new BufferedInputStream(fis);
-				int i = bis.read(buffer);
-				while(i != -1){
-					os.write(buffer);
-					i = bis.read(buffer);
-				}
-
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			System.out.println("----------file download" + filename);
-			try {
-				bis.close();
-				fis.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		GenericResult<BlockDto> result = blockService.complete(inviteCode, blockDto);
+		if(result.isError()){
+			model.addAttribute("enroll", enrollForm);
+			model.addAttribute("msg", result.getDesc());
+			return "enroll";
 		}
-		return null;
+
+		return "redirect:/login";
 	}
 }

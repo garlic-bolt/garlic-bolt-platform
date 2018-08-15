@@ -19,8 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ProfileInterceptor implements HandlerInterceptor {
 	private static final Logger logger = LoggerFactory.getLogger(ProfileInterceptor.class);
@@ -44,7 +42,7 @@ public class ProfileInterceptor implements HandlerInterceptor {
 			// 在应用的当前会话中设置属性
 			Session session = currentUser.getSession();
 			String loginName = (String)currentUser.getPrincipal();
-			OperatorDto operatorDto = operatorService.find(loginName).getValue();
+			OperatorDto operatorDto = operatorService.find(loginName).getData();
 
 			profile = new ProfileEntity();
 			profile.setOperator(operatorDto);
@@ -54,11 +52,11 @@ public class ProfileInterceptor implements HandlerInterceptor {
 			profile.setAvatarUrl(operatorDto.getAvatar());
 
 			ListResult<NoticeDto> result = noticeService.queryMerchantNotice(operatorDto.getMerchantId());
-			profile.setAlertMessages(result.getValues());
+			profile.setAlertMessages(result.getData());
 
 			ListResult<AuthorityDto> authListResult = authorityService.queryByOperator(loginName);
-			profile.setAuthorities(authListResult.getValues());
-			profile.setMenus(authListResult.getValues());
+			profile.setAuthorities(authListResult.getData());
+			profile.setMenus(authListResult.getData());
 
 			ProfileUtil.saveProfile(profile);
 		}

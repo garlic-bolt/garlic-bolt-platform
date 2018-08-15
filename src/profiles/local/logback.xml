@@ -5,41 +5,7 @@
 
 	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
-			<pattern>%-4relative %d{HH:mm:ss.SSS} [%thread] %-5level %logger{40} - %msg %n</pattern>
-		</encoder>
-	</appender>
-
-	<appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${CATALINA_HOME}/logs/${app_name}.log</file>
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${CATALINA_HOME}/logs/${app_name}.%d{yyyyMMdd}.%i.zip</fileNamePattern>
-			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-				<maxFileSize>100MB</maxFileSize>
-			</timeBasedFileNamingAndTriggeringPolicy>
-			<maxHistory>30</maxHistory>
-		</rollingPolicy>
-
-		<encoder>
-			<Pattern>%-4relative %d{HH:mm:ss.SSS} [%thread] %-5level %logger{40} - %msg %n</Pattern>
-		</encoder>
-	</appender>
-
-	<appender name="exception" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-			<level>ERROR</level>
-		</filter>
-		<file>${CATALINA_HOME}/logs/${app_name}.error.log</file>
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${CATALINA_HOME}/logs/${app_name}.error.%d{yyyyMMdd}.%i.zip</fileNamePattern>
-			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-				<maxFileSize>100MB</maxFileSize>
-			</timeBasedFileNamingAndTriggeringPolicy>
-			<maxHistory>30</maxHistory>
-		</rollingPolicy>
-
-		<encoder>
-			<Pattern>%-4relative %d{HH:mm:ss.SSS} [%thread] %-5level %logger{40} - %msg %n</Pattern>
-			<!--			<charset>UTF-8</charset>-->
+			<pattern>%-4relative %d{HH:mm:ss.SSS} [%thread] %-5level %logger{140} - %msg %n</pattern>
 		</encoder>
 	</appender>
 
@@ -47,6 +13,7 @@
 	<logger name="org.mybatis.spring" level="INFO" />
 	<logger name="org.apache.ibatis" level="INFO" />
 	<logger name="org.springframework.web" level="WARN" />
+	<logger name="org.springframework.jms" level="WARN" />
 
 	<logger name="java.sql.PreparedStatement" level="DEBUG" />
 	<logger name="java.sql.Statement" level="DEBUG" />
@@ -58,6 +25,7 @@
 	<logger name="org.springframework" level="INFO" />
 	<logger name="org.quartz" level="INFO" />
 
+	<logger name="org.apache.activemq" level="INFO" />
 	<logger name="com.mchange.v2" level="INFO" />
 	<logger name="net.sf.ehcache" level="INFO" />
 	<logger name="org.apache.velocity" level="INFO" />
@@ -65,10 +33,6 @@
 
 	<root level="DEBUG">
 		<appender-ref ref="console" />
-		<appender-ref ref="file" />
 	</root>
 
-	<root level="ERROR">
-		<appender-ref ref="exception" />
-	</root>
 </configuration>

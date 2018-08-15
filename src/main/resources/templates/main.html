@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<div id="contextWrap">
+<div id="contextWrap" th:with="curMenu='welcome', curPage='main'">
 	<!--sidebar-->
 	<div class="ui sidebar vertical left menu overlay  borderless visible sidemenu inverted  grey"
 	     style="-webkit-transition-duration: 0.1s; transition-duration: 0.1s;" data-color="grey">
@@ -25,38 +25,38 @@
 		
 		<div class="ui accordion inverted">
 			
-			<a class="title item active">
+			<a class="title item" th:classappend="${curTab=='welcome'}? 'active'">
 				<i class="ion-speedometer titleIcon icon"></i> 欢迎 <i class="dropdown icon"></i>
 			</a>
-			<div class="content active">
+			<div class="content" th:classappend="${curPage=='block'}? 'active'">
 				<a class="item transition visible" href="/vender/block" th:if="${user.blockOperator}">
 					我的社区
 				</a>
-				<a class="item transition visible" href="/vender/block/merchant">
+				<a class="item transition visible" href="/vender/merchant-index">
 					商户管理
 				</a>
 				<a class="item transition visible" href="/vender/merchant">
 					我的商户
 				</a>
-				<a class="item transition visible" href="/vender/operator">
+				<a class="item transition visible" href="/vender/operator-index">
 					操作员管理
 				</a>
-				<a class="item transition visible" href="/vender/member">
+				<a class="item transition visible" href="/vender/member-index">
 					会员管理
 				</a>
 			</div>
 			
-			<div class="title item">
+			<div class="title item" th:classappend="${curTab=='trade'}? 'active'">
 				<i class="ion-ios-lightbulb titleIcon icon"></i> 交易管理 <i class="dropdown icon"></i>
 			</div>
 			<div class="content">
-				<a class="item transition visible" href="/vender/trade/deposit">
+				<a class="item transition visible" href="/vender/deposit-index">
 					充值记录
 				</a>
-				<a class="item transition visible" href="vender/trade/loan">
+				<a class="item transition visible" href="vender/loan-index">
 					标的记录
 				</a>
-				<a class="item transition visible" href="vender/trade/claim">
+				<a class="item transition visible" href="vender/claim-index">
 					债权债务
 				</a>
 			</div>
@@ -103,16 +103,16 @@
 				<a class="item" href="/vender/block">
 					我的社区
 				</a>
-				<a class="item" href="/vender/block/merchant">
+				<a class="item" href="/vender/merchant-index">
 					商户管理
 				</a>
 				<a class="item" href="/vender/merchant">
 					我的商户
 				</a>
-				<a class="item" href="/vender/operator">
+				<a class="item" href="/vender/operator-index">
 					操作员管理
 				</a>
-				<a class="item" href="/vender/member">
+				<a class="item" href="/vender/member-index">
 					会员管理
 				</a>
 			</div>
@@ -126,13 +126,13 @@
 					交易管理
 				</div>
 				<div class="ui divider"></div>
-				<a class="item" href="/vender/trade/deposit">
+				<a class="item" href="/vender/deposit-index">
 					充值记录
 				</a>
-				<a class="item" href="vender/trade/loan">
+				<a class="item" href="vender/loan-index">
 					标的记录
 				</a>
-				<a class="item" href="vender/trade/claim">
+				<a class="item" href="vender/claim-index">
 					债权债务
 				</a>
 			</div>
@@ -149,10 +149,10 @@
 				<a class="item" href="/vender/account">
 					账户信息
 				</a>
-				<a class="item" href="/vender/account/billing">
+				<a class="item" href="/vender/billing">
 					历史账单
 				</a>
-				<a class="item" href="/vender/account/statistic">
+				<a class="item" href="/vender/statistic">
 					统计报表
 				</a>
 			</div>
@@ -244,137 +244,160 @@
 				<!--Site Content-->
 				
 				<div class="row">
-					<div class="sixteen wide tablet eight wide computer column">
+					<div class="sixteen wide tablet wide computer column">
 						<div class="ui segments">
 							<div class="ui segment">
-								<h3 class="ui header">社区基本信息</h3>
-							</div>
-							<div class="ui form segment">
+								<div class="ui pointing secondary menu tabfour stackable">
+									<a class="item" data-tab="eight" th:classappend="${curTab=='basic'}? 'active'">社区基本信息</a>
+									<a class="item" data-tab="nine" th:classappend="${curTab=='wx'}? 'active'">微信参数</a>
+									<a class="item" data-tab="ten" th:classappend="${curTab=='alipay'}? 'active'">支付宝参数</a>
+								</div>
+								<div class="ui tab" data-tab="eight" th:classappend="${curTab=='basic'}? 'active'">
+
+										<div class="ui form segment">
+											
+											<div class="two fields">
+												<div class="field">
+													<label>社区编码</label>
+													<input type="text" value="10010" th:value="${block.blockCode}">
+												</div>
+												
+												<div class="field">
+													<label>社区名称</label>
+													<input type="text" value="回龙观东大街" th:value="${block.blockName}">
+												</div>
+											</div>
+											
+											<div class="three fields">
+												<div class="field">
+													<label>省份</label>
+													<input type="text" value="广东省" th:value="${block.province}">
+												</div>
+												<div class="field">
+													<label>城市</label>
+													<input type="text" value="东莞" th:value="${block.city}">
+												</div>
+												<div class="field">
+													<label>地区</label>
+													<input type="text" value="长阳区" th:value="${block.district}">
+												</div>
+											</div>
+											
+											<div class="two fields">
+												<div class="field">
+													<label>经度</label>
+													<input type="text" value="10010" th:value="${block.latitude}">
+												</div>
+												<div class="field">
+													<label>纬度</label>
+													<input type="text" value="10010" th:value="${block.longitude}">
+												</div>
+											</div>
+											
+											<div class="three fields">
+												<div class="field">
+													<label>管理员姓名</label>
+													<input type="text" value="10010" th:value="${block.wardenName}">
+												</div>
+												<div class="field">
+													<label>管理员邮箱</label>
+													<input type="text" value="10010" th:value="${block.wardenEmail}">
+												</div>
+												<div class="field">
+													<label>管理员电话</label>
+													<input type="text" value="10010" th:value="${block.wardenPhone}">
+												</div>
+											</div>
+											
+											<div class="field">
+												<label>社区状态</label>
+												<input type="text" value="10010" th:value="${block.state.desc}">
+											</div>
+											
+											<div class="field">
+												<label>备注信息</label>
+												<textarea rows="3" th:text="${block.memo}">1234</textarea>
+											</div>
+										
+										</div>
+
+								</div >
 								
-								<div class="two fields disabled">
-									<div class="field">
-										<label>社区编码</label>
-										<input type="text" value="10010" th:value="${block.blockCode}">
-									</div>
+								<div class="ui tab" data-tab="nine" th:classappend="${curTab=='wx'}? 'active'">
 									
-									<div class="field">
-										<label>社区名称</label>
-										<input type="text" value="回龙观东大街" th:value="${block.blockName}">
+									<div class="ui segment">
+										<form id="wxForm" class="ui fluid form" method="post" th:action="@{/vender/wxOfficial}">
+											
+											<div class="field">
+												<label>微信商户id</label>
+												<input type="text" name="officialId" th:value="${wxOfficial.officialId}">
+											</div>
+											<div class="two fields">
+												<div class="field">
+													<label>公众号App ID</label>
+													<input type="text" name="appId" th:value="${wxOfficial.appId}">
+												</div>
+												
+												<div class="field">
+													<label>公众号类型</label>
+													<div class="ui selection dropdown" tabindex="0">
+														<input type="hidden" name="officialType" th:value="${wxOfficial.officialType}">
+														<div class="text" th:text="${wxOfficial.officialType}">1234</div>
+														<i class="dropdown icon"></i>
+														<div class="menu" tabindex="-1">
+															<div class="item" data-value="SUBSCRIBE">订阅号</div>
+															<div class="item" data-value="SERVICE">服务号</div>
+															<div class="item" data-value="ENTERPRISE">企业号</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											
+											<div class="field">
+												<label>密钥</label>
+												<input type="text" name="appSecret" th:value="${wxOfficial.appSecret}">
+											</div>
+											
+											<div class="field">
+												<label>token</label>
+												<input type="text" name="token" th:value="${wxOfficial.token}">
+											</div>
+											
+											<div class="field">
+												<label>授权访问url</label>
+												<input type="text" name="url" th:value="${wxOfficial.url}">
+											</div>
+										
+										</form>
 									</div>
-								</div>
+									<div class="ui segment center aligned" th:if="${block.wxOfficial} == null">
+										<button id="wxSubmit" class="ui primary button saving">保存微信支付参数</button>
+									</div>
 								
-								<div class="three fields disabled">
-									<div class="field">
-										<label>省份</label>
-										<input type="text" value="广东省" th:value="${block.province}">
-									</div>
-									<div class="field">
-										<label>城市</label>
-										<input type="text" value="东莞" th:value="${block.city}">
-									</div>
-									<div class="field">
-										<label>地区</label>
-										<input type="text" value="长阳区" th:value="${block.district}">
-									</div>
 								</div>
+								<div class="ui tab" data-tab="ten" th:classappend="${curTab=='alipay'}? 'active'">
+									
+									<div class="ui segment">
+										<form id="alipayForm" class="ui fluid form" method="post" th:action="@{/vender/aliPlatform}">
+											<div class="field disabled">
+												待完善
+											</div>
+										</form>
+									</div>
+									<div class="ui segment center aligned">
+										<button id="alipaySubmit" class="ui primary button saving">保存新信支付参数</button>
+									</div>
 								
-								<div class="two fields disabled">
-									<div class="field">
-										<label>经度</label>
-										<input type="text" value="10010" th:value="${block.latitude}">
-									</div>
-									<div class="field">
-										<label>纬度</label>
-										<input type="text" value="10010" th:value="${block.longitude}">
-									</div>
 								</div>
-								
-								<div class="three fields disabled">
-									<div class="field">
-										<label>管理员姓名</label>
-										<input type="text" value="10010" th:value="${block.wardenName}">
-									</div>
-									<div class="field">
-										<label>管理员邮箱</label>
-										<input type="text" value="10010" th:value="${block.wardenEmail}">
-									</div>
-									<div class="field">
-										<label>管理员电话</label>
-										<input type="text" value="10010" th:value="${block.wardenPhone}">
-									</div>
-								</div>
-								
-								<div class="field disabled">
-									<label>社区状态</label>
-									<input type="text" value="10010" th:value="${block.state}">
-								</div>
-								
-								<div class="field disabled">
-									<label>备注信息</label>
-									<textarea rows="3" th:text="${block.memo}">1234</textarea>
-								</div>
-							
 							</div>
 						</div>
 					</div>
-					
-					<div class="sixteen wide tablet eight wide computer column">
-						<div class="ui segments">
-							<div class="ui segment">
-								<h3 class="ui header">微信支付参数配置</h3>
-								<div class="ui green message" th:if="${message}" th:text="${message}">更新成功</div>
-							</div>
-							<div class="ui segment">
-								<form id="wxForm" class="ui fluid form" method="post" th:action="@{/vender/block/wxOfficial}">
-									
-									<div class="field">
-										<label>微信商户id</label>
-										<input type="text" name="officialId" th:value="${block.wxOfficial.officialId}">
-									</div>
-									<div class="two fields">
-										<div class="field">
-											<label>公众号App ID</label>
-											<input type="text" name="appId" th:value="${block.wxOfficial.appId}">
-										</div>
-										
-										<div class="field">
-											<label>公众号类型</label>
-											<div class="ui selection dropdown" tabindex="0">
-												<input type="hidden" name="officialType" th:value="${block.wxOfficial.officialType}">
-												<div class="text" th:text="${block.wxOfficial.officialType}">1234</div>
-												<i class="dropdown icon"></i>
-												<div class="menu" tabindex="-1">
-													<div class="item" data-value="SUBSCRIBE">订阅号</div>
-													<div class="item" data-value="SERVICE">服务号</div>
-													<div class="item" data-value="ENTERPRISE">企业号</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									
-									<div class="field">
-										<label>密钥</label>
-										<input type="text" name="appSecret" th:value="${block.wxOfficial.appSecret}">
-									</div>
-									
-									<div class="field">
-										<label>token</label>
-										<input type="text" name="token" th:value="${block.wxOfficial.token}">
-									</div>
-									
-									<div class="field">
-										<label>授权访问url</label>
-										<input type="text" name="url" th:value="${block.wxOfficial.url}">
-									</div>
-								
-								</form>
-							</div>
-							<div class="ui segment center aligned">
-								<button id="wxSubmit" class="ui primary button saving">更新微信支付参数</button>
-							</div>
-						</div>
-					
-					
+				
+				</div>
+				
+				<div class="row">
+					<div class="sixteen wide tablet wide computer column">
+						<div class="ui green message" th:if="${message}" th:text="${message}">更新成功</div>
 					</div>
 				</div>
 				
@@ -404,6 +427,9 @@
 		$("#wxSubmit").on("click", function (e) {
 			$("#wxForm").submit();
 		});
+			
+	  $(".menu .item").tab();
+		
 	})
 </script>
 

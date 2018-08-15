@@ -53,7 +53,7 @@ public class ShiroRealmTest {
 
 		SecurityUtils.setSecurityManager((org.apache.shiro.mgt.SecurityManager) applicationContext.getBean(org.apache.shiro.mgt.SecurityManager.class));
 		Subject sj = SecurityUtils.getSubject();
-		UsernamePasswordToken token = new UsernamePasswordToken("101000", "123456");
+		UsernamePasswordToken token = new UsernamePasswordToken("10000102", "123456");
 		try {
 			sj.login(token);
 		} catch (AuthenticationException e) {

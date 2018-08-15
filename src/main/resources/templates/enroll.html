@@ -7,8 +7,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 	
 	<link rel="icon" href="../static/favicon.jpg" type="image/x-icon" th:href="@{/favicon.jpg}" />
-	<link href="../static/dist/semantic.min.css" rel="stylesheet" th:href="@{}"/>
-	<link href="../static/css/main.css" rel="stylesheet" th:href="@{}"/>
+	<link href="../static/dist/semantic.min.css" rel="stylesheet" th:href="@{/dist/semantic.min.css}"/>
+	<link href="../static/css/main.css" rel="stylesheet" th:href="@{/css/main.css}"/>
 </head>
 <body>
 <div class="ui container" style="padding-top:10%">
@@ -16,78 +16,70 @@
 		<h2 class="ui center aligned header">完善社区信息</h2>
 		<div class="ui segments">
 			<div class="ui segment">
-				<h5 class="ui header">
+				<h3 class="ui header" th:text="|${enroll.blockName}你好, 请正确填写信息, 激活后使用${enroll.operatorId}账号进行登录|">
 					gaotianle@163.com，请正确填写 xxx社区 信息并激活
-				</h5>
+				</h3>
+
 			</div>
-			<form class="ui form segment form1">
-				
+			<form class="ui form segment" method="post" th:action="@{/enroll}">
+				<input type="hidden" name="operatorId" th:value="${enroll.operatorId}">
+				<input type="hidden" name="blockCode" th:value="${enroll.blockCode}">
+				<input type="hidden" name="blockName" th:value="${enroll.blockName}">
+				<input type="hidden" name="wardenEmail" th:value="${enroll.wardenEmail}">
+				<input type="hidden" name="inviteCode" th:value="${enroll.inviteCode}">
 				<div class="two fields">
 					<div class="field">
 						<label>姓名</label>
-						<input placeholder="First Name" name="name" type="text">
+						<input placeholder="姓名" name="wardenName" type="text" th:value="${enroll.wardenName}">
 					</div>
 					<div class="field">
-						<label>Gender</label>
-						<div class="ui dropdown selection" tabindex="0">
-							<select name="gender">
-								<option value="">Gender</option>
-								<option value="male">Male</option>
-								<option value="female">Female</option>
-							</select>
-							<i class="dropdown icon"></i>
-							<div class="default text">Gender</div>
-							<div class="menu" tabindex="-1">
-								<div class="item" data-value="male">Male</div>
-								<div class="item" data-value="female">Female</div>
-							</div>
-						</div>
+						<label>证件号</label>
+						<input placeholder="证件号" name="wardenIdNo" type="text" th:value="${enroll.wardenIdNo}">
 					</div>
 				</div>
 				<div class="two fields">
 					<div class="field">
-						<label>Username</label>
-						<input placeholder="Username" name="username" type="text">
+						<label>登录密码</label>
+						<input placeholder="请输入登录密码" type="password" name="password">
 					</div>
 					<div class="field">
-						<label>Password</label>
-						<input type="password" name="password">
+						<label>密码确认</label>
+						<input placeholder="请重新输入密码" type="password" name="rePassword">
 					</div>
 				</div>
+				
 				<div class="field">
-					<label>Skills</label>
+					<label>地址</label>
+					<input placeholder="地址" type="text" name="address" th:value="${enroll.address}">
+				</div>
+				
+				<div class="field">
+					<label>行业</label>
 					<div class="ui dropdown selection multiple" tabindex="0">
-						<select name="skills" multiple="multiple">
-							<option value="">Select Skills</option>
-							<option value="css">CSS</option>
-							<option value="html">HTML</option>
-							<option value="javascript">Javascript</option>
-							<option value="design">Graphic Design</option>
-							<option value="plumbing">Plumbing</option>
-							<option value="mech">Mechanical Engineering</option>
-							<option value="repair">Kitchen Repair</option>
+						<select name="industry" multiple="multiple" th:value="${enroll.industry}">
+							<option value="">行业</option>
+							<option value="生产制造">生产制造</option>
+							<option value="批发零售">批发零售</option>
+							<option value="品牌加盟">品牌加盟</option>
 						</select>
 						<i class="dropdown icon"></i>
-						<div class="default text">Select Skills</div>
+						<div class="default text">行业</div>
 						<div class="menu" tabindex="-1">
-							<div class="item" data-value="css">CSS</div>
-							<div class="item" data-value="html">HTML</div>
-							<div class="item" data-value="javascript">Javascript</div>
-							<div class="item" data-value="design">Graphic Design</div>
-							<div class="item" data-value="plumbing">Plumbing</div>
-							<div class="item" data-value="mech">Mechanical Engineering</div>
-							<div class="item" data-value="repair">Kitchen Repair</div>
+							<div class="item" data-value="生产制造">生产制造</div>
+							<div class="item" data-value="批发零售">批发零售</div>
+							<div class="item" data-value="品牌加盟">品牌加盟</div>
 						</div>
 					</div>
 				</div>
+				
 				<div class="inline field">
 					<div class="ui checkbox">
 						<input id="ckbAgreement" type="checkbox" name="terms" tabindex="0" class="hidden" checked="checked">
 						<label for="ckbAgreement">同意<a>注册条款</a>内容</label>
 					</div>
 				</div>
-				<div class="ui blue submit button">Submit</div>
-				<div class="ui error message"></div>
+				<input type="submit" class="ui blue submit button">
+				<div class="ui error" th:text="${msg}">哈哈哈</div>
 			</form>
 		</div>
 	</div>

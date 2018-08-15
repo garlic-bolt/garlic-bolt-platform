@@ -5,6 +5,8 @@ import com.chanjetpay.garlic.dto.OperatorDto;
 import com.chanjetpay.garlic.enums.OperatorTypeEnum;
 import com.chanjetpay.result.BasicResult;
 import com.chanjetpay.result.GenericResult;
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.util.ByteSource;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +38,9 @@ public class OperatorControllerTest {
 	public void testFindByCode(){
 		GenericResult<OperatorDto> result = operatorService.find("10000201");
 		System.out.println(result);
+
 	}
+
 
 
 

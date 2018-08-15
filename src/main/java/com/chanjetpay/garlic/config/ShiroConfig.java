@@ -6,6 +6,7 @@ import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.mgt.WebSecurityManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -21,8 +22,8 @@ public class ShiroConfig {
 	private static final Logger logger = LoggerFactory.getLogger(ShiroConfig.class);
 
 	@Bean
-	public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager) {
-		logger.info("shirFilter" + securityManager);
+	public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
+		logger.info("shiroFilter" + securityManager);
 		ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
 		shiroFilterFactoryBean.setSecurityManager(securityManager);
 		//拦截器.
@@ -63,7 +64,7 @@ public class ShiroConfig {
 
 	@Bean
 	public SecurityManager securityManager() {
-		DefaultSecurityManager securityManager = new DefaultSecurityManager();
+		DefaultSecurityManager securityManager = new DefaultWebSecurityManager();
 		securityManager.setRealm(webShiroRealm());
 		return securityManager;
 	}
