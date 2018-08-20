@@ -4,6 +4,7 @@ import com.chanjetpay.garlic.api.BlockService;
 import com.chanjetpay.garlic.dto.BlockDto;
 import com.chanjetpay.garlic.pojo.EnrollForm;
 import com.chanjetpay.result.GenericResult;
+import com.chanjetpay.result.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class EnrollController {
 	@RequestMapping(value = "/reg/{blockCode}/invite/{inviteCode}", method = RequestMethod.GET)
 	public String register(@PathVariable String blockCode, @PathVariable String inviteCode, Model model){
 		GenericResult<BlockDto> result = blockService.findByBlockCode(blockCode);
-		if (result.isError() || !inviteCode.equals(result.getData().getInviteCode())) {
+		if (!result.getCode().equals(Result.SUCCESS) || !inviteCode.equals(result.getData().getInviteCode())) {
 			logger.error("社区不存在或邀请码不匹配");
 			throw new RuntimeException("社区不存在或邀请码不匹配");
 		}
@@ -55,7 +56,7 @@ public class EnrollController {
 
 		GenericResult<BlockDto> blockResult = blockService.findByBlockCode(blockCode);
 
-		if(blockResult.isError()  || !blockResult.getData().getInviteCode().equals(inviteCode)){
+		if(!blockResult.getCode().equals(Result.SUCCESS)  || !blockResult.getData().getInviteCode().equals(inviteCode)){
 			model.addAttribute("enroll", enrollForm);
 			model.addAttribute("msg", blockResult.getDesc());
 			return "enroll";
@@ -69,7 +70,7 @@ public class EnrollController {
 		blockDto.setMemo(enrollForm.getIndustry());
 
 		GenericResult<BlockDto> result = blockService.complete(inviteCode, blockDto);
-		if(result.isError()){
+		if(!result.getCode().equals(Result.SUCCESS)){
 			model.addAttribute("enroll", enrollForm);
 			model.addAttribute("msg", result.getDesc());
 			return "enroll";

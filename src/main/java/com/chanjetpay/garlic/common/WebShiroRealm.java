@@ -3,6 +3,7 @@ package com.chanjetpay.garlic.common;
 import com.chanjetpay.garlic.api.OperatorService;
 import com.chanjetpay.garlic.dto.OperatorDto;
 import com.chanjetpay.result.GenericResult;
+import com.chanjetpay.result.Result;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -87,7 +88,7 @@ public class WebShiroRealm extends AuthorizingRealm {
 		//实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
 		GenericResult<OperatorDto> result = operatorService.find(loginName);
 
-		if(result.isError() || result.getData() == null){
+		if(!result.getCode().equals(Result.SUCCESS) || result.getData() == null){
 			throw new UnknownAccountException("用户不存在");
 		}
 

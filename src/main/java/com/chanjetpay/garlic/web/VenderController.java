@@ -9,6 +9,7 @@ import com.chanjetpay.garlic.pojo.ProfileEntity;
 import com.chanjetpay.result.BasicResult;
 import com.chanjetpay.result.GenericResult;
 import com.chanjetpay.result.ListResult;
+import com.chanjetpay.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -81,7 +82,7 @@ public class VenderController {
 		//保存失败，跳转到首页
 		BasicResult result = blockService.addWxOfficial(profile.getBlockCode(), wxOfficial);
 
-		if (result.isError()) {
+		if (!result.getCode().equals(Result.SUCCESS)) {
 			attr.addFlashAttribute("message", result.getDesc());
 		}else{
 			attr.addFlashAttribute("message", "微信支付信息保存成功");
@@ -114,7 +115,7 @@ public class VenderController {
 
 		ListResult<OperatorDto> result = operatorService.query(profile.getMerchantId(), query);
 
-		if(result.isError()){
+		if(!result.getCode().equals(Result.SUCCESS)){
 			model.addAttribute("query",query);
 			model.addAttribute("message", result.getDesc());
 			return "operator-index";
